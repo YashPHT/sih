@@ -54,7 +54,7 @@ export interface InsurancePlan {
   recommended: boolean
 }
 
-export type StakeholderRole = 'farmer' | 'fpo' | 'processor' | 'retailer'
+export type StakeholderRole = 'farmer' | 'fpo' | 'processor' | 'retailer' | 'policymaker'
 
 export type TrendDirection = 'positive' | 'negative' | 'neutral'
 

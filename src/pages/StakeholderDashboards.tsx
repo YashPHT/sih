@@ -13,14 +13,21 @@ import {
   Minus,
   AlertTriangle,
   CloudRain,
-  Map
+  Map,
+  Brain,
+  TrendingUp
 } from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
 import { stakeholderDashboards } from '../data/stakeholderData'
 import { logisticsGeoData } from '../data/logisticsGeoData'
+import { cropPriceHistories, demandSupplyAnalytics, cropPlanningSuggestions, regionalPestRisks } from '../data/priceHistoryData'
 import { useWeatherData } from '../hooks/useWeatherData'
 import { formatRelativeTime, weatherSeverityStyles } from '../utils/weatherStyles'
 import LogisticsMap from '../components/LogisticsMap'
+import PriceForecastChart from '../components/PriceForecastChart'
+import DemandSupplyChart from '../components/DemandSupplyChart'
+import CropPlanningSuggestions from '../components/CropPlanningSuggestions'
+import PestRiskDashboard from '../components/PestRiskDashboard'
 import type {
   CommunicationStatus,
   LogisticsStatus,
@@ -53,6 +60,12 @@ const roleTabs: Array<{ id: StakeholderRole; label: string; description: string;
     label: 'Retailer',
     description: 'Store availability, promotions, consumer demand',
     icon: ShoppingCart
+  },
+  {
+    id: 'policymaker',
+    label: 'Policymaker',
+    description: 'AI insights, market analytics, strategic planning',
+    icon: Brain
   }
 ]
 
@@ -129,7 +142,7 @@ function StakeholderDashboards() {
 
       <div className="card">
         <h2 className="text-sm font-semibold text-gray-500 uppercase tracking-wide">Select stakeholder role</h2>
-        <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4">
+        <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
           {roleTabs.map((role) => {
             const RoleIcon = role.icon
             const isActive = role.id === activeRole
@@ -199,7 +212,43 @@ function StakeholderDashboards() {
         })}
       </div>
 
-      <div className="grid grid-cols-1 xl:grid-cols-3 gap-6">
+      {activeRole === 'policymaker' ? (
+        <>
+          <div className="card">
+            <h2 className="text-xl font-bold text-gray-900 mb-6 flex items-center">
+              <Brain className="h-5 w-5 mr-2 text-primary-600" />
+              AI-Powered Price Forecasting
+            </h2>
+            <div className="space-y-8">
+              {cropPriceHistories.slice(0, 3).map(crop => (
+                <PriceForecastChart key={crop.crop} cropName={crop.crop} />
+              ))}
+            </div>
+          </div>
+
+          <div className="card">
+            <h2 className="text-xl font-bold text-gray-900 mb-6 flex items-center">
+              <TrendingUp className="h-5 w-5 mr-2 text-primary-600" />
+              Demand-Supply Analytics
+            </h2>
+            <div className="space-y-8">
+              {demandSupplyAnalytics.slice(0, 3).map(data => (
+                <DemandSupplyChart key={data.crop} data={data} />
+              ))}
+            </div>
+          </div>
+
+          <div className="card">
+            <CropPlanningSuggestions suggestions={cropPlanningSuggestions} />
+          </div>
+
+          <div className="card">
+            <PestRiskDashboard regionalRisks={regionalPestRisks} />
+          </div>
+        </>
+      ) : (
+        <>
+          <div className="grid grid-cols-1 xl:grid-cols-3 gap-6">
         <div className="xl:col-span-2 card">
           <div className="flex items-center justify-between mb-4">
             <h2 className="text-xl font-bold text-gray-900 flex items-center">
@@ -416,6 +465,8 @@ function StakeholderDashboards() {
           className="h-[600px]"
         />
       </div>
+        </>
+      )}
     </div>
   )
 }

@@ -524,5 +524,138 @@ export const stakeholderDashboards: Record<StakeholderRole, StakeholderDashboard
         progress: 40
       }
     ]
+  },
+  policymaker: {
+    highlight: {
+      title: 'National Agricultural Market Intelligence',
+      subtitle: 'AI-powered insights for strategic policy decisions',
+      context: 'Real-time price forecasting, demand-supply analytics, and regional pest risk monitoring to support evidence-based agricultural policy planning.'
+    },
+    kpis: [
+      {
+        id: 'market-stability',
+        label: 'Market Stability Index',
+        value: '7.8/10',
+        change: '+0.4 pts this quarter',
+        trend: 'positive'
+      },
+      {
+        id: 'price-volatility',
+        label: 'Avg Price Volatility',
+        value: '8.2%',
+        change: '-1.2% vs last month',
+        trend: 'positive'
+      },
+      {
+        id: 'supply-gaps',
+        label: 'Crops in Deficit',
+        value: '2',
+        change: 'Rice, Chickpea',
+        trend: 'negative'
+      },
+      {
+        id: 'pest-alerts',
+        label: 'High Risk Regions',
+        value: '4',
+        change: 'Intervention needed',
+        trend: 'negative'
+      }
+    ],
+    actions: [
+      {
+        id: 'policy-action-1',
+        title: 'Implement rice production incentives',
+        description: 'Deploy subsidized seeds and increased MSP to address growing 5,000 MT deficit. Target Punjab, Haryana, UP, and West Bengal.',
+        dueDate: 'Next 30 days',
+        impact: 'high',
+        owner: 'Ministry of Agriculture'
+      },
+      {
+        id: 'policy-action-2',
+        title: 'Deploy pest control measures in high-risk zones',
+        description: 'Urgent intervention required in Punjab, Madhya Pradesh, Karnataka, and West Bengal. Coordinate with state agriculture departments.',
+        dueDate: 'Next 2 weeks',
+        impact: 'high',
+        owner: 'Plant Protection Division'
+      },
+      {
+        id: 'policy-action-3',
+        title: 'Review maize procurement policy',
+        description: 'Current 10,000 MT surplus requires policy adjustment. Consider export promotion or alternative use incentives.',
+        dueDate: 'Next quarter',
+        impact: 'medium',
+        owner: 'Price Monitoring Cell'
+      },
+      {
+        id: 'policy-action-4',
+        title: 'Update price support mechanisms',
+        description: 'Monitor wheat and mustard price trends. Prepare buffer stock adjustments if needed.',
+        dueDate: 'Next 45 days',
+        impact: 'medium',
+        owner: 'Food Corporation'
+      }
+    ],
+    communications: [
+      {
+        id: 'policy-comm-1',
+        counterpart: 'State Agriculture Ministers',
+        topic: 'Regional crop planning coordination',
+        lastMessage: 'Quarterly review meeting scheduled for next week.',
+        lastUpdated: '2 days ago',
+        status: 'scheduled'
+      },
+      {
+        id: 'policy-comm-2',
+        counterpart: 'Research Institutions',
+        topic: 'Pest outbreak early warning systems',
+        lastMessage: 'Awaiting implementation timeline from ICAR.',
+        lastUpdated: '1 week ago',
+        status: 'awaiting-response'
+      },
+      {
+        id: 'policy-comm-3',
+        counterpart: 'International Trade Division',
+        topic: 'Export opportunity assessment',
+        lastMessage: 'Maize export feasibility study completed.',
+        lastUpdated: 'Today',
+        status: 'resolved'
+      }
+    ],
+    opportunities: [
+      {
+        id: 'policy-opp-1',
+        buyer: 'State Procurement Agencies',
+        requirement: 'Enhanced digital procurement infrastructure',
+        value: '₹250 Cr modernization program',
+        timeline: 'Pilot starting Q1 2025',
+        status: 'negotiation'
+      },
+      {
+        id: 'policy-opp-2',
+        buyer: 'FPO Development Program',
+        requirement: 'Capacity building for 500 FPOs',
+        value: '₹180 Cr allocation',
+        timeline: 'Implementation ready',
+        status: 'matched'
+      }
+    ],
+    logistics: [
+      {
+        id: 'policy-log-1',
+        route: 'National Food Security Program',
+        status: 'in-transit',
+        eta: 'Q3 targets: 85% achieved',
+        mode: 'Multi-state coordination',
+        progress: 85
+      },
+      {
+        id: 'policy-log-2',
+        route: 'Price Stabilization Fund',
+        status: 'scheduled',
+        eta: 'Disbursement: Next month',
+        mode: 'Direct benefit transfer',
+        progress: 45
+      }
+    ]
   }
 }
