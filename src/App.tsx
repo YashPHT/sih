@@ -1,11 +1,12 @@
 import { BrowserRouter as Router, Routes, Route, Link, useLocation } from 'react-router-dom'
-import { Sprout, TrendingUp, Home, Users, ShoppingCart, Link2 } from 'lucide-react'
+import { Sprout, TrendingUp, Home, Users, ShoppingCart, Link2, Brain } from 'lucide-react'
 import Dashboard from './pages/Dashboard'
 import StakeholderDashboards from './pages/StakeholderDashboards'
 import CropAdvisory from './pages/CropAdvisory'
 import CreditInsurance from './pages/CreditInsurance'
 import Marketplace from './pages/Marketplace'
 import Traceability from './pages/Traceability'
+import PolicymakerDashboard from './pages/PolicymakerDashboard'
 
 function Navigation() {
   const location = useLocation()
@@ -87,6 +88,17 @@ function Navigation() {
               <Link2 className="h-4 w-4 mr-2" />
               Traceability
             </Link>
+            <Link
+              to="/dashboard/policymaker"
+              className={`flex items-center px-3 py-2 rounded-md text-sm font-medium ${
+                isActive('/dashboard/policymaker') 
+                  ? 'bg-primary-100 text-primary-700' 
+                  : 'text-gray-700 hover:bg-gray-100'
+              }`}
+            >
+              <Brain className="h-4 w-4 mr-2" />
+              Policymaker
+            </Link>
           </div>
         </div>
       </div>
@@ -107,6 +119,7 @@ function App() {
             <Route path="/crop-advisory" element={<CropAdvisory />} />
             <Route path="/credit-insurance" element={<CreditInsurance />} />
             <Route path="/traceability" element={<Traceability />} />
+            <Route path="/dashboard/policymaker" element={<PolicymakerDashboard />} />
           </Routes>
         </main>
       </div>
