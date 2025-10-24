@@ -27,16 +27,16 @@ const statusLabels: Record<MarketplaceLot['status'], string> = {
 }
 
 const statusClasses: Record<MarketplaceLot['status'], string> = {
-  available: 'bg-primary-100 text-primary-800',
-  'in-negotiation': 'bg-amber-100 text-amber-800',
-  'under-fulfillment': 'bg-blue-100 text-blue-800',
-  fulfilled: 'bg-green-100 text-green-800'
+  available: 'bg-primary-100 dark:bg-primary-900/30 text-primary-800 dark:text-primary-300',
+  'in-negotiation': 'bg-amber-100 dark:bg-amber-900/30 text-amber-800 dark:text-amber-300',
+  'under-fulfillment': 'bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-300',
+  fulfilled: 'bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-300'
 }
 
 const interestStatusClasses = {
-  active: 'bg-primary-100 text-primary-800',
-  counter: 'bg-amber-100 text-amber-800',
-  accepted: 'bg-green-100 text-green-800'
+  active: 'bg-primary-100 dark:bg-primary-900/30 text-primary-800 dark:text-primary-300',
+  counter: 'bg-amber-100 dark:bg-amber-900/30 text-amber-800 dark:text-amber-300',
+  accepted: 'bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-300'
 } as const
 
 const interestStatusLabels = {
@@ -252,11 +252,11 @@ function Marketplace() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-3xl font-bold text-gray-900 flex items-center">
-          <ShoppingCart className="h-8 w-8 mr-3 text-primary-600" />
+        <h1 className="text-3xl font-bold text-gray-900 dark:text-white flex items-center">
+          <ShoppingCart className="h-8 w-8 mr-3 text-primary-600 dark:text-primary-400" />
           Farmer Marketplace
         </h1>
-        <p className="mt-2 text-gray-600 max-w-3xl">
+        <p className="mt-2 text-gray-600 dark:text-gray-300 max-w-3xl">
           Navigate active crop lots, buyer demand, and fulfilment logistics from a single narrative console.
           Filters and demo actions below let you shape the story in real-time for stakeholder walkthroughs.
         </p>
@@ -265,43 +265,43 @@ function Marketplace() {
       <div className="card">
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-4">
           <div>
-            <p className="text-xs uppercase tracking-wide text-gray-500">Pipeline value</p>
-            <p className="text-2xl font-bold text-gray-900 mt-2 flex items-center gap-2">
+            <p className="text-xs uppercase tracking-wide text-gray-500 dark:text-gray-400">Pipeline value</p>
+            <p className="text-2xl font-bold text-gray-900 dark:text-white mt-2 flex items-center gap-2">
               {formatCurrency(marketplaceMetrics.pipelineValue)}
-              <ArrowUpRight className="h-5 w-5 text-primary-600" />
+              <ArrowUpRight className="h-5 w-5 text-primary-600 dark:text-primary-400" />
             </p>
-            <p className="text-xs text-gray-500 mt-1">Based on current best offers</p>
+            <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">Based on current best offers</p>
           </div>
           <div>
-            <p className="text-xs uppercase tracking-wide text-gray-500">Volume in play</p>
-            <p className="text-2xl font-bold text-gray-900 mt-2">{marketplaceMetrics.totalVolume} MT</p>
-            <p className="text-xs text-gray-500 mt-1">Across filtered lots</p>
+            <p className="text-xs uppercase tracking-wide text-gray-500 dark:text-gray-400">Volume in play</p>
+            <p className="text-2xl font-bold text-gray-900 dark:text-white mt-2">{marketplaceMetrics.totalVolume} MT</p>
+            <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">Across filtered lots</p>
           </div>
           <div>
-            <p className="text-xs uppercase tracking-wide text-gray-500">Avg. engagement</p>
-            <p className="text-2xl font-bold text-gray-900 mt-2">{marketplaceMetrics.avgEngagement}%</p>
-            <p className="text-xs text-gray-500 mt-1">Buyer readiness score</p>
+            <p className="text-xs uppercase tracking-wide text-gray-500 dark:text-gray-400">Avg. engagement</p>
+            <p className="text-2xl font-bold text-gray-900 dark:text-white mt-2">{marketplaceMetrics.avgEngagement}%</p>
+            <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">Buyer readiness score</p>
           </div>
           <div>
-            <p className="text-xs uppercase tracking-wide text-gray-500">Active buyers</p>
-            <p className="text-2xl font-bold text-gray-900 mt-2 flex items-center gap-2">
-              <Users className="h-5 w-5 text-primary-600" />
+            <p className="text-xs uppercase tracking-wide text-gray-500 dark:text-gray-400">Active buyers</p>
+            <p className="text-2xl font-bold text-gray-900 dark:text-white mt-2 flex items-center gap-2">
+              <Users className="h-5 w-5 text-primary-600 dark:text-primary-400" />
               {marketplaceMetrics.uniqueBuyers}
             </p>
-            <p className="text-xs text-gray-500 mt-1">Unique organisations engaged</p>
+            <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">Unique organisations engaged</p>
           </div>
         </div>
 
         <div className="mt-6">
-          <p className="text-xs uppercase tracking-wide text-gray-500 mb-2">Activity log</p>
-          <div className="border border-dashed border-gray-300 rounded-lg p-4 bg-gray-50">
+          <p className="text-xs uppercase tracking-wide text-gray-500 dark:text-gray-400 mb-2">Activity log</p>
+          <div className="border border-dashed border-gray-300 dark:border-gray-700 rounded-lg p-4 bg-gray-50 dark:bg-gray-900/50">
             {activityLog.length === 0 ? (
-              <p className="text-sm text-gray-500">No recent marketplace actions yet.</p>
+              <p className="text-sm text-gray-500 dark:text-gray-400">No recent marketplace actions yet.</p>
             ) : (
-              <ul className="space-y-2 text-sm text-gray-700">
+              <ul className="space-y-2 text-sm text-gray-700 dark:text-gray-300">
                 {activityLog.map((entry) => (
                   <li key={entry.id} className="flex items-start gap-3">
-                    <span className="mt-0.5 text-xs font-semibold text-gray-500 w-16 flex-shrink-0">{entry.timestamp}</span>
+                    <span className="mt-0.5 text-xs font-semibold text-gray-500 dark:text-gray-400 w-16 flex-shrink-0">{entry.timestamp}</span>
                     <span className="flex-1 leading-snug">{entry.message}</span>
                   </li>
                 ))}
@@ -313,8 +313,8 @@ function Marketplace() {
 
       <div className="card">
         <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
-          <div className="flex items-center text-gray-700 font-semibold">
-            <Filter className="h-5 w-5 mr-2 text-primary-600" />
+          <div className="flex items-center text-gray-700 dark:text-gray-300 font-semibold">
+            <Filter className="h-5 w-5 mr-2 text-primary-600 dark:text-primary-400" />
             Refine marketplace view
           </div>
           <div className="w-full lg:w-auto">
@@ -325,7 +325,7 @@ function Marketplace() {
                 value={searchTerm}
                 onChange={(event) => setSearchTerm(event.target.value)}
                 placeholder="Search crop, buyer or region"
-                className="w-full lg:w-64 border border-gray-300 rounded-lg px-10 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary-500"
+                className="w-full lg:w-64 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 text-gray-900 dark:text-gray-100 rounded-lg px-10 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary-500 placeholder:text-gray-400 dark:placeholder:text-gray-500"
               />
             </div>
           </div>
@@ -333,11 +333,11 @@ function Marketplace() {
 
         <div className="mt-4 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4">
           <div>
-            <label className="text-xs uppercase text-gray-500 block mb-1">Crop</label>
+            <label className="text-xs uppercase text-gray-500 dark:text-gray-400 block mb-1">Crop</label>
             <select
               value={selectedCrop}
               onChange={(event) => setSelectedCrop(event.target.value)}
-              className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary-500"
+              className="w-full bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 text-gray-900 dark:text-gray-100 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary-500"
             >
               {cropOptions.map((option) => (
                 <option key={option} value={option}>
@@ -347,11 +347,11 @@ function Marketplace() {
             </select>
           </div>
           <div>
-            <label className="text-xs uppercase text-gray-500 block mb-1">Status</label>
+            <label className="text-xs uppercase text-gray-500 dark:text-gray-400 block mb-1">Status</label>
             <select
               value={selectedStatus}
               onChange={(event) => setSelectedStatus(event.target.value)}
-              className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary-500"
+              className="w-full bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 text-gray-900 dark:text-gray-100 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary-500"
             >
               <option value="all">All statuses</option>
               <option value="available">Open to offers</option>
@@ -361,11 +361,11 @@ function Marketplace() {
             </select>
           </div>
           <div>
-            <label className="text-xs uppercase text-gray-500 block mb-1">Region</label>
+            <label className="text-xs uppercase text-gray-500 dark:text-gray-400 block mb-1">Region</label>
             <select
               value={selectedRegion}
               onChange={(event) => setSelectedRegion(event.target.value)}
-              className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary-500"
+              className="w-full bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 text-gray-900 dark:text-gray-100 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary-500"
             >
               {regionOptions.map((option) => (
                 <option key={option} value={option}>
@@ -375,11 +375,11 @@ function Marketplace() {
             </select>
           </div>
           <div>
-            <label className="text-xs uppercase text-gray-500 block mb-1">Sort by</label>
+            <label className="text-xs uppercase text-gray-500 dark:text-gray-400 block mb-1">Sort by</label>
             <select
               value={sortOption}
               onChange={(event) => setSortOption(event.target.value as typeof sortOption)}
-              className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary-500"
+              className="w-full bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 text-gray-900 dark:text-gray-100 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary-500"
             >
               <option value="engagement">Buyer engagement</option>
               <option value="price-high">Price (high to low)</option>
@@ -392,8 +392,8 @@ function Marketplace() {
 
       {filteredLots.length === 0 ? (
         <div className="card text-center py-16">
-          <p className="text-lg font-semibold text-gray-900">No lots match the current filters.</p>
-          <p className="text-sm text-gray-600 mt-2">Adjust the filters or clear the search term to see marketplace activity.</p>
+          <p className="text-lg font-semibold text-gray-900 dark:text-white">No lots match the current filters.</p>
+          <p className="text-sm text-gray-600 dark:text-gray-400 mt-2">Adjust the filters or clear the search term to see marketplace activity.</p>
         </div>
       ) : (
         <div className="grid grid-cols-1 xl:grid-cols-2 gap-6">
@@ -408,49 +408,49 @@ function Marketplace() {
                     <div>
                       <div className="flex items-center gap-3">
                         <span className={`badge ${statusClasses[lot.status]}`}>{statusLabels[lot.status]}</span>
-                        <span className="text-sm text-gray-500">{formatDate(lot.harvestDate)}</span>
+                        <span className="text-sm text-gray-500 dark:text-gray-400">{formatDate(lot.harvestDate)}</span>
                       </div>
-                      <h2 className="text-xl font-bold text-gray-900 mt-3">
+                      <h2 className="text-xl font-bold text-gray-900 dark:text-white mt-3">
                         {lot.crop} • {lot.variety}
                       </h2>
-                      <p className="text-sm text-gray-600 mt-1">{lot.location}</p>
+                      <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">{lot.location}</p>
                     </div>
                     <div className="text-right">
-                      <p className="text-xs uppercase text-gray-500">Best offer</p>
-                      <p className="text-2xl font-bold text-gray-900 mt-1">{formatCurrency(lot.bestOfferPerTon, lot.contractCurrency)}</p>
-                      <p className="text-xs text-gray-500">{formatCurrency(totalValue, lot.contractCurrency)} total</p>
+                      <p className="text-xs uppercase text-gray-500 dark:text-gray-400">Best offer</p>
+                      <p className="text-2xl font-bold text-gray-900 dark:text-white mt-1">{formatCurrency(lot.bestOfferPerTon, lot.contractCurrency)}</p>
+                      <p className="text-xs text-gray-500 dark:text-gray-400">{formatCurrency(totalValue, lot.contractCurrency)} total</p>
                     </div>
                   </div>
 
-                  <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm text-gray-600">
+                  <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm text-gray-600 dark:text-gray-400">
                     <div>
-                      <p className="text-xs uppercase text-gray-500 mb-1">Lot volume</p>
-                      <p className="font-semibold text-gray-900">{lot.lotSizeTons} MT</p>
+                      <p className="text-xs uppercase text-gray-500 dark:text-gray-400 mb-1">Lot volume</p>
+                      <p className="font-semibold text-gray-900 dark:text-gray-100">{lot.lotSizeTons} MT</p>
                     </div>
                     <div>
-                      <p className="text-xs uppercase text-gray-500 mb-1">Quality grade</p>
-                      <p className="font-semibold text-gray-900">{lot.qualityGrade} • Moisture {lot.moisture}</p>
+                      <p className="text-xs uppercase text-gray-500 dark:text-gray-400 mb-1">Quality grade</p>
+                      <p className="font-semibold text-gray-900 dark:text-gray-100">{lot.qualityGrade} • Moisture {lot.moisture}</p>
                     </div>
                     <div>
-                      <p className="text-xs uppercase text-gray-500 mb-1">Active offers</p>
-                      <p className="font-semibold text-gray-900">{lot.activeOffers}</p>
+                      <p className="text-xs uppercase text-gray-500 dark:text-gray-400 mb-1">Active offers</p>
+                      <p className="font-semibold text-gray-900 dark:text-gray-100">{lot.activeOffers}</p>
                     </div>
                     <div>
-                      <p className="text-xs uppercase text-gray-500 mb-1">Leading buyer</p>
-                      <p className="font-semibold text-gray-900">
+                      <p className="text-xs uppercase text-gray-500 dark:text-gray-400 mb-1">Leading buyer</p>
+                      <p className="font-semibold text-gray-900 dark:text-gray-100">
                         {topBuyer ? `${topBuyer.buyerName} · ₹${topBuyer.offerPerTon.toLocaleString('en-IN')}` : '—'}
                       </p>
                     </div>
                   </div>
 
                   <div className="mt-4">
-                    <div className="flex items-center justify-between text-xs text-gray-500">
+                    <div className="flex items-center justify-between text-xs text-gray-500 dark:text-gray-400">
                       <span>Buyer engagement</span>
                       <span>{lot.engagementScore}% aligned</span>
                     </div>
-                    <div className="mt-2 h-2 bg-gray-100 rounded-full">
+                    <div className="mt-2 h-2 bg-gray-100 dark:bg-gray-700 rounded-full">
                       <div
-                        className="h-2 bg-primary-600 rounded-full"
+                        className="h-2 bg-primary-600 dark:bg-primary-500 rounded-full"
                         style={{ width: `${lot.engagementScore}%` }}
                       />
                     </div>
@@ -458,7 +458,7 @@ function Marketplace() {
 
                   <div className="mt-4 flex flex-wrap gap-2">
                     {lot.assuranceNotes.map((note) => (
-                      <span key={note} className="badge bg-gray-100 text-gray-700">
+                      <span key={note} className="badge bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300">
                         {note}
                       </span>
                     ))}
@@ -498,61 +498,61 @@ function Marketplace() {
 
       {selectedLot && (
         <div
-          className="fixed inset-0 z-50 bg-black/40 flex items-center justify-center px-4 py-6"
+          className="fixed inset-0 z-50 bg-black/40 dark:bg-black/60 flex items-center justify-center px-4 py-6"
           onClick={() => setSelectedLot(null)}
         >
           <div
-            className="bg-white rounded-xl shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto"
+            className="bg-white dark:bg-gray-800 rounded-xl shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto"
             onClick={(event) => event.stopPropagation()}
           >
-            <div className="border-b border-gray-200 px-6 py-4 flex items-start justify-between gap-4">
+            <div className="border-b border-gray-200 dark:border-gray-700 px-6 py-4 flex items-start justify-between gap-4">
               <div>
                 <div className="flex items-center gap-3">
-                  <ShoppingCart className="h-5 w-5 text-primary-600" />
+                  <ShoppingCart className="h-5 w-5 text-primary-600 dark:text-primary-400" />
                   <span className={`badge ${statusClasses[selectedLot.status]}`}>{statusLabels[selectedLot.status]}</span>
                 </div>
-                <h2 className="text-2xl font-bold text-gray-900 mt-2">
+                <h2 className="text-2xl font-bold text-gray-900 dark:text-white mt-2">
                   {selectedLot.crop} • {selectedLot.variety}
                 </h2>
-                <p className="text-sm text-gray-600 mt-1">{selectedLot.location}</p>
+                <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">{selectedLot.location}</p>
               </div>
               <button
                 type="button"
                 onClick={() => setSelectedLot(null)}
-                className="text-gray-500 hover:text-gray-700"
+                className="text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200"
               >
                 <X className="h-6 w-6" />
               </button>
             </div>
 
             <div className="px-6 py-6 space-y-6">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-gray-600">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-gray-600 dark:text-gray-400">
                 <div>
-                  <p className="text-xs uppercase text-gray-500">Harvested</p>
-                  <p className="text-base font-semibold text-gray-900">{formatDate(selectedLot.harvestDate)}</p>
+                  <p className="text-xs uppercase text-gray-500 dark:text-gray-400">Harvested</p>
+                  <p className="text-base font-semibold text-gray-900 dark:text-gray-100">{formatDate(selectedLot.harvestDate)}</p>
                 </div>
                 <div>
-                  <p className="text-xs uppercase text-gray-500">Lot volume</p>
-                  <p className="text-base font-semibold text-gray-900">{selectedLot.lotSizeTons} MT</p>
+                  <p className="text-xs uppercase text-gray-500 dark:text-gray-400">Lot volume</p>
+                  <p className="text-base font-semibold text-gray-900 dark:text-gray-100">{selectedLot.lotSizeTons} MT</p>
                 </div>
                 <div>
-                  <p className="text-xs uppercase text-gray-500">Offer bandwidth</p>
-                  <p className="text-base font-semibold text-gray-900">
+                  <p className="text-xs uppercase text-gray-500 dark:text-gray-400">Offer bandwidth</p>
+                  <p className="text-base font-semibold text-gray-900 dark:text-gray-100">
                     {formatCurrency(selectedLot.bestOfferPerTon, selectedLot.contractCurrency)} best · Asking {formatCurrency(selectedLot.askingPricePerTon, selectedLot.contractCurrency)}
                   </p>
                 </div>
                 <div>
-                  <p className="text-xs uppercase text-gray-500">Quality & moisture</p>
-                  <p className="text-base font-semibold text-gray-900">{selectedLot.qualityGrade} • {selectedLot.moisture}</p>
+                  <p className="text-xs uppercase text-gray-500 dark:text-gray-400">Quality & moisture</p>
+                  <p className="text-base font-semibold text-gray-900 dark:text-gray-100">{selectedLot.qualityGrade} • {selectedLot.moisture}</p>
                 </div>
               </div>
 
               {selectedLot.assuranceNotes.length > 0 && (
-                <div className="bg-gray-50 border border-gray-200 rounded-lg p-4">
-                  <p className="text-xs uppercase text-gray-500 mb-2">Assurance & readiness</p>
+                <div className="bg-gray-50 dark:bg-gray-900/50 border border-gray-200 dark:border-gray-700 rounded-lg p-4">
+                  <p className="text-xs uppercase text-gray-500 dark:text-gray-400 mb-2">Assurance & readiness</p>
                   <div className="flex flex-wrap gap-2">
                     {selectedLot.assuranceNotes.map((note) => (
-                      <span key={note} className="badge bg-white border border-gray-200 text-gray-700">
+                      <span key={note} className="badge bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300">
                         {note}
                       </span>
                     ))}
@@ -561,18 +561,18 @@ function Marketplace() {
               )}
 
               <div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-3">Buyer interest</h3>
+                <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">Buyer interest</h3>
                 <div className="space-y-3">
                   {selectedLot.buyerInterest.map((buyer) => (
                     <div
                       key={buyer.id}
-                      className="border border-gray-200 rounded-lg p-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4"
+                      className="border border-gray-200 dark:border-gray-700 rounded-lg p-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4"
                     >
                       <div>
-                        <p className="text-sm font-semibold text-gray-900">{buyer.buyerName}</p>
-                        <p className="text-xs text-gray-500 mt-0.5">{buyer.organization}</p>
+                        <p className="text-sm font-semibold text-gray-900 dark:text-gray-100">{buyer.buyerName}</p>
+                        <p className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">{buyer.organization}</p>
                       </div>
-                      <div className="flex flex-wrap gap-4 text-sm text-gray-600">
+                      <div className="flex flex-wrap gap-4 text-sm text-gray-600 dark:text-gray-400">
                         <span>Offer: ₹{buyer.offerPerTon.toLocaleString('en-IN')}/MT</span>
                         <span>Volume: {buyer.volumeTons} MT</span>
                         <span>Updated: {buyer.updatedAt}</span>
@@ -586,22 +586,22 @@ function Marketplace() {
               </div>
 
               <div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-3 flex items-center gap-2">
-                  <Truck className="h-5 w-5 text-primary-600" />
+                <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-3 flex items-center gap-2">
+                  <Truck className="h-5 w-5 text-primary-600 dark:text-primary-400" />
                   Logistics options
                 </h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   {selectedLot.logisticsOptions.map((option) => (
-                    <div key={option.id} className="border border-gray-200 rounded-lg p-4">
+                    <div key={option.id} className="border border-gray-200 dark:border-gray-700 rounded-lg p-4">
                       <div className="flex items-center justify-between gap-3">
                         <div>
-                          <p className="text-sm font-semibold text-gray-900">{option.provider}</p>
-                          <p className="text-xs text-gray-500">{option.mode}</p>
+                          <p className="text-sm font-semibold text-gray-900 dark:text-gray-100">{option.provider}</p>
+                          <p className="text-xs text-gray-500 dark:text-gray-400">{option.mode}</p>
                         </div>
-                        <span className="badge bg-blue-100 text-blue-800">{option.reliabilityScore}% reliability</span>
+                        <span className="badge bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-300">{option.reliabilityScore}% reliability</span>
                       </div>
-                      <div className="mt-3 grid grid-cols-2 gap-3 text-sm text-gray-600">
-                        <span className="font-medium text-gray-900">{option.estimatedCost}</span>
+                      <div className="mt-3 grid grid-cols-2 gap-3 text-sm text-gray-600 dark:text-gray-400">
+                        <span className="font-medium text-gray-900 dark:text-gray-100">{option.estimatedCost}</span>
                         <span>Transit: {option.transitTime}</span>
                         <span>{option.availability}</span>
                         <span>Capacity: {option.capacity}</span>
@@ -612,17 +612,17 @@ function Marketplace() {
               </div>
 
               <div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-3 flex items-center gap-2">
-                  <CreditCard className="h-5 w-5 text-primary-600" />
+                <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-3 flex items-center gap-2">
+                  <CreditCard className="h-5 w-5 text-primary-600 dark:text-primary-400" />
                   Credit enablement
                 </h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   {selectedLot.creditOptions.map((option) => (
-                    <div key={option.id} className="border border-gray-200 rounded-lg p-4">
-                      <p className="text-sm font-semibold text-gray-900">{option.provider}</p>
-                      <p className="text-xs text-gray-500">{option.product}</p>
-                      <div className="mt-3 text-sm text-gray-600 space-y-1">
-                        <p className="font-medium text-gray-900">Rate: {option.rate}</p>
+                    <div key={option.id} className="border border-gray-200 dark:border-gray-700 rounded-lg p-4">
+                      <p className="text-sm font-semibold text-gray-900 dark:text-gray-100">{option.provider}</p>
+                      <p className="text-xs text-gray-500 dark:text-gray-400">{option.product}</p>
+                      <div className="mt-3 text-sm text-gray-600 dark:text-gray-400 space-y-1">
+                        <p className="font-medium text-gray-900 dark:text-gray-100">Rate: {option.rate}</p>
                         <p>Max amount: {option.maxAmount}</p>
                         <p>Approval: {option.approvalTime}</p>
                         <p className="leading-snug">{option.notes}</p>
