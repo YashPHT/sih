@@ -1,8 +1,25 @@
 import { Link } from 'react-router-dom'
-import { Sprout, TrendingUp, AlertTriangle, Calendar, ArrowRight } from 'lucide-react'
+import {
+  Sprout,
+  TrendingUp,
+  AlertTriangle,
+  Calendar,
+  ArrowRight,
+  CloudSun,
+  Droplet,
+  Wind,
+  RefreshCcw,
+  Thermometer,
+  CloudRain
+} from 'lucide-react'
 import { mockSeasonalAdvisories, mockPestPredictions, mockCropRecommendations } from '../data/mockData'
+import { useWeatherData } from '../hooks/useWeatherData'
+import { formatForecastHour, formatRelativeTime, weatherSeverityStyles } from '../utils/weatherStyles'
 
 function Dashboard() {
+  const { data: weatherData, loading: weatherLoading, isFallback: weatherFallback, error: weatherError, refetch: refetchWeather } = useWeatherData()
+  const forecastPreview = weatherData?.forecast.slice(0, 4) ?? []
+  const alertPreview = weatherData?.alerts.slice(0, 3) ?? []
   const highPriorityAdvisories = mockSeasonalAdvisories.filter(a => a.priority === 'high').length
   const highRiskPests = mockPestPredictions.filter(p => p.riskLevel === 'high').length
   const topRecommendation = mockCropRecommendations[0]
@@ -12,6 +29,128 @@ function Dashboard() {
       <div>
         <h1 className="text-3xl font-bold text-gray-900">Welcome to AgriAdvisory</h1>
         <p className="mt-2 text-gray-600">Your intelligent farming companion for better decisions</p>
+      </div>
+
+      <div className="card bg-gradient-to-br from-sky-50 to-blue-100 border-sky-200">
+        <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-6">
+          <div>
+            <p className="text-sm font-semibold text-sky-700 uppercase tracking-wide">Weather overview</p>
+            <div className="mt-2 flex items-baseline gap-3">
+              <span className="text-4xl font-bold text-sky-900">
+                {weatherLoading || !weatherData ? '--' : `${weatherData.current.temperature}°C`}
+              </span>
+              <span className="text-sky-800 capitalize text-base">
+                {weatherLoading || !weatherData ? 'Loading forecast...' : weatherData.current.description}
+              </span>
+            </div>
+            <p className="mt-1 text-sm text-sky-800">
+              {weatherData?.location ?? 'Detecting location...'}
+            </p>
+            <div className="mt-4 grid grid-cols-2 sm:grid-cols-4 gap-3">
+              <div className="bg-white/80 border border-sky-100 rounded-lg p-3 shadow-sm">
+                <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wide text-sky-700">
+                  <Thermometer className="h-4 w-4" />
+                  <span>Feels like</span>
+                </div>
+                <p className="mt-2 text-lg font-semibold text-gray-900">
+                  {weatherLoading || !weatherData ? '--' : `${weatherData.current.feelsLike}°C`}
+                </p>
+              </div>
+              <div className="bg-white/80 border border-sky-100 rounded-lg p-3 shadow-sm">
+                <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wide text-sky-700">
+                  <Droplet className="h-4 w-4" />
+                  <span>Humidity</span>
+                </div>
+                <p className="mt-2 text-lg font-semibold text-gray-900">
+                  {weatherLoading || !weatherData ? '--' : `${weatherData.current.humidity}%`}
+                </p>
+              </div>
+              <div className="bg-white/80 border border-sky-100 rounded-lg p-3 shadow-sm">
+                <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wide text-sky-700">
+                  <Wind className="h-4 w-4" />
+                  <span>Wind</span>
+                </div>
+                <p className="mt-2 text-lg font-semibold text-gray-900">
+                  {weatherLoading || !weatherData ? '--' : `${weatherData.current.windSpeed} km/h`}
+                </p>
+              </div>
+              <div className="bg-white/80 border border-sky-100 rounded-lg p-3 shadow-sm">
+                <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wide text-sky-700">
+                  <CloudRain className="h-4 w-4" />
+                  <span>Rain chance</span>
+                </div>
+                <p className="mt-2 text-lg font-semibold text-gray-900">
+                  {weatherLoading || !weatherData ? '--' : `${weatherData.current.precipitationChance}%`}
+                </p>
+              </div>
+            </div>
+            {weatherFallback && (
+              <p className="mt-3 text-xs font-medium text-sky-700">
+                Showing simulated data while live weather updates are unavailable.
+              </p>
+            )}
+            {weatherError && (
+              <p className="mt-2 text-xs text-red-600">
+                {weatherError}
+              </p>
+            )}
+          </div>
+          <div className="flex flex-col items-end gap-3 text-right min-w-[150px]">
+            <CloudSun className="h-12 w-12 text-sky-500" />
+            <button
+              type="button"
+              onClick={refetchWeather}
+              className="inline-flex items-center gap-1 text-xs font-medium text-sky-700 hover:text-sky-900 transition-colors"
+            >
+              <RefreshCcw className="h-4 w-4" />
+              Refresh
+            </button>
+            <p className="text-xs text-sky-700">
+              {weatherData ? `Updated ${formatRelativeTime(weatherData.lastUpdated)}` : 'Awaiting update'}
+            </p>
+          </div>
+        </div>
+        <div className="mt-6">
+          <p className="text-xs font-semibold uppercase tracking-wide text-sky-700">Upcoming forecast</p>
+          {forecastPreview.length === 0 ? (
+            <p className="mt-2 text-sm text-sky-800">Forecast data is not available right now.</p>
+          ) : (
+            <div className="mt-3 grid grid-cols-2 md:grid-cols-4 gap-3">
+              {forecastPreview.map((entry) => (
+                <div key={entry.timestamp} className="bg-white/80 border border-sky-100 rounded-lg p-3 shadow-sm">
+                  <p className="text-xs text-sky-700 font-semibold">{formatForecastHour(entry.timestamp)}</p>
+                  <p className="mt-1 text-lg font-semibold text-gray-900">{entry.temperature}°C</p>
+                  <div className="mt-2 flex items-center justify-between text-xs text-gray-600">
+                    <span className="flex items-center gap-1">
+                      <Droplet className="h-4 w-4 text-sky-600" />
+                      {entry.precipitationChance}%
+                    </span>
+                    <span className="flex items-center gap-1">
+                      <Wind className="h-4 w-4 text-sky-600" />
+                      {entry.windSpeed} km/h
+                    </span>
+                  </div>
+                  <p className="mt-1 text-xs text-gray-500 capitalize leading-snug">{entry.description}</p>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+        {alertPreview.length > 0 && (
+          <div className="mt-6">
+            <p className="text-xs font-semibold uppercase tracking-wide text-sky-700">Weather alerts</p>
+            <div className="mt-2 flex flex-wrap gap-2">
+              {alertPreview.map((alert) => {
+                const badgeClass = weatherSeverityStyles[alert.severity]?.badge ?? 'bg-gray-100 text-gray-800'
+                return (
+                  <span key={alert.id} className={`badge ${badgeClass}`}>
+                    {`${alert.severity.toUpperCase()} • ${alert.title}`}
+                  </span>
+                )
+              })}
+            </div>
+          </div>
+        )}
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">

@@ -15,6 +15,11 @@ A modern agricultural advisory platform providing AI-powered insights for crop p
 - **Insurance Plans**: Multiple crop insurance options with coverage comparison
 - **Next Steps Guidance**: Clear workflow for application and approval process
 
+### ☁️ Weather Intelligence
+- **Server-side weather integration** with OpenWeatherMap via cached Vite middleware
+- **Forecast snapshots & warning badges** rendered across the dashboard and stakeholder views
+- **Resilient fallbacks** that gracefully switch to simulated weather data when live APIs are unavailable
+
 ## Technology Stack
 
 - **Frontend**: React 18 with TypeScript
@@ -42,6 +47,14 @@ npm run dev
 
 3. Open your browser and navigate to `http://localhost:5173`
 
+### Weather API configuration
+
+The platform reads live conditions from OpenWeatherMap via a lightweight Vite middleware exposed at `/api/weather`.
+
+- Provide an API key through the `OPENWEATHER_API_KEY` environment variable when running `npm run dev` or `npm run preview`.
+- Responses are cached in-memory for 10 minutes to minimise API calls during demos.
+- When the key is missing or a request fails, the middleware automatically falls back to rich simulated data from `src/data/weatherMock.ts` so the experience remains uninterrupted.
+
 ### Build for Production
 
 ```bash
@@ -54,16 +67,20 @@ The built files will be in the `dist` directory.
 
 ```
 src/
-├── components/       # Reusable UI components
-├── pages/           # Main page components
+├── data/            # Mock and fallback datasets
+├── hooks/           # Custom React hooks (e.g., weather data)
+├── pages/           # Main routed views
 │   ├── Dashboard.tsx
 │   ├── CropAdvisory.tsx
-│   └── CreditInsurance.tsx
-├── types/           # TypeScript type definitions
-├── data/            # Mock data for demo
+│   ├── CreditInsurance.tsx
+│   └── StakeholderDashboards.tsx
+├── types/           # Shared TypeScript interfaces
+├── utils/           # Formatting helpers and style utilities
 ├── App.tsx          # Main application component
-├── main.tsx         # Application entry point
-└── index.css        # Global styles
+├── index.css        # Global styles
+└── main.tsx         # Application entry point
+server/
+└── weatherRoutes.ts # Vite middleware exposing cached weather API
 ```
 
 ## Features Demo
@@ -98,6 +115,8 @@ The application uses mock data to demonstrate functionality. In production, this
 - Market price databases
 - Credit scoring engines
 - Insurance providers
+
+Weather fallbacks used by the `/api/weather` endpoint are defined in `src/data/weatherMock.ts`.
 
 ## License
 

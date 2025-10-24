@@ -11,10 +11,14 @@ import {
   Truck,
   ArrowUpRight,
   ArrowDownRight,
-  Minus
+  Minus,
+  AlertTriangle,
+  CloudRain
 } from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
 import { stakeholderDashboards } from '../data/stakeholderData'
+import { useWeatherData } from '../hooks/useWeatherData'
+import { formatRelativeTime, weatherSeverityStyles } from '../utils/weatherStyles'
 import type {
   CommunicationStatus,
   LogisticsStatus,
@@ -104,6 +108,8 @@ function StakeholderDashboards() {
   const [activeRole, setActiveRole] = useState<StakeholderRole>('farmer')
   const dashboard = stakeholderDashboards[activeRole]
   const activeRoleMeta = roleTabs.find((role) => role.id === activeRole)
+  const { data: weatherData } = useWeatherData({ disableAutoRefresh: true })
+  const logisticsWeatherAlerts = (weatherData?.alerts ?? []).filter((alert) => alert.category === 'logistics' || alert.category === 'general')
 
   return (
     <div className="space-y-8">
@@ -336,6 +342,55 @@ function StakeholderDashboards() {
                 </div>
               ))}
             </div>
+            {logisticsWeatherAlerts.length > 0 && (
+              <div className="mt-6 space-y-4">
+                <div className="flex items-center justify-between">
+                  <h4 className="text-xs font-semibold uppercase tracking-wide text-gray-500 flex items-center gap-2">
+                    <CloudRain className="h-4 w-4 text-primary-600" />
+                    Weather-driven logistics alerts
+                  </h4>
+                  <p className="text-xs text-gray-400">
+                    {weatherData ? `Updated ${formatRelativeTime(weatherData.lastUpdated)}` : ''}
+                  </p>
+                </div>
+                {logisticsWeatherAlerts.map((alert) => {
+                  const badgeClass = weatherSeverityStyles[alert.severity]?.badge ?? 'bg-gray-100 text-gray-800'
+                  const borderClass = weatherSeverityStyles[alert.severity]?.borderAccent ?? 'border-gray-300'
+                  const textClass = weatherSeverityStyles[alert.severity]?.text ?? 'text-gray-900'
+                  const iconClass = weatherSeverityStyles[alert.severity]?.icon ?? 'text-gray-500'
+
+                  return (
+                    <div key={alert.id} className={`rounded-lg bg-white/90 p-4 shadow-sm border-l-4 ${borderClass}`}>
+                      <div className="flex items-start justify-between gap-3">
+                        <div>
+                          <span className={`badge ${badgeClass}`}>{alert.severity.toUpperCase()}</span>
+                          <h5 className={`mt-2 text-base font-semibold ${textClass}`}>{alert.title}</h5>
+                          <p className="mt-1 text-xs uppercase tracking-wide text-gray-500">Logistics intelligence</p>
+                        </div>
+                        <AlertTriangle className={`h-5 w-5 ${iconClass}`} />
+                      </div>
+                      <p className="mt-2 text-sm text-gray-700 leading-relaxed">{alert.description}</p>
+                      {alert.impactAreas.length > 0 && (
+                        <div className="mt-3 flex flex-wrap gap-2">
+                          {alert.impactAreas.map((area) => (
+                            <span key={area} className="badge bg-gray-100 text-gray-800">
+                              {area}
+                            </span>
+                          ))}
+                        </div>
+                      )}
+                      {alert.recommendedActions.length > 0 && (
+                        <ul className="mt-3 space-y-1 text-sm text-gray-600 list-disc list-inside">
+                          {alert.recommendedActions.map((action) => (
+                            <li key={action}>{action}</li>
+                          ))}
+                        </ul>
+                      )}
+                    </div>
+                  )
+                })}
+              </div>
+            )}
           </div>
         </div>
       </div>
