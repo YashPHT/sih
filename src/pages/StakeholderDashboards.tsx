@@ -12,12 +12,15 @@ import {
   ArrowDownRight,
   Minus,
   AlertTriangle,
-  CloudRain
+  CloudRain,
+  Map
 } from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
 import { stakeholderDashboards } from '../data/stakeholderData'
+import { logisticsGeoData } from '../data/logisticsGeoData'
 import { useWeatherData } from '../hooks/useWeatherData'
 import { formatRelativeTime, weatherSeverityStyles } from '../utils/weatherStyles'
+import LogisticsMap from '../components/LogisticsMap'
 import type {
   CommunicationStatus,
   LogisticsStatus,
@@ -392,6 +395,26 @@ function StakeholderDashboards() {
             )}
           </div>
         </div>
+      </div>
+
+      <div className="card space-y-4">
+        <div className="flex items-center justify-between">
+          <h2 className="text-xl font-bold text-gray-900 flex items-center">
+            <Map className="h-5 w-5 mr-2 text-primary-600" />
+            Warehouse & Logistics Visibility Map
+          </h2>
+          <span className="text-sm text-gray-500">Interactive geospatial view of supply chain infrastructure</span>
+        </div>
+        <p className="text-sm text-gray-600">
+          Track warehouses, processing facilities, and active transport routes in real-time. 
+          Use filters to focus on specific commodities or operational statuses.
+        </p>
+        <LogisticsMap 
+          warehouses={logisticsGeoData.warehouses}
+          processingUnits={logisticsGeoData.processingUnits}
+          routes={logisticsGeoData.routes}
+          className="h-[600px]"
+        />
       </div>
     </div>
   )
