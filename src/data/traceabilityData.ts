@@ -25,7 +25,7 @@ export const mockBatches: TraceabilityBatch[] = [
           soilPH: '7.2'
         },
         previousHash: '0000000000000000000000000000000000000000000000000000000000000000',
-        currentHash: '3f8a9c7e2d1b6f4a8e9c7d5b3a2f1e8c9d7b5a3f2e1d9c8b7a6f5e4d3c2b1a0',
+        currentHash: '1f82e9b3ed93d8b9a53e06176f831db0663ea47b6fecca4673e47232e7f5b9f9',
         blockNumber: 0
       },
       {
@@ -40,8 +40,8 @@ export const mockBatches: TraceabilityBatch[] = [
           waterVolume: '12000 liters',
           duration: '6 hours'
         },
-        previousHash: '3f8a9c7e2d1b6f4a8e9c7d5b3a2f1e8c9d7b5a3f2e1d9c8b7a6f5e4d3c2b1a0',
-        currentHash: 'a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2',
+        previousHash: '1f82e9b3ed93d8b9a53e06176f831db0663ea47b6fecca4673e47232e7f5b9f9',
+        currentHash: 'eead998d6cf63b5cec8fd26a471390f0a571795d82002926e416bd79949c462c',
         blockNumber: 1
       },
       {
@@ -56,8 +56,8 @@ export const mockBatches: TraceabilityBatch[] = [
           quantity: '500 kg',
           npkRatio: '10-10-10'
         },
-        previousHash: 'a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2',
-        currentHash: 'b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2c3',
+        previousHash: 'eead998d6cf63b5cec8fd26a471390f0a571795d82002926e416bd79949c462c',
+        currentHash: 'ca99f63722cbc4ae51e79c312ffd4549c66e787dbbbf711be00db8a2f4e1c53d',
         blockNumber: 2
       },
       {
@@ -73,8 +73,8 @@ export const mockBatches: TraceabilityBatch[] = [
           leafColor: 'Deep Green',
           pestObservations: 'None detected'
         },
-        previousHash: 'b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2c3',
-        currentHash: 'c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2c3d4',
+        previousHash: 'ca99f63722cbc4ae51e79c312ffd4549c66e787dbbbf711be00db8a2f4e1c53d',
+        currentHash: '2a7606a7729fb698fc76b58daf2827eb903252c970eec8847bd2701d3d19d31e',
         blockNumber: 3
       },
       {
@@ -90,8 +90,8 @@ export const mockBatches: TraceabilityBatch[] = [
           moisture: '12%',
           quality: 'Grade A'
         },
-        previousHash: 'c3d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2c3d4',
-        currentHash: 'd4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2c3d4e5',
+        previousHash: '2a7606a7729fb698fc76b58daf2827eb903252c970eec8847bd2701d3d19d31e',
+        currentHash: '9927ca56384ee0af536230b7009fa74d0d5778c8fa8f82033f51035e02252678',
         blockNumber: 4
       },
       {
@@ -107,8 +107,8 @@ export const mockBatches: TraceabilityBatch[] = [
           contaminants: 'None',
           certification: 'Organic India Certified'
         },
-        previousHash: 'd4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2c3d4e5',
-        currentHash: 'e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2c3d4e5f6',
+        previousHash: '9927ca56384ee0af536230b7009fa74d0d5778c8fa8f82033f51035e02252678',
+        currentHash: 'de44bc6adb9622e650a329ee28f343777a563adfb08605500eaf1b556e747495',
         blockNumber: 5
       },
       {
@@ -124,8 +124,8 @@ export const mockBatches: TraceabilityBatch[] = [
           byproducts: '200 kg bran',
           temperature: '25°C'
         },
-        previousHash: 'e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2c3d4e5f6',
-        currentHash: 'f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2c3d4e5f6a7',
+        previousHash: 'de44bc6adb9622e650a329ee28f343777a563adfb08605500eaf1b556e747495',
+        currentHash: 'dd6a73f0c7c0eec15eded6519feaec64dd6c0a548403faa76c0cae1a3453d3c4',
         blockNumber: 6
       },
       {
@@ -141,8 +141,8 @@ export const mockBatches: TraceabilityBatch[] = [
           batchLabeling: 'QR Code + Barcode',
           expiryDate: '2025-12-14'
         },
-        previousHash: 'f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2c3d4e5f6a7',
-        currentHash: 'a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2c3d4e5f6a7b8',
+        previousHash: 'dd6a73f0c7c0eec15eded6519feaec64dd6c0a548403faa76c0cae1a3453d3c4',
+        currentHash: '1741cce3d0749f4164c215df43c1d70d5cf05dbe00206bf12cff50dfb14dc3f9',
         blockNumber: 7
       },
       {
@@ -158,8 +158,8 @@ export const mockBatches: TraceabilityBatch[] = [
           distance: '450 km',
           eta: '2024-12-15T18:00:00Z'
         },
-        previousHash: 'a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2c3d4e5f6a7b8',
-        currentHash: 'b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2c3d4e5f6a7b8c9',
+        previousHash: '1741cce3d0749f4164c215df43c1d70d5cf05dbe00206bf12cff50dfb14dc3f9',
+        currentHash: 'b4a567edf575b95ae5d672ebd5e65da328d3fdf9eb5c5771c89b0844f25b7b47',
         blockNumber: 8
       },
       {
@@ -175,8 +175,8 @@ export const mockBatches: TraceabilityBatch[] = [
           shelfPlacement: 'Organic Section',
           retailPrice: '₹45/kg'
         },
-        previousHash: 'b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2c3d4e5f6a7b8c9',
-        currentHash: 'c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2c3d4e5f6a7b8c9d0',
+        previousHash: 'b4a567edf575b95ae5d672ebd5e65da328d3fdf9eb5c5771c89b0844f25b7b47',
+        currentHash: '1cfa7a40766a640a0f16effd00dc0b132b9cd4c8b452d366d4be54bdc2c8f74d',
         blockNumber: 9
       }
     ]
@@ -205,7 +205,7 @@ export const mockBatches: TraceabilityBatch[] = [
           soilPH: '7.0'
         },
         previousHash: '0000000000000000000000000000000000000000000000000000000000000000',
-        currentHash: '1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0f1a2b',
+        currentHash: '3cca3c4167be2637c310a1b2530a2ed184f03853fc592b396381f74904dc3dbe',
         blockNumber: 0
       },
       {
@@ -220,8 +220,8 @@ export const mockBatches: TraceabilityBatch[] = [
           waterVolume: '15000 liters',
           duration: '8 hours'
         },
-        previousHash: '1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0f1a2b',
-        currentHash: '2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0f1a2b3c',
+        previousHash: '3cca3c4167be2637c310a1b2530a2ed184f03853fc592b396381f74904dc3dbe',
+        currentHash: '861eb3c3394c479e9c687b92f0ee5543609008b8931db5775b592b2c0dbcf934',
         blockNumber: 1
       },
       {
@@ -237,8 +237,8 @@ export const mockBatches: TraceabilityBatch[] = [
           leafColor: 'Bright Green',
           pestObservations: 'Minor aphid presence'
         },
-        previousHash: '2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0f1a2b3c',
-        currentHash: '3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0f1a2b3c4d',
+        previousHash: '861eb3c3394c479e9c687b92f0ee5543609008b8931db5775b592b2c0dbcf934',
+        currentHash: 'f70cdb5d78447778ea3472f9e55d2f4eb3e62f9bb728b66f32088202decaa747',
         blockNumber: 2
       },
       {
@@ -254,8 +254,8 @@ export const mockBatches: TraceabilityBatch[] = [
           quantity: '5 liters',
           method: 'Organic spray application'
         },
-        previousHash: '3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0f1a2b3c4d',
-        currentHash: '4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0f1a2b3c4d5e',
+        previousHash: 'f70cdb5d78447778ea3472f9e55d2f4eb3e62f9bb728b66f32088202decaa747',
+        currentHash: '97c8c2330258e6ffca9875e386479c22840729e016cbc376ee9bfdd6fef6891b',
         blockNumber: 3
       }
     ]
