@@ -220,3 +220,48 @@ export interface WeatherApiResponse {
   forecast: WeatherForecastEntry[]
   alerts: WeatherAlert[]
 }
+
+export type SupplyChainEventType =
+  | 'planting'
+  | 'growth-monitoring'
+  | 'pest-treatment'
+  | 'irrigation'
+  | 'fertilization'
+  | 'harvesting'
+  | 'processing'
+  | 'quality-inspection'
+  | 'packaging'
+  | 'distribution'
+  | 'retail-delivery'
+
+export interface SupplyChainEvent {
+  id: string
+  batchId: string
+  eventType: SupplyChainEventType
+  timestamp: string
+  location: string
+  actor: string
+  data: Record<string, string | number | boolean>
+  previousHash: string
+  currentHash: string
+  blockNumber: number
+}
+
+export interface TraceabilityBatch {
+  id: string
+  batchNumber: string
+  crop: string
+  quantity: string
+  originFarm: string
+  createdAt: string
+  status: 'active' | 'completed'
+  events: SupplyChainEvent[]
+  isVerified: boolean
+}
+
+export interface BlockchainVerification {
+  isValid: boolean
+  totalBlocks: number
+  invalidBlocks: number[]
+  message: string
+}
