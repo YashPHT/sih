@@ -13,6 +13,7 @@ import {
   Download,
   Map as MapIcon
 } from 'lucide-react'
+import { useTranslation } from 'react-i18next'
 import { LineChart, Line, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, PieChart, Pie, Cell } from 'recharts'
 import { policymakerData, statesList, seasonsList } from '../data/policymakerData'
 import LogisticsMap from '../components/LogisticsMap'
@@ -22,6 +23,7 @@ import { useNotificationContext } from '../context/NotificationContext'
 const COLORS = ['#10b981', '#3b82f6', '#f59e0b', '#ef4444', '#8b5cf6']
 
 function PolicymakerDashboard() {
+  const { t } = useTranslation()
   const [selectedState, setSelectedState] = useState<string>('all')
   const [selectedSeason, setSelectedSeason] = useState<string>('all')
   const { showNotification } = useNotificationContext()
@@ -89,11 +91,10 @@ function PolicymakerDashboard() {
       <div>
         <h1 className="text-3xl font-bold text-gray-900 flex items-center">
           <Brain className="h-8 w-8 mr-3 text-primary-600" />
-          Policymaker Intelligence Dashboard
+          {t('policymaker.intelligenceDashboard')}
         </h1>
         <p className="mt-2 text-gray-600 max-w-3xl">
-          Strategic insights on agricultural production, import dependency, processing capacity, 
-          and market trends to support evidence-based policy decisions.
+          {t('policymaker.strategicInsights')}
         </p>
       </div>
 
@@ -102,23 +103,23 @@ function PolicymakerDashboard() {
           <div className="flex-1">
             <div className="flex items-center gap-3">
               <Filter className="h-5 w-5 text-primary-600" />
-              <h2 className="text-lg font-bold text-gray-900">Data Filters</h2>
+              <h2 className="text-lg font-bold text-gray-900">{t('policymaker.dataFilters')}</h2>
             </div>
             <p className="text-sm text-gray-600 mt-2">
-              Refine insights by state and season to focus on specific agricultural regions and periods.
+              {t('policymaker.refineInsights')}
             </p>
           </div>
           <div className="flex flex-wrap gap-4">
             <div>
               <label className="block text-xs font-semibold text-gray-700 uppercase tracking-wide mb-2">
-                State
+                {t('policymaker.state')}
               </label>
               <select
                 value={selectedState}
                 onChange={(e) => setSelectedState(e.target.value)}
                 className="form-select px-4 py-2 border border-gray-300 rounded-lg bg-white text-gray-900 font-medium focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
               >
-                <option value="all">All States</option>
+                <option value="all">{t('policymaker.allStates')}</option>
                 {statesList.map(state => (
                   <option key={state} value={state}>{state}</option>
                 ))}
@@ -126,14 +127,14 @@ function PolicymakerDashboard() {
             </div>
             <div>
               <label className="block text-xs font-semibold text-gray-700 uppercase tracking-wide mb-2">
-                Season
+                {t('dashboard.season')}
               </label>
               <select
                 value={selectedSeason}
                 onChange={(e) => setSelectedSeason(e.target.value)}
                 className="form-select px-4 py-2 border border-gray-300 rounded-lg bg-white text-gray-900 font-medium focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
               >
-                <option value="all">All Seasons</option>
+                <option value="all">{t('policymaker.allSeasons')}</option>
                 {seasonsList.map(season => (
                   <option key={season} value={season}>{season}</option>
                 ))}
@@ -149,11 +150,11 @@ function PolicymakerDashboard() {
             <div className="flex-1">
               <div className="flex items-center gap-2 mb-2">
                 <TrendingDown className="h-5 w-5 text-red-600" />
-                <p className="text-sm font-semibold text-red-800 uppercase tracking-wide">Import Dependency</p>
+                <p className="text-sm font-semibold text-red-800 uppercase tracking-wide">{t('policymaker.importDependency')}</p>
               </div>
               <p className="text-4xl font-bold text-red-900">{aggregatedKPIs.importDependency.toFixed(1)}%</p>
               <p className="text-sm text-red-700 mt-2">
-                {aggregatedKPIs.importDependency < 20 ? 'Low dependency' : aggregatedKPIs.importDependency < 40 ? 'Moderate dependency' : 'High dependency'}
+                {t('policymaker.oilseedImports')}
               </p>
             </div>
             <div className={`flex items-center justify-center w-12 h-12 rounded-full ${
@@ -173,7 +174,7 @@ function PolicymakerDashboard() {
             <div className="flex-1">
               <div className="flex items-center gap-2 mb-2">
                 <Package className="h-5 w-5 text-blue-600" />
-                <p className="text-sm font-semibold text-blue-800 uppercase tracking-wide">Production Targets</p>
+                <p className="text-sm font-semibold text-blue-800 uppercase tracking-wide">{t('policymaker.productionVsTarget')}</p>
               </div>
               <p className="text-4xl font-bold text-blue-900">
                 {(aggregatedKPIs.productionTarget / 1000).toFixed(1)}K MT

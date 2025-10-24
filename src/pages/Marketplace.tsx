@@ -10,6 +10,7 @@ import {
   X,
   Users
 } from 'lucide-react'
+import { useTranslation } from 'react-i18next'
 import { mockMarketplaceLots } from '../data/marketplaceData'
 import { MarketplaceLot } from '../types'
 
@@ -66,6 +67,7 @@ const formatTime = () =>
   }).format(new Date())
 
 function Marketplace() {
+  const { t } = useTranslation()
   const [lots, setLots] = useState<MarketplaceLot[]>(mockMarketplaceLots)
   const [selectedCrop, setSelectedCrop] = useState<string>('all')
   const [selectedStatus, setSelectedStatus] = useState<string>('all')
@@ -76,7 +78,7 @@ function Marketplace() {
   const [activityLog, setActivityLog] = useState<ActivityLogEntry[]>(() => [
     {
       id: 'activity-initial',
-      message: 'Marketplace seeded with live-like data for the demo storyline.',
+      message: t('marketplace.marketplaceSeeded'),
       timestamp: formatTime()
     }
   ])
