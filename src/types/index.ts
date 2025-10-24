@@ -53,3 +53,74 @@ export interface InsurancePlan {
   benefits: string[]
   recommended: boolean
 }
+
+export type StakeholderRole = 'farmer' | 'fpo' | 'processor' | 'retailer'
+
+export type TrendDirection = 'positive' | 'negative' | 'neutral'
+
+export type ImpactLevel = 'high' | 'medium' | 'low'
+
+export interface StakeholderKPI {
+  id: string
+  label: string
+  value: string
+  change: string
+  trend: TrendDirection
+}
+
+export interface StakeholderAction {
+  id: string
+  title: string
+  description: string
+  dueDate: string
+  impact: ImpactLevel
+  owner: string
+}
+
+export type CommunicationStatus = 'awaiting-response' | 'scheduled' | 'resolved'
+
+export interface StakeholderCommunication {
+  id: string
+  counterpart: string
+  topic: string
+  lastMessage: string
+  lastUpdated: string
+  status: CommunicationStatus
+}
+
+export type OpportunityStatus = 'negotiation' | 'matched' | 'new'
+
+export interface StakeholderOpportunity {
+  id: string
+  buyer: string
+  requirement: string
+  value: string
+  timeline: string
+  status: OpportunityStatus
+}
+
+export type LogisticsStatus = 'in-transit' | 'scheduled' | 'delayed' | 'delivered'
+
+export interface StakeholderLogistics {
+  id: string
+  route: string
+  status: LogisticsStatus
+  eta: string
+  mode: string
+  progress: number
+}
+
+export interface StakeholderHighlight {
+  title: string
+  subtitle: string
+  context: string
+}
+
+export interface StakeholderDashboardData {
+  highlight: StakeholderHighlight
+  kpis: StakeholderKPI[]
+  actions: StakeholderAction[]
+  communications: StakeholderCommunication[]
+  opportunities: StakeholderOpportunity[]
+  logistics: StakeholderLogistics[]
+}
