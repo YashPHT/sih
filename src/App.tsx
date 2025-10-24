@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Routes, Route, Link, useLocation } from 'react-router-dom'
-import { Sprout, TrendingUp, Home } from 'lucide-react'
+import { Sprout, TrendingUp, Home, Users } from 'lucide-react'
 import Dashboard from './pages/Dashboard'
+import StakeholderDashboards from './pages/StakeholderDashboards'
 import CropAdvisory from './pages/CropAdvisory'
 import CreditInsurance from './pages/CreditInsurance'
 
@@ -28,6 +29,17 @@ function Navigation() {
             >
               <Home className="h-4 w-4 mr-2" />
               Dashboard
+            </Link>
+            <Link
+              to="/stakeholders"
+              className={`flex items-center px-3 py-2 rounded-md text-sm font-medium ${
+                isActive('/stakeholders') 
+                  ? 'bg-primary-100 text-primary-700' 
+                  : 'text-gray-700 hover:bg-gray-100'
+              }`}
+            >
+              <Users className="h-4 w-4 mr-2" />
+              Stakeholders
             </Link>
             <Link
               to="/crop-advisory"
@@ -66,6 +78,7 @@ function App() {
         <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <Routes>
             <Route path="/" element={<Dashboard />} />
+            <Route path="/stakeholders" element={<StakeholderDashboards />} />
             <Route path="/crop-advisory" element={<CropAdvisory />} />
             <Route path="/credit-insurance" element={<CreditInsurance />} />
           </Routes>
