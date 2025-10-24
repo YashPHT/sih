@@ -7,6 +7,15 @@
 @layer base {
   body {
     @apply bg-gray-50 dark:bg-gray-950 text-gray-900 dark:text-gray-100;
+    font-family: 'Noto Sans', 'Noto Sans Devanagari', 'Noto Sans Tamil', 'Noto Sans Telugu', 'Noto Sans Gujarati', 'Noto Sans Kannada', 'Noto Sans Bengali', 'Noto Sans Malayalam', 'Noto Sans Oriya', 'Noto Nastaliq Urdu', sans-serif;
+  }
+  
+  html[dir="rtl"] {
+    direction: rtl;
+  }
+  
+  html[dir="rtl"] body {
+    font-family: 'Noto Nastaliq Urdu', 'Noto Sans', sans-serif;
   }
 }
 

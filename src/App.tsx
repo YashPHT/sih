@@ -12,38 +12,46 @@ import Marketplace from './pages/Marketplace'
 import Traceability from './pages/Traceability'
 import PolicymakerDashboard from './pages/PolicymakerDashboard'
 import { NotificationContext } from './context/NotificationContext'
+import { useTranslation } from 'react-i18next'
 
-const dashboardConfig = {
-  appName: 'AgriAdvisory',
-  logo: <Sprout className="h-8 w-8 text-primary-600 dark:text-primary-400" />,
-  navigation: defaultNavigation,
-  showTopbar: true,
-  showSidebar: false
-}
-
-function App() {
+function AppContent() {
+  const { t } = useTranslation()
   const notificationHook = useNotification()
+
+  const dashboardConfig = {
+    appName: t('appName'),
+    logo: <Sprout className="h-8 w-8 text-primary-600 dark:text-primary-400" />,
+    navigation: defaultNavigation,
+    showTopbar: true,
+    showSidebar: false
+  }
 
   return (
     <NotificationContext.Provider value={notificationHook}>
-      <Router>
-        <DashboardLayout config={dashboardConfig}>
-          <Routes>
-            <Route path="/" element={<Dashboard />} />
-            <Route path="/marketplace" element={<Marketplace />} />
-            <Route path="/stakeholders" element={<StakeholderDashboards />} />
-            <Route path="/crop-advisory" element={<CropAdvisory />} />
-            <Route path="/credit-insurance" element={<CreditInsurance />} />
-            <Route path="/traceability" element={<Traceability />} />
-            <Route path="/dashboard/policymaker" element={<PolicymakerDashboard />} />
-          </Routes>
-        </DashboardLayout>
-        <NotificationContainer
-          notifications={notificationHook.notifications}
-          onDismiss={notificationHook.dismissNotification}
-        />
-      </Router>
+      <DashboardLayout config={dashboardConfig}>
+        <Routes>
+          <Route path="/" element={<Dashboard />} />
+          <Route path="/marketplace" element={<Marketplace />} />
+          <Route path="/stakeholders" element={<StakeholderDashboards />} />
+          <Route path="/crop-advisory" element={<CropAdvisory />} />
+          <Route path="/credit-insurance" element={<CreditInsurance />} />
+          <Route path="/traceability" element={<Traceability />} />
+          <Route path="/dashboard/policymaker" element={<PolicymakerDashboard />} />
+        </Routes>
+      </DashboardLayout>
+      <NotificationContainer
+        notifications={notificationHook.notifications}
+        onDismiss={notificationHook.dismissNotification}
+      />
     </NotificationContext.Provider>
+  )
+}
+
+function App() {
+  return (
+    <Router>
+      <AppContent />
+    </Router>
   )
 }
 
