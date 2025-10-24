@@ -28,6 +28,15 @@ A modern agricultural advisory platform providing AI-powered insights for crop p
 - **Integrity Verification**: Automated detection of any tampering or data modification
 - **Educational UI**: Clear explanations of how blockchain traceability works
 
+### 🗺️ Warehouse & Logistics Visibility Map
+- **Interactive Geospatial View**: Leaflet-based map showing entire supply chain network
+- **Warehouse Tracking**: Real-time capacity monitoring, temperature control, and commodity storage
+- **Processing Units**: Throughput metrics, efficiency tracking, and batch management
+- **Transport Routes**: Live tracking of shipments with progress indicators and status updates
+- **Advanced Filtering**: Filter by commodity type, operational status, or entity type
+- **Rich Tooltips**: Detailed information popups with capacity bars, metrics, and status badges
+- **Status Indicators**: Color-coded markers and routes for instant visibility into operations
+
 ## Technology Stack
 
 - **Frontend**: React 18 with TypeScript
@@ -35,6 +44,7 @@ A modern agricultural advisory platform providing AI-powered insights for crop p
 - **Styling**: Tailwind CSS
 - **Routing**: React Router v6
 - **Icons**: Lucide React
+- **Maps**: Leaflet with React-Leaflet
 
 ## Getting Started
 
@@ -75,7 +85,11 @@ The built files will be in the `dist` directory.
 
 ```
 src/
+├── components/      # Reusable React components
+│   ├── LogisticsMap.tsx     # Interactive map component
+│   └── MapLegend.tsx        # Map legend component
 ├── data/            # Mock and fallback datasets
+│   ├── logisticsGeoData.ts  # Geospatial logistics data
 │   ├── traceabilityData.ts  # Blockchain demo batches
 │   └── weatherMock.ts       # Weather fallback data
 ├── hooks/           # Custom React hooks (e.g., weather data)
@@ -83,7 +97,7 @@ src/
 │   ├── Dashboard.tsx
 │   ├── CropAdvisory.tsx
 │   ├── CreditInsurance.tsx
-│   ├── StakeholderDashboards.tsx
+│   ├── StakeholderDashboards.tsx  # Includes logistics map
 │   ├── Marketplace.tsx
 │   └── Traceability.tsx     # Blockchain traceability module
 ├── types/           # Shared TypeScript interfaces
@@ -114,6 +128,14 @@ server/
 - Verify blockchain integrity with hash chain validation
 - Understand how cryptographic hashing prevents supply chain fraud
 - Track events like planting, harvesting, processing, and distribution
+
+### Warehouse & Logistics Map
+- Visualize entire supply chain network on an interactive map
+- Track warehouse capacity utilization and temperature in real-time
+- Monitor processing unit throughput and efficiency
+- Follow active transport routes with live progress updates
+- Filter by commodity types or operational status
+- Click markers for detailed facility and shipment information
 
 ## Development
 

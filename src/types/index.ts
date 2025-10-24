@@ -265,3 +265,83 @@ export interface BlockchainVerification {
   invalidBlocks: number[]
   message: string
 }
+
+export interface GeoLocation {
+  lat: number
+  lng: number
+  address: string
+}
+
+export interface GeoPoint {
+  lat: number
+  lng: number
+}
+
+export type WarehouseStatus = 'operational' | 'maintenance' | 'critical'
+
+export interface Warehouse {
+  id: string
+  name: string
+  type: 'warehouse'
+  location: GeoLocation
+  status: WarehouseStatus
+  capacity: {
+    total: number
+    used: number
+    available: number
+  }
+  commodities: string[]
+  temperature: number
+  lastUpdated: string
+}
+
+export type ProcessingStatus = 'operational' | 'maintenance' | 'critical'
+
+export interface ProcessingUnit {
+  id: string
+  name: string
+  type: 'processing'
+  location: GeoLocation
+  status: ProcessingStatus
+  throughput: {
+    current: number
+    capacity: number
+    efficiency: number
+  }
+  commodities: string[]
+  activeBatches: number
+  lastUpdated: string
+}
+
+export type RouteStatus = 'active' | 'delayed' | 'scheduled' | 'completed'
+
+export interface TransportRoute {
+  id: string
+  name: string
+  type: 'route'
+  status: RouteStatus
+  commodity: string
+  origin: GeoPoint & { name: string }
+  destination: GeoPoint & { name: string }
+  waypoints: GeoPoint[]
+  mode: string
+  distance: number
+  estimatedTime: string
+  progress: number
+  vehicleId: string
+  lastUpdated: string
+}
+
+export interface LogisticsGeoData {
+  warehouses: Warehouse[]
+  processingUnits: ProcessingUnit[]
+  routes: TransportRoute[]
+}
+
+export interface MapFilters {
+  commodities: string[]
+  statuses: string[]
+  showWarehouses: boolean
+  showProcessingUnits: boolean
+  showRoutes: boolean
+}
