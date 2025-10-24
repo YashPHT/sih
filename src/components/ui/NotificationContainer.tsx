@@ -8,27 +8,27 @@ interface NotificationContainerProps {
 
 const notificationStyles: Record<NotificationType, { bgColor: string; borderColor: string; textColor: string; icon: typeof CheckCircle }> = {
   success: {
-    bgColor: 'bg-green-50',
-    borderColor: 'border-green-200',
-    textColor: 'text-green-800',
+    bgColor: 'bg-green-50 dark:bg-green-900/30',
+    borderColor: 'border-green-200 dark:border-green-700',
+    textColor: 'text-green-800 dark:text-green-200',
     icon: CheckCircle
   },
   error: {
-    bgColor: 'bg-red-50',
-    borderColor: 'border-red-200',
-    textColor: 'text-red-800',
+    bgColor: 'bg-red-50 dark:bg-red-900/30',
+    borderColor: 'border-red-200 dark:border-red-700',
+    textColor: 'text-red-800 dark:text-red-200',
     icon: AlertCircle
   },
   warning: {
-    bgColor: 'bg-amber-50',
-    borderColor: 'border-amber-200',
-    textColor: 'text-amber-800',
+    bgColor: 'bg-amber-50 dark:bg-amber-900/30',
+    borderColor: 'border-amber-200 dark:border-amber-700',
+    textColor: 'text-amber-800 dark:text-amber-200',
     icon: AlertTriangle
   },
   info: {
-    bgColor: 'bg-blue-50',
-    borderColor: 'border-blue-200',
-    textColor: 'text-blue-800',
+    bgColor: 'bg-blue-50 dark:bg-blue-900/30',
+    borderColor: 'border-blue-200 dark:border-blue-700',
+    textColor: 'text-blue-800 dark:text-blue-200',
     icon: Info
   }
 }
