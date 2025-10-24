@@ -2,8 +2,14 @@ import { useState } from 'react'
 import { TrendingUp, CreditCard, Shield, CheckCircle, AlertCircle, ArrowRight, Info } from 'lucide-react'
 import { mockCreditEligibility, mockInsurancePlans } from '../data/mockData'
 import { InsurancePlan } from '../types'
+import { useNotificationContext } from '../context/NotificationContext'
+import { useLoading } from '../hooks/useLoading'
+import { LoadingSpinner } from '../components/ui/LoadingSpinner'
+import { api } from '../services/api'
 
 function CreditEligibilitySection() {
+  const { showNotification } = useNotificationContext()
+  const { isLoading, withLoading } = useLoading()
   const eligibility = mockCreditEligibility
 
   return (
@@ -133,9 +139,29 @@ function CreditEligibilitySection() {
             </div>
           </div>
         </div>
-        <button className="btn-primary w-full mt-6 flex items-center justify-center">
-          Apply for Loan
-          <ArrowRight className="h-5 w-5 ml-2" />
+        <button 
+          onClick={async () => {
+            await withLoading(async () => {
+              const result = await api.submitLoanApplication({
+                amount: eligibility.maxLoanAmount,
+                purpose: 'Agricultural operations'
+              })
+              if (result.success) {
+                showNotification('success', 'Loan application initiated! Our team will contact you within 24 hours with next steps.')
+              } else {
+                showNotification('error', result.error || 'Failed to submit application')
+              }
+            })
+          }}
+          disabled={isLoading}
+          className="btn-primary w-full mt-6 flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed"
+        >
+          {isLoading ? <LoadingSpinner size="sm" /> : (
+            <>
+              Apply for Loan
+              <ArrowRight className="h-5 w-5 ml-2" />
+            </>
+          )}
         </button>
       </div>
     </div>
@@ -144,6 +170,8 @@ function CreditEligibilitySection() {
 
 function InsurancePlanCard({ plan }: { plan: InsurancePlan }) {
   const [showDetails, setShowDetails] = useState(false)
+  const { showNotification } = useNotificationContext()
+  const { isLoading, withLoading } = useLoading()
 
   return (
     <div className={`card relative ${plan.recommended ? 'ring-2 ring-primary-500 shadow-xl' : ''}`}>
@@ -202,12 +230,25 @@ function InsurancePlanCard({ plan }: { plan: InsurancePlan }) {
         </div>
       )}
 
-      <button className={`w-full py-2 rounded-lg font-medium transition-colors ${
-        plan.recommended
-          ? 'bg-primary-600 text-white hover:bg-primary-700'
-          : 'bg-gray-200 text-gray-800 hover:bg-gray-300'
-      }`}>
-        {plan.recommended ? 'Choose Recommended Plan' : 'Select Plan'}
+      <button 
+        onClick={async () => {
+          await withLoading(async () => {
+            const result = await api.enrollInInsurance(plan.id)
+            if (result.success) {
+              showNotification('success', `${plan.name} selected! Your enrollment will be processed shortly.`)
+            } else {
+              showNotification('error', result.error || 'Failed to enroll in plan')
+            }
+          })
+        }}
+        disabled={isLoading}
+        className={`w-full py-2 rounded-lg font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center ${
+          plan.recommended
+            ? 'bg-primary-600 text-white hover:bg-primary-700'
+            : 'bg-gray-200 text-gray-800 hover:bg-gray-300'
+        }`}
+      >
+        {isLoading ? <LoadingSpinner size="sm" /> : (plan.recommended ? 'Choose Recommended Plan' : 'Select Plan')}
       </button>
     </div>
   )
