@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react'
 import {
-  Handshake,
+  ShoppingCart,
   Filter,
   Search,
   ArrowUpRight,
@@ -221,7 +221,7 @@ function Marketplace() {
 
         const updatedBuyerInterest = lot.buyerInterest.length
           ? [
-              { ...lot.buyerInterest[0], status: 'accepted', updatedAt: 'just now' },
+              { ...lot.buyerInterest[0], status: 'accepted' as const, updatedAt: 'just now' },
               ...lot.buyerInterest.slice(1)
             ]
           : lot.buyerInterest
@@ -253,7 +253,7 @@ function Marketplace() {
     <div className="space-y-6">
       <div>
         <h1 className="text-3xl font-bold text-gray-900 flex items-center">
-          <Handshake className="h-8 w-8 mr-3 text-primary-600" />
+          <ShoppingCart className="h-8 w-8 mr-3 text-primary-600" />
           Farmer Marketplace
         </h1>
         <p className="mt-2 text-gray-600 max-w-3xl">
@@ -508,7 +508,7 @@ function Marketplace() {
             <div className="border-b border-gray-200 px-6 py-4 flex items-start justify-between gap-4">
               <div>
                 <div className="flex items-center gap-3">
-                  <Handshake className="h-5 w-5 text-primary-600" />
+                  <ShoppingCart className="h-5 w-5 text-primary-600" />
                   <span className={`badge ${statusClasses[selectedLot.status]}`}>{statusLabels[selectedLot.status]}</span>
                 </div>
                 <h2 className="text-2xl font-bold text-gray-900 mt-2">

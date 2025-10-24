@@ -11,7 +11,7 @@ import {
   RefreshCcw,
   Thermometer,
   CloudRain,
-  Handshake
+  ShoppingCart
 } from 'lucide-react'
 import { mockSeasonalAdvisories, mockPestPredictions, mockCropRecommendations } from '../data/mockData'
 import { mockMarketplaceLots } from '../data/marketplaceData'
@@ -205,7 +205,7 @@ function Dashboard() {
         <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
           <div>
             <h2 className="text-xl font-bold text-gray-900 flex items-center">
-              <Handshake className="h-5 w-5 mr-2 text-emerald-600" />
+              <ShoppingCart className="h-5 w-5 mr-2 text-emerald-600" />
               Marketplace pipeline
             </h2>
             <p className="text-gray-600 mt-2">

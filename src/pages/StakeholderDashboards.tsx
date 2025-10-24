@@ -7,7 +7,6 @@ import {
   ShoppingCart,
   ClipboardCheck,
   MessageCircle,
-  Handshake,
   Truck,
   ArrowUpRight,
   ArrowDownRight,
@@ -278,7 +277,7 @@ function StakeholderDashboards() {
       <div className="card space-y-6">
         <div className="flex items-center justify-between">
           <h2 className="text-xl font-bold text-gray-900 flex items-center">
-            <Handshake className="h-5 w-5 mr-2 text-primary-600" />
+            <ShoppingCart className="h-5 w-5 mr-2 text-primary-600" />
             Marketplace & Logistics Snapshot
           </h2>
           <span className="text-sm text-gray-500">Bridge supply assurance with fulfillment confidence</span>
@@ -286,7 +285,7 @@ function StakeholderDashboards() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           <div>
             <h3 className="text-sm font-semibold text-gray-500 uppercase tracking-wide flex items-center">
-              <Handshake className="h-4 w-4 mr-2 text-primary-600" />
+              <ShoppingCart className="h-4 w-4 mr-2 text-primary-600" />
               Active opportunities
             </h3>
             <div className="mt-3 space-y-4">

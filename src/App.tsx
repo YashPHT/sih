@@ -1,10 +1,11 @@
 import { BrowserRouter as Router, Routes, Route, Link, useLocation } from 'react-router-dom'
-import { Sprout, TrendingUp, Home, Users, Handshake } from 'lucide-react'
+import { Sprout, TrendingUp, Home, Users, ShoppingCart, Link2 } from 'lucide-react'
 import Dashboard from './pages/Dashboard'
 import StakeholderDashboards from './pages/StakeholderDashboards'
 import CropAdvisory from './pages/CropAdvisory'
 import CreditInsurance from './pages/CreditInsurance'
 import Marketplace from './pages/Marketplace'
+import Traceability from './pages/Traceability'
 
 function Navigation() {
   const location = useLocation()
@@ -39,7 +40,7 @@ function Navigation() {
                   : 'text-gray-700 hover:bg-gray-100'
               }`}
             >
-              <Handshake className="h-4 w-4 mr-2" />
+              <ShoppingCart className="h-4 w-4 mr-2" />
               Marketplace
             </Link>
             <Link
@@ -75,6 +76,17 @@ function Navigation() {
               <TrendingUp className="h-4 w-4 mr-2" />
               Credit & Insurance
             </Link>
+            <Link
+              to="/traceability"
+              className={`flex items-center px-3 py-2 rounded-md text-sm font-medium ${
+                isActive('/traceability') 
+                  ? 'bg-primary-100 text-primary-700' 
+                  : 'text-gray-700 hover:bg-gray-100'
+              }`}
+            >
+              <Link2 className="h-4 w-4 mr-2" />
+              Traceability
+            </Link>
           </div>
         </div>
       </div>
@@ -94,6 +106,7 @@ function App() {
             <Route path="/stakeholders" element={<StakeholderDashboards />} />
             <Route path="/crop-advisory" element={<CropAdvisory />} />
             <Route path="/credit-insurance" element={<CreditInsurance />} />
+            <Route path="/traceability" element={<Traceability />} />
           </Routes>
         </main>
       </div>

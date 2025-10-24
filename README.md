@@ -20,6 +20,14 @@ A modern agricultural advisory platform providing AI-powered insights for crop p
 - **Forecast snapshots & warning badges** rendered across the dashboard and stakeholder views
 - **Resilient fallbacks** that gracefully switch to simulated weather data when live APIs are unavailable
 
+### 🔗 Blockchain Traceability
+- **Supply Chain Tracking**: Farm-to-fork traceability with cryptographic verification
+- **QR Code Generation**: Generate scannable codes for batch tracking
+- **Hash Chain Verification**: Immutable blockchain-style event logging with SHA-256 hashing
+- **Event Timeline**: Chronological view of all supply chain steps from planting to retail
+- **Integrity Verification**: Automated detection of any tampering or data modification
+- **Educational UI**: Clear explanations of how blockchain traceability works
+
 ## Technology Stack
 
 - **Frontend**: React 18 with TypeScript
@@ -68,14 +76,19 @@ The built files will be in the `dist` directory.
 ```
 src/
 ├── data/            # Mock and fallback datasets
+│   ├── traceabilityData.ts  # Blockchain demo batches
+│   └── weatherMock.ts       # Weather fallback data
 ├── hooks/           # Custom React hooks (e.g., weather data)
 ├── pages/           # Main routed views
 │   ├── Dashboard.tsx
 │   ├── CropAdvisory.tsx
 │   ├── CreditInsurance.tsx
-│   └── StakeholderDashboards.tsx
+│   ├── StakeholderDashboards.tsx
+│   ├── Marketplace.tsx
+│   └── Traceability.tsx     # Blockchain traceability module
 ├── types/           # Shared TypeScript interfaces
 ├── utils/           # Formatting helpers and style utilities
+│   └── blockchain.ts        # Hashing and verification utilities
 ├── App.tsx          # Main application component
 ├── index.css        # Global styles
 └── main.tsx         # Application entry point
@@ -94,6 +107,13 @@ server/
 - Check credit eligibility with detailed scoring
 - Compare insurance plans with benefit breakdowns
 - Follow guided application workflows
+
+### Blockchain Traceability
+- Create new production batches with QR codes
+- View complete farm-to-fork journey for each batch
+- Verify blockchain integrity with hash chain validation
+- Understand how cryptographic hashing prevents supply chain fraud
+- Track events like planting, harvesting, processing, and distribution
 
 ## Development
 
