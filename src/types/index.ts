@@ -125,6 +125,60 @@ export interface StakeholderDashboardData {
   logistics: StakeholderLogistics[]
 }
 
+export type MarketLotStatus = 'available' | 'in-negotiation' | 'under-fulfillment' | 'fulfilled'
+
+export interface MarketplaceBuyerInterest {
+  id: string
+  buyerName: string
+  organization: string
+  offerPerTon: number
+  volumeTons: number
+  status: 'active' | 'counter' | 'accepted'
+  updatedAt: string
+}
+
+export interface MarketplaceLogisticsOption {
+  id: string
+  provider: string
+  mode: string
+  estimatedCost: string
+  transitTime: string
+  availability: string
+  capacity: string
+  reliabilityScore: number
+}
+
+export interface MarketplaceCreditOption {
+  id: string
+  provider: string
+  product: string
+  rate: string
+  maxAmount: string
+  approvalTime: string
+  notes: string
+}
+
+export interface MarketplaceLot {
+  id: string
+  crop: string
+  variety: string
+  lotSizeTons: number
+  qualityGrade: string
+  moisture: string
+  location: string
+  harvestDate: string
+  status: MarketLotStatus
+  askingPricePerTon: number
+  bestOfferPerTon: number
+  contractCurrency: string
+  engagementScore: number
+  activeOffers: number
+  assuranceNotes: string[]
+  buyerInterest: MarketplaceBuyerInterest[]
+  logisticsOptions: MarketplaceLogisticsOption[]
+  creditOptions: MarketplaceCreditOption[]
+}
+
 export type WeatherAlertSeverity = 'info' | 'watch' | 'warning'
 
 export type WeatherAlertCategory = 'crop' | 'logistics' | 'general'

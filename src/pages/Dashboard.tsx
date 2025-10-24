@@ -10,9 +10,11 @@ import {
   Wind,
   RefreshCcw,
   Thermometer,
-  CloudRain
+  CloudRain,
+  Handshake
 } from 'lucide-react'
 import { mockSeasonalAdvisories, mockPestPredictions, mockCropRecommendations } from '../data/mockData'
+import { mockMarketplaceLots } from '../data/marketplaceData'
 import { useWeatherData } from '../hooks/useWeatherData'
 import { formatForecastHour, formatRelativeTime, weatherSeverityStyles } from '../utils/weatherStyles'
 
@@ -23,6 +25,17 @@ function Dashboard() {
   const highPriorityAdvisories = mockSeasonalAdvisories.filter(a => a.priority === 'high').length
   const highRiskPests = mockPestPredictions.filter(p => p.riskLevel === 'high').length
   const topRecommendation = mockCropRecommendations[0]
+  const formatCurrency = (value: number) =>
+    new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR', maximumFractionDigits: 0 }).format(value)
+  const activeMarketplaceLots = mockMarketplaceLots.filter((lot) => lot.status !== 'fulfilled')
+  const marketplacePipelineValue = activeMarketplaceLots.reduce(
+    (acc, lot) => acc + lot.bestOfferPerTon * lot.lotSizeTons,
+    0
+  )
+  const leadMarketplaceLot = activeMarketplaceLots
+    .slice()
+    .sort((a, b) => b.engagementScore - a.engagementScore)[0]
+  const marketplaceLotsInPlay = activeMarketplaceLots.length
 
   return (
     <div className="space-y-8">
@@ -185,6 +198,34 @@ function Dashboard() {
             </div>
             <AlertTriangle className="h-12 w-12 text-red-600" />
           </div>
+        </div>
+      </div>
+
+      <div className="card bg-gradient-to-r from-emerald-50 via-teal-50 to-primary-50 border-emerald-200">
+        <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+          <div>
+            <h2 className="text-xl font-bold text-gray-900 flex items-center">
+              <Handshake className="h-5 w-5 mr-2 text-emerald-600" />
+              Marketplace pipeline
+            </h2>
+            <p className="text-gray-600 mt-2">
+              {marketplaceLotsInPlay > 0
+                ? `${marketplaceLotsInPlay} active lots tracking ${formatCurrency(marketplacePipelineValue)} in demand-aligned value.`
+                : 'All lots fulfilled—open the marketplace to activate new opportunities.'}
+            </p>
+            {leadMarketplaceLot && (
+              <p className="text-sm text-emerald-700 mt-3">
+                Spotlight: {leadMarketplaceLot.crop} from {leadMarketplaceLot.location} at {leadMarketplaceLot.engagementScore}% buyer engagement.
+              </p>
+            )}
+          </div>
+          <Link
+            to="/marketplace"
+            className="btn-primary flex items-center justify-center w-full md:w-auto"
+          >
+            Open Marketplace
+            <ArrowRight className="h-4 w-4 ml-2" />
+          </Link>
         </div>
       </div>
 
