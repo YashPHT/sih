@@ -14,8 +14,12 @@ import { mockCropRecommendations, mockSeasonalAdvisories, mockPestPredictions } 
 import { useWeatherData } from '../hooks/useWeatherData'
 import { weatherSeverityStyles } from '../utils/weatherStyles'
 import { CropRecommendation, SeasonalAdvisory, PestPrediction, WeatherAlert } from '../types'
+import { useNotificationContext } from '../context/NotificationContext'
+import { useLoading } from '../hooks/useLoading'
+import { LoadingSpinner } from '../components/ui/LoadingSpinner'
+import { api } from '../services/api'
 
-function CropRecommendationCard({ crop }: { crop: CropRecommendation }) {
+function CropRecommendationCard({ crop, onSelect, isLoading }: { crop: CropRecommendation; onSelect: (crop: CropRecommendation) => void; isLoading?: boolean }) {
   return (
     <div className="card hover:shadow-lg transition-shadow">
       <div className="flex items-center justify-between mb-4">
@@ -86,8 +90,12 @@ function CropRecommendationCard({ crop }: { crop: CropRecommendation }) {
         </ul>
       </div>
 
-      <button className="btn-primary w-full mt-4">
-        Select This Crop
+      <button 
+        onClick={() => onSelect(crop)}
+        disabled={isLoading}
+        className="btn-primary w-full mt-4 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center"
+      >
+        {isLoading ? <LoadingSpinner size="sm" /> : 'Select This Crop'}
       </button>
     </div>
   )
@@ -145,7 +153,7 @@ function WeatherImpactCard({ alert }: { alert: WeatherAlert }) {
   )
 }
 
-function SeasonalAdvisoryCard({ advisory }: { advisory: SeasonalAdvisory }) {
+function SeasonalAdvisoryCard({ advisory, onUpdateStatus }: { advisory: SeasonalAdvisory; onUpdateStatus: (advisory: SeasonalAdvisory) => void }) {
   const getCategoryIcon = (category: string) => {
     switch (category) {
       case 'irrigation':
@@ -204,7 +212,10 @@ function SeasonalAdvisoryCard({ advisory }: { advisory: SeasonalAdvisory }) {
         </div>
       </div>
       <p className="text-gray-700 text-sm leading-relaxed">{advisory.description}</p>
-      <button className="btn-secondary w-full mt-4">
+      <button 
+        onClick={() => onUpdateStatus(advisory)}
+        className="btn-secondary w-full mt-4"
+      >
         Mark as {advisory.status === 'pending' ? 'In Progress' : 'Completed'}
       </button>
     </div>
@@ -322,8 +333,41 @@ function PestPredictionCard({ pest }: { pest: PestPrediction }) {
 
 function CropAdvisory() {
   const [activeTab, setActiveTab] = useState<'recommendations' | 'advisories' | 'pest'>('recommendations')
+  const [advisories, setAdvisories] = useState(mockSeasonalAdvisories)
   const { data: weatherData } = useWeatherData({ disableAutoRefresh: true })
   const cropWeatherAlerts = (weatherData?.alerts ?? []).filter((alert) => alert.category === 'crop' || alert.category === 'general')
+  const { showNotification } = useNotificationContext()
+  const { isLoading, withLoading } = useLoading()
+
+  const handleSelectCrop = async (crop: CropRecommendation) => {
+    await withLoading(async () => {
+      const result = await api.submitCropSelection(crop.id)
+      if (result.success) {
+        showNotification('success', `${crop.cropName} selected! This recommendation will be saved to your crop plan.`)
+      } else {
+        showNotification('error', result.error || 'Failed to select crop')
+      }
+    })
+  }
+
+  const handleUpdateAdvisoryStatus = async (advisory: SeasonalAdvisory) => {
+    await withLoading(async () => {
+      const newStatus = advisory.status === 'pending' ? 'in-progress' : 'completed'
+      const result = await api.updateAdvisoryStatus(advisory.id, newStatus)
+      
+      if (result.success) {
+        setAdvisories(prev => prev.map(a => {
+          if (a.id === advisory.id) {
+            showNotification('success', `Advisory "${a.title}" marked as ${newStatus === 'in-progress' ? 'In Progress' : 'Completed'}`)
+            return { ...a, status: newStatus }
+          }
+          return a
+        }))
+      } else {
+        showNotification('error', result.error || 'Failed to update advisory')
+      }
+    })
+  }
 
   return (
     <div className="space-y-6">
@@ -378,7 +422,7 @@ function CropAdvisory() {
           </div>
           <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
             {mockCropRecommendations.map((crop) => (
-              <CropRecommendationCard key={crop.id} crop={crop} />
+              <CropRecommendationCard key={crop.id} crop={crop} onSelect={handleSelectCrop} isLoading={isLoading} />
             ))}
           </div>
         </div>
@@ -406,8 +450,8 @@ function CropAdvisory() {
             </div>
           )}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            {mockSeasonalAdvisories.map((advisory) => (
-              <SeasonalAdvisoryCard key={advisory.id} advisory={advisory} />
+            {advisories.map((advisory) => (
+              <SeasonalAdvisoryCard key={advisory.id} advisory={advisory} onUpdateStatus={handleUpdateAdvisoryStatus} />
             ))}
           </div>
         </div>

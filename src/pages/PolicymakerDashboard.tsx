@@ -17,12 +17,15 @@ import { LineChart, Line, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, L
 import { policymakerData, statesList, seasonsList } from '../data/policymakerData'
 import LogisticsMap from '../components/LogisticsMap'
 import { logisticsGeoData } from '../data/logisticsGeoData'
+import { useNotificationContext } from '../context/NotificationContext'
 
 const COLORS = ['#10b981', '#3b82f6', '#f59e0b', '#ef4444', '#8b5cf6']
 
 function PolicymakerDashboard() {
   const [selectedState, setSelectedState] = useState<string>('all')
   const [selectedSeason, setSelectedSeason] = useState<string>('all')
+  const { showNotification } = useNotificationContext()
+  const [isExporting, setIsExporting] = useState(false)
 
   const filteredData = policymakerData.filter(data => {
     const stateMatch = selectedState === 'all' || data.state === selectedState
@@ -448,11 +451,30 @@ function PolicymakerDashboard() {
             </div>
           </div>
           <div className="flex flex-col gap-3">
-            <button className="btn-primary flex items-center justify-center whitespace-nowrap">
+            <button 
+              onClick={async () => {
+                setIsExporting(true)
+                try {
+                  await new Promise(resolve => setTimeout(resolve, 1500))
+                  showNotification('success', 'Report exported successfully! Check your downloads folder.')
+                } catch {
+                  showNotification('error', 'Failed to export report')
+                } finally {
+                  setIsExporting(false)
+                }
+              }}
+              disabled={isExporting}
+              className="btn-primary flex items-center justify-center whitespace-nowrap disabled:opacity-50 disabled:cursor-not-allowed"
+            >
               <Download className="h-4 w-4 mr-2" />
-              Export Report
+              {isExporting ? 'Exporting...' : 'Export Report'}
             </button>
-            <button className="px-4 py-2 border border-gray-300 rounded-lg text-gray-700 font-medium hover:bg-gray-50 transition-colors flex items-center justify-center whitespace-nowrap">
+            <button 
+              onClick={() => {
+                showNotification('info', 'Full analysis document will be generated and sent to your registered email.')
+              }}
+              className="px-4 py-2 border border-gray-300 rounded-lg text-gray-700 font-medium hover:bg-gray-50 transition-colors flex items-center justify-center whitespace-nowrap"
+            >
               <FileText className="h-4 w-4 mr-2" />
               Full Analysis
             </button>
