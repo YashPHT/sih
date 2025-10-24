@@ -124,3 +124,45 @@ export interface StakeholderDashboardData {
   opportunities: StakeholderOpportunity[]
   logistics: StakeholderLogistics[]
 }
+
+export type WeatherAlertSeverity = 'info' | 'watch' | 'warning'
+
+export type WeatherAlertCategory = 'crop' | 'logistics' | 'general'
+
+export interface WeatherCurrent {
+  temperature: number
+  feelsLike: number
+  humidity: number
+  windSpeed: number
+  precipitationChance: number
+  description: string
+  icon: string
+}
+
+export interface WeatherForecastEntry {
+  timestamp: string
+  temperature: number
+  precipitationChance: number
+  windSpeed: number
+  description: string
+  icon: string
+}
+
+export interface WeatherAlert {
+  id: string
+  title: string
+  severity: WeatherAlertSeverity
+  category: WeatherAlertCategory
+  description: string
+  impactAreas: string[]
+  recommendedActions: string[]
+}
+
+export interface WeatherApiResponse {
+  location: string
+  source: 'live' | 'mock'
+  lastUpdated: string
+  current: WeatherCurrent
+  forecast: WeatherForecastEntry[]
+  alerts: WeatherAlert[]
+}

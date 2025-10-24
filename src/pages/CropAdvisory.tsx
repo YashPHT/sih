@@ -1,7 +1,19 @@
 import { useState } from 'react'
-import { Sprout, TrendingUp, Droplet, DollarSign, AlertTriangle, Calendar, CheckCircle, Clock } from 'lucide-react'
+import {
+  Sprout,
+  TrendingUp,
+  Droplet,
+  DollarSign,
+  AlertTriangle,
+  Calendar,
+  CheckCircle,
+  Clock,
+  CloudRain
+} from 'lucide-react'
 import { mockCropRecommendations, mockSeasonalAdvisories, mockPestPredictions } from '../data/mockData'
-import { CropRecommendation, SeasonalAdvisory, PestPrediction } from '../types'
+import { useWeatherData } from '../hooks/useWeatherData'
+import { weatherSeverityStyles } from '../utils/weatherStyles'
+import { CropRecommendation, SeasonalAdvisory, PestPrediction, WeatherAlert } from '../types'
 
 function CropRecommendationCard({ crop }: { crop: CropRecommendation }) {
   return (
@@ -77,6 +89,58 @@ function CropRecommendationCard({ crop }: { crop: CropRecommendation }) {
       <button className="btn-primary w-full mt-4">
         Select This Crop
       </button>
+    </div>
+  )
+}
+
+const alertCategoryLabels: Record<WeatherAlert['category'], string> = {
+  crop: 'Crop advisory impact',
+  logistics: 'Logistics insight',
+  general: 'Regional outlook'
+}
+
+function WeatherImpactCard({ alert }: { alert: WeatherAlert }) {
+  const styles = weatherSeverityStyles[alert.severity]
+  const containerClass = styles?.subtle ?? 'bg-white border border-gray-200'
+  const badgeClass = styles?.badge ?? 'bg-gray-100 text-gray-800'
+  const iconClass = styles?.icon ?? 'text-gray-500'
+  const headingClass = styles?.text ?? 'text-gray-900'
+
+  return (
+    <div className={`rounded-lg p-6 shadow-sm transition hover:shadow-lg ${containerClass}`}>
+      <div className="flex items-start justify-between gap-3">
+        <div>
+          <span className={`badge ${badgeClass}`}>{alert.severity.toUpperCase()}</span>
+          <p className={`mt-3 text-lg font-semibold leading-snug ${headingClass}`}>{alert.title}</p>
+          <p className="mt-1 text-xs uppercase tracking-wide text-gray-500">
+            {alertCategoryLabels[alert.category]}
+          </p>
+        </div>
+        <AlertTriangle className={`h-6 w-6 ${iconClass}`} />
+      </div>
+      <p className="mt-3 text-sm text-gray-700 leading-relaxed">{alert.description}</p>
+      {alert.impactAreas.length > 0 && (
+        <div className="mt-4">
+          <p className="text-xs font-semibold uppercase tracking-wide text-gray-500">Impact areas</p>
+          <div className="mt-2 flex flex-wrap gap-2">
+            {alert.impactAreas.map((area) => (
+              <span key={area} className="badge bg-white border border-gray-200 text-gray-800">
+                {area}
+              </span>
+            ))}
+          </div>
+        </div>
+      )}
+      {alert.recommendedActions.length > 0 && (
+        <div className="mt-4">
+          <p className="text-xs font-semibold uppercase tracking-wide text-gray-500">Recommended actions</p>
+          <ul className="mt-2 space-y-1 text-sm text-gray-700 list-disc list-inside">
+            {alert.recommendedActions.map((action) => (
+              <li key={action}>{action}</li>
+            ))}
+          </ul>
+        </div>
+      )}
     </div>
   )
 }
@@ -258,6 +322,8 @@ function PestPredictionCard({ pest }: { pest: PestPrediction }) {
 
 function CropAdvisory() {
   const [activeTab, setActiveTab] = useState<'recommendations' | 'advisories' | 'pest'>('recommendations')
+  const { data: weatherData } = useWeatherData({ disableAutoRefresh: true })
+  const cropWeatherAlerts = (weatherData?.alerts ?? []).filter((alert) => alert.category === 'crop' || alert.category === 'general')
 
   return (
     <div className="space-y-6">
@@ -326,6 +392,19 @@ function CropAdvisory() {
               Stay on top of critical farming activities with timely advisories. Our AI analyzes weather forecasts, crop growth stages, and best practices to give you actionable recommendations.
             </p>
           </div>
+          {cropWeatherAlerts.length > 0 && (
+            <div className="mb-6">
+              <h3 className="text-lg font-semibold text-gray-900 flex items-center gap-2">
+                <CloudRain className="h-5 w-5 text-primary-600" />
+                Weather impact on advisories
+              </h3>
+              <div className="mt-3 grid grid-cols-1 lg:grid-cols-2 gap-4">
+                {cropWeatherAlerts.map((alert) => (
+                  <WeatherImpactCard key={alert.id} alert={alert} />
+                ))}
+              </div>
+            </div>
+          )}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             {mockSeasonalAdvisories.map((advisory) => (
               <SeasonalAdvisoryCard key={advisory.id} advisory={advisory} />
