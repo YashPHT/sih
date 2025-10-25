@@ -70,15 +70,15 @@ const roleTabs: Array<{ id: StakeholderRole; label: string; description: string;
 ]
 
 const trendStyles: Record<TrendDirection, { icon: LucideIcon; classes: string }> = {
-  positive: { icon: ArrowUpRight, classes: 'bg-green-100 text-green-700' },
-  negative: { icon: ArrowDownRight, classes: 'bg-red-100 text-red-700' },
-  neutral: { icon: Minus, classes: 'bg-gray-100 text-gray-700' }
+  positive: { icon: ArrowUpRight, classes: 'bg-green-100 dark:bg-green-900 text-green-700 dark:text-green-100' },
+  negative: { icon: ArrowDownRight, classes: 'bg-red-100 dark:bg-red-900 text-red-700 dark:text-red-100' },
+  neutral: { icon: Minus, classes: 'bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300' }
 }
 
 const communicationStatusClasses: Record<CommunicationStatus, string> = {
-  'awaiting-response': 'bg-amber-100 text-amber-800',
-  scheduled: 'bg-blue-100 text-blue-800',
-  resolved: 'bg-green-100 text-green-800'
+  'awaiting-response': 'bg-amber-100 dark:bg-amber-900 text-amber-800 dark:text-amber-100',
+  scheduled: 'bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-100',
+  resolved: 'bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-100'
 }
 
 const communicationStatusLabels: Record<CommunicationStatus, string> = {
@@ -88,9 +88,9 @@ const communicationStatusLabels: Record<CommunicationStatus, string> = {
 }
 
 const opportunityStatusClasses: Record<OpportunityStatus, string> = {
-  negotiation: 'bg-amber-100 text-amber-800',
-  matched: 'bg-green-100 text-green-800',
-  new: 'bg-primary-100 text-primary-800'
+  negotiation: 'bg-amber-100 dark:bg-amber-900 text-amber-800 dark:text-amber-100',
+  matched: 'bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-100',
+  new: 'bg-primary-100 dark:bg-primary-900 text-primary-800 dark:text-primary-100'
 }
 
 const opportunityStatusLabels: Record<OpportunityStatus, string> = {
@@ -100,10 +100,10 @@ const opportunityStatusLabels: Record<OpportunityStatus, string> = {
 }
 
 const logisticsStatusClasses: Record<LogisticsStatus, string> = {
-  'in-transit': 'bg-blue-100 text-blue-800',
-  scheduled: 'bg-gray-100 text-gray-700',
-  delayed: 'bg-red-100 text-red-800',
-  delivered: 'bg-green-100 text-green-800'
+  'in-transit': 'bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-100',
+  scheduled: 'bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300',
+  delayed: 'bg-red-100 dark:bg-red-900 text-red-800 dark:text-red-100',
+  delivered: 'bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-100'
 }
 
 const logisticsStatusLabels: Record<LogisticsStatus, string> = {
@@ -114,9 +114,9 @@ const logisticsStatusLabels: Record<LogisticsStatus, string> = {
 }
 
 const progressBarColor = (status: LogisticsStatus) => {
-  if (status === 'delayed') return 'bg-red-500'
-  if (status === 'delivered') return 'bg-green-600'
-  return 'bg-primary-600'
+  if (status === 'delayed') return 'bg-red-500 dark:bg-red-600'
+  if (status === 'delivered') return 'bg-green-600 dark:bg-green-700'
+  return 'bg-primary-600 dark:bg-primary-500'
 }
 
 function StakeholderDashboards() {
@@ -202,7 +202,7 @@ function StakeholderDashboards() {
                   <p className="text-sm text-gray-500 dark:text-gray-400">{kpi.label}</p>
                   <p className="text-3xl font-bold text-gray-900 dark:text-white mt-3">{kpi.value}</p>
                 </div>
-                <div className={`flex items-center px-3 py-1 rounded-full text-sm font-medium ${trend.classes} dark:bg-opacity-20`}>
+                <div className={`flex items-center px-3 py-1 rounded-full text-sm font-medium ${trend.classes}`}>
                   <TrendIcon className="h-4 w-4 mr-1" />
                   <span>{kpi.change}</span>
                 </div>
@@ -305,12 +305,12 @@ function StakeholderDashboards() {
           </div>
           <div className="space-y-4">
             {dashboard.communications.map((thread) => (
-              <div key={thread.id} className="border border-gray-200 rounded-lg p-4 hover:border-primary-300 transition">
+              <div key={thread.id} className="border border-gray-200 dark:border-gray-700 rounded-lg p-4 hover:border-primary-300 dark:hover:border-primary-600 transition">
                 <div className="flex items-start justify-between gap-3">
                   <div>
                     <p className="text-xs uppercase tracking-wide text-gray-500 dark:text-gray-400">{thread.topic}</p>
-                    <h3 className="text-lg font-semibold text-gray-900 mt-1">{thread.counterpart}</h3>
-                    <p className="text-sm text-gray-600 mt-3 italic">“{thread.lastMessage}”</p>
+                    <h3 className="text-lg font-semibold text-gray-900 dark:text-white mt-1">{thread.counterpart}</h3>
+                    <p className="text-sm text-gray-600 dark:text-gray-400 mt-3 italic">“{thread.lastMessage}”</p>
                   </div>
                   <span className={`badge ${communicationStatusClasses[thread.status]}`}>
                     {communicationStatusLabels[thread.status]}
@@ -336,7 +336,7 @@ function StakeholderDashboards() {
         </div>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           <div>
-            <h3 className="text-sm font-semibold text-gray-500 uppercase tracking-wide flex items-center">
+            <h3 className="text-sm font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wide flex items-center">
               <ShoppingCart className="h-4 w-4 mr-2 text-primary-600 dark:text-primary-400" />
               Active opportunities
             </h3>
@@ -364,7 +364,7 @@ function StakeholderDashboards() {
             </div>
           </div>
           <div>
-            <h3 className="text-sm font-semibold text-gray-500 uppercase tracking-wide flex items-center">
+            <h3 className="text-sm font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wide flex items-center">
               <Truck className="h-4 w-4 mr-2 text-primary-600 dark:text-primary-400" />
               Logistics movements
             </h3>
@@ -384,7 +384,7 @@ function StakeholderDashboards() {
                     <span>{shipment.eta}</span>
                     <span className="font-semibold text-gray-900 dark:text-white">{shipment.progress}%</span>
                   </div>
-                  <div className="mt-2 w-full bg-gray-100 rounded-full h-2">
+                  <div className="mt-2 w-full bg-gray-100 dark:bg-gray-700 rounded-full h-2">
                     <div
                       className={`${progressBarColor(shipment.status)} h-2 rounded-full transition-all`}
                       style={{ width: `${shipment.progress}%` }}
@@ -396,22 +396,22 @@ function StakeholderDashboards() {
             {logisticsWeatherAlerts.length > 0 && (
               <div className="mt-6 space-y-4">
                 <div className="flex items-center justify-between">
-                  <h4 className="text-xs font-semibold uppercase tracking-wide text-gray-500 flex items-center gap-2">
+                  <h4 className="text-xs font-semibold uppercase tracking-wide text-gray-500 dark:text-gray-400 flex items-center gap-2">
                     <CloudRain className="h-4 w-4 text-primary-600 dark:text-primary-400" />
                     Weather-driven logistics alerts
                   </h4>
-                  <p className="text-xs text-gray-400">
+                  <p className="text-xs text-gray-400 dark:text-gray-500">
                     {weatherData ? `Updated ${formatRelativeTime(weatherData.lastUpdated)}` : ''}
                   </p>
                 </div>
                 {logisticsWeatherAlerts.map((alert) => {
-                  const badgeClass = weatherSeverityStyles[alert.severity]?.badge ?? 'bg-gray-100 text-gray-800'
-                  const borderClass = weatherSeverityStyles[alert.severity]?.borderAccent ?? 'border-gray-300'
-                  const textClass = weatherSeverityStyles[alert.severity]?.text ?? 'text-gray-900'
-                  const iconClass = weatherSeverityStyles[alert.severity]?.icon ?? 'text-gray-500'
+                  const badgeClass = weatherSeverityStyles[alert.severity]?.badge ?? 'bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200'
+                  const borderClass = weatherSeverityStyles[alert.severity]?.borderAccent ?? 'border-gray-300 dark:border-gray-600'
+                  const textClass = weatherSeverityStyles[alert.severity]?.text ?? 'text-gray-900 dark:text-white'
+                  const iconClass = weatherSeverityStyles[alert.severity]?.icon ?? 'text-gray-500 dark:text-gray-400'
 
                   return (
-                    <div key={alert.id} className={`rounded-lg bg-white/90 p-4 shadow-sm border-l-4 ${borderClass}`}>
+                    <div key={alert.id} className={`rounded-lg bg-white/90 dark:bg-gray-800/90 p-4 shadow-sm border-l-4 ${borderClass}`}>
                       <div className="flex items-start justify-between gap-3">
                         <div>
                           <span className={`badge ${badgeClass}`}>{alert.severity.toUpperCase()}</span>
@@ -420,18 +420,18 @@ function StakeholderDashboards() {
                         </div>
                         <AlertTriangle className={`h-5 w-5 ${iconClass}`} />
                       </div>
-                      <p className="mt-2 text-sm text-gray-700 leading-relaxed">{alert.description}</p>
+                      <p className="mt-2 text-sm text-gray-700 dark:text-gray-300 leading-relaxed">{alert.description}</p>
                       {alert.impactAreas.length > 0 && (
                         <div className="mt-3 flex flex-wrap gap-2">
                           {alert.impactAreas.map((area) => (
-                            <span key={area} className="badge bg-gray-100 text-gray-800">
+                            <span key={area} className="badge bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200">
                               {area}
                             </span>
                           ))}
                         </div>
                       )}
                       {alert.recommendedActions.length > 0 && (
-                        <ul className="mt-3 space-y-1 text-sm text-gray-600 list-disc list-inside">
+                        <ul className="mt-3 space-y-1 text-sm text-gray-600 dark:text-gray-400 list-disc list-inside">
                           {alert.recommendedActions.map((action) => (
                             <li key={action}>{action}</li>
                           ))}
