@@ -180,7 +180,7 @@ function PolicymakerDashboard() {
                 {(aggregatedKPIs.productionTarget / 1000).toFixed(1)}K MT
               </p>
               <p className="text-sm text-blue-700 mt-2">
-                Achievement: {targetAchievementRate.toFixed(1)}%
+                {t('policymaker.achievementLabel')}: {targetAchievementRate.toFixed(1)}%
               </p>
             </div>
             <div className="flex items-center justify-center w-12 h-12 rounded-full bg-blue-200">
@@ -194,13 +194,13 @@ function PolicymakerDashboard() {
             <div className="flex-1">
               <div className="flex items-center gap-2 mb-2">
                 <Factory className="h-5 w-5 text-green-600" />
-                <p className="text-sm font-semibold text-green-800 uppercase tracking-wide">Processing Capacity</p>
+                <p className="text-sm font-semibold text-green-800 uppercase tracking-wide">{t('policymaker.processingCapacityTitle')}</p>
               </div>
               <p className="text-4xl font-bold text-green-900">
                 {(aggregatedKPIs.processingCapacity / 1000).toFixed(1)}K MT
               </p>
               <p className="text-sm text-green-700 mt-2">
-                Utilization: {aggregatedKPIs.processingUtilization.toFixed(1)}%
+                {t('policymaker.utilizationLabel')}: {aggregatedKPIs.processingUtilization.toFixed(1)}%
               </p>
             </div>
             <div className="flex items-center justify-center w-12 h-12 rounded-full bg-green-200">
@@ -214,13 +214,13 @@ function PolicymakerDashboard() {
             <div className="flex-1">
               <div className="flex items-center gap-2 mb-2">
                 <TrendingDown className="h-5 w-5 text-purple-600" />
-                <p className="text-sm font-semibold text-purple-800 uppercase tracking-wide">Import Reduction</p>
+                <p className="text-sm font-semibold text-purple-800 uppercase tracking-wide">{t('policymaker.importReductionTitle')}</p>
               </div>
               <p className="text-4xl font-bold text-purple-900">
                 {importReductionRate > 0 ? '+' : ''}{importReductionRate.toFixed(1)}%
               </p>
               <p className="text-sm text-purple-700 mt-2">
-                {importReductionRate > 0 ? 'Target on track' : 'Needs attention'}
+                {importReductionRate > 0 ? t('policymaker.targetOnTrack') : t('policymaker.needsAttention')}
               </p>
             </div>
             <div className="flex items-center justify-center w-12 h-12 rounded-full bg-purple-200">
@@ -235,10 +235,10 @@ function PolicymakerDashboard() {
           <div>
             <h2 className="text-xl font-bold text-gray-900 flex items-center">
               <TrendingUp className="h-5 w-5 mr-2 text-primary-600" />
-              Production vs Demand Analysis
+              {t('policymaker.productionVsDemandAnalysis')}
             </h2>
             <p className="text-sm text-gray-600 mt-1">
-              Track production levels against market demand over time
+              {t('policymaker.trackProductionLevels')}
             </p>
           </div>
         </div>

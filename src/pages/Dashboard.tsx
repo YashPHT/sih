@@ -39,6 +39,15 @@ function Dashboard() {
     .sort((a, b) => b.engagementScore - a.engagementScore)[0]
   const marketplaceLotsInPlay = activeMarketplaceLots.length
 
+  const getAdvisoryTitle = (title: string) => {
+    const titleMap: Record<string, string> = {
+      'Pre-Monsoon Irrigation Required': t('dashboard.advisories.preMonsoon'),
+      'Apply Nitrogen Fertilizer': t('dashboard.advisories.nitrogen'),
+      'Aphid Monitoring Alert': t('dashboard.advisories.aphidMonitoring')
+    }
+    return titleMap[title] || title
+  }
+
   return (
     <div className="space-y-8">
       <div>
@@ -299,7 +308,7 @@ function Dashboard() {
                         {t(`dashboard.priority.${advisory.priority}`)}
                       </span>
                     </div>
-                    <h3 className="font-semibold text-gray-900 dark:text-gray-100 text-sm">{advisory.title}</h3>
+                    <h3 className="font-semibold text-gray-900 dark:text-gray-100 text-sm">{getAdvisoryTitle(advisory.title)}</h3>
                     <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">{new Date(advisory.actionDate).toLocaleDateString()}</p>
                   </div>
                 </div>

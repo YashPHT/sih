@@ -11,16 +11,7 @@ interface Language {
 
 const languages: Language[] = [
   { code: 'en', name: 'English', nativeName: 'English' },
-  { code: 'hi', name: 'Hindi', nativeName: 'हिन्दी' },
-  { code: 'mr', name: 'Marathi', nativeName: 'मराठी' },
-  { code: 'te', name: 'Telugu', nativeName: 'తెలుగు' },
-  { code: 'ta', name: 'Tamil', nativeName: 'தமிழ்' },
-  { code: 'gu', name: 'Gujarati', nativeName: 'ગુજરાતી' },
-  { code: 'ur', name: 'Urdu', nativeName: 'اردو', rtl: true },
-  { code: 'kn', name: 'Kannada', nativeName: 'ಕನ್ನಡ' },
-  { code: 'or', name: 'Odia', nativeName: 'ଓଡ଼ିଆ' },
-  { code: 'bn', name: 'Bengali', nativeName: 'বাংলা' },
-  { code: 'ml', name: 'Malayalam', nativeName: 'മലയാളം' }
+  { code: 'hi', name: 'Hindi', nativeName: 'हिन्दी' }
 ]
 
 export function LanguageSwitcher() {
@@ -118,12 +109,6 @@ export function LanguageSwitcher() {
                 )}
               </button>
             ))}
-            
-            <div className="mt-2 pt-2 border-t border-gray-200 dark:border-gray-700">
-              <div className="px-3 py-2 text-xs text-gray-500 dark:text-gray-400 italic text-center">
-                {t('language.moreComingSoon')}
-              </div>
-            </div>
           </div>
         </div>
       )}
