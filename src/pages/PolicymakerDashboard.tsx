@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import {
   Brain,
   TrendingUp,
@@ -19,6 +19,8 @@ import { policymakerData, statesList, seasonsList } from '../data/policymakerDat
 import LogisticsMap from '../components/LogisticsMap'
 import { logisticsGeoData } from '../data/logisticsGeoData'
 import { useNotificationContext } from '../context/NotificationContext'
+import { AILoadingAnimation, MLModelIndicator } from '../components/ui'
+import { simulateAIProcessing } from '../utils/aiPredictions'
 
 const COLORS = ['#10b981', '#3b82f6', '#f59e0b', '#ef4444', '#8b5cf6']
 
@@ -28,6 +30,19 @@ function PolicymakerDashboard() {
   const [selectedSeason, setSelectedSeason] = useState<string>('all')
   const { showNotification } = useNotificationContext()
   const [isExporting, setIsExporting] = useState(false)
+  const [isAILoading, setIsAILoading] = useState(true)
+  const [lastUpdated, setLastUpdated] = useState<Date | null>(null)
+
+  const loadPolicyData = async () => {
+    setIsAILoading(true)
+    await simulateAIProcessing(1500, 2500)
+    setLastUpdated(new Date())
+    setIsAILoading(false)
+  }
+
+  useEffect(() => {
+    loadPolicyData()
+  }, [])
 
   const filteredData = policymakerData.filter(data => {
     const stateMatch = selectedState === 'all' || data.state === selectedState
@@ -86,6 +101,32 @@ function PolicymakerDashboard() {
     ? ((importReductionData[0].importVolume - importReductionData[importReductionData.length - 1].importVolume) / importReductionData[0].importVolume * 100)
     : 0
 
+  if (isAILoading) {
+    return (
+      <div className="space-y-8">
+        <div>
+          <h1 className="text-3xl font-bold text-gray-900 dark:text-white flex items-center">
+            <Brain className="h-8 w-8 mr-3 text-primary-600 dark:text-primary-400" />
+            Policymaker Intelligence Dashboard
+          </h1>
+          <p className="mt-2 text-gray-600 dark:text-gray-300 max-w-3xl">
+            Strategic insights for agricultural policy and planning
+          </p>
+        </div>
+        <AILoadingAnimation
+          title="AI Model Processing..."
+          subtitle="Analyzing national agricultural data and generating insights"
+          steps={[
+            'Loading production and import data',
+            'Analyzing state-wise trends',
+            'Computing demand-supply forecasts',
+            'Generating policy recommendations'
+          ]}
+        />
+      </div>
+    )
+  }
+
   return (
     <div className="space-y-8">
       <div>
@@ -97,6 +138,15 @@ function PolicymakerDashboard() {
           Strategic insights for agricultural policy and planning
         </p>
       </div>
+
+      <MLModelIndicator
+        modelName="Multi-Region Demand-Supply Forecasting Model"
+        accuracy="91.8"
+        lastTrained="Oct 22, 2024"
+        lastUpdated={lastUpdated || undefined}
+        onRefresh={loadPolicyData}
+        isRefreshing={isAILoading}
+      />
 
       <div className="card bg-gradient-to-r from-primary-50 via-blue-50 to-indigo-50 dark:from-primary-900/30 dark:via-blue-900/30 dark:to-indigo-900/30 border-primary-200 dark:border-primary-700">
         <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">

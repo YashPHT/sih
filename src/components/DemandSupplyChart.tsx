@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react'
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts'
 import { TrendingUp, TrendingDown, Minus, AlertTriangle, CheckCircle, AlertCircle } from 'lucide-react'
 import { DemandSupplyData } from '../data/priceHistoryData'
+import { AILoadingAnimation, MLModelIndicator } from './ui'
+import { simulateAIProcessing } from '../utils/aiPredictions'
 
 interface DemandSupplyChartProps {
   data: DemandSupplyData
@@ -9,6 +11,15 @@ interface DemandSupplyChartProps {
 
 function DemandSupplyChart({ data }: DemandSupplyChartProps) {
   const [isDark, setIsDark] = useState(document.documentElement.classList.contains('dark'))
+  const [isLoading, setIsLoading] = useState(true)
+  const [lastUpdated, setLastUpdated] = useState<Date | null>(null)
+
+  const loadForecast = async () => {
+    setIsLoading(true)
+    await simulateAIProcessing(1500, 2500)
+    setLastUpdated(new Date())
+    setIsLoading(false)
+  }
 
   useEffect(() => {
     const observer = new MutationObserver(() => {
@@ -17,6 +28,10 @@ function DemandSupplyChart({ data }: DemandSupplyChartProps) {
     observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] })
     return () => observer.disconnect()
   }, [])
+
+  useEffect(() => {
+    loadForecast()
+  }, [data.crop])
   const chartData = data.months.map((month, index) => ({
     month,
     demand: data.demandForecast[index],
@@ -53,8 +68,32 @@ function DemandSupplyChart({ data }: DemandSupplyChartProps) {
   const DemandTrendIcon = demandTrendIcon
   const SupplyTrendIcon = supplyTrendIcon
   
+  if (isLoading) {
+    return (
+      <AILoadingAnimation
+        title="AI Demand-Supply Analysis..."
+        subtitle="Analyzing market trends and computing forecasts"
+        steps={[
+          'Loading historical demand-supply data',
+          'Analyzing market trends',
+          'Computing 6-month forecasts',
+          'Generating policy recommendations'
+        ]}
+      />
+    )
+  }
+  
   return (
     <div className="space-y-4">
+      <MLModelIndicator
+        modelName="Demand-Supply Forecasting Model"
+        accuracy="90.5"
+        lastTrained="Oct 19, 2024"
+        lastUpdated={lastUpdated || undefined}
+        onRefresh={loadForecast}
+        isRefreshing={isLoading}
+      />
+      
       <div className="flex items-start justify-between">
         <div>
           <h3 className="text-lg font-bold text-gray-900 dark:text-white">{data.crop} Demand-Supply Analytics</h3>
