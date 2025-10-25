@@ -37,10 +37,10 @@ function CreditEligibilitySection() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
-          <div className="bg-white rounded-lg p-4 shadow-sm border border-gray-200">
+          <div className="bg-white rounded-lg p-4 shadow-sm border border-gray-200 dark:border-gray-700">
             <p className="text-sm text-gray-600 mb-1">Credit Score</p>
             <div className="flex items-baseline">
-              <p className="text-3xl font-bold text-gray-900">{eligibility.score}</p>
+              <p className="text-3xl font-bold text-gray-900 dark:text-white">{eligibility.score}</p>
               <p className="text-sm text-gray-600 ml-2">/ 850</p>
             </div>
             <div className="w-full bg-gray-200 rounded-full h-2 mt-3">
@@ -51,10 +51,10 @@ function CreditEligibilitySection() {
             </div>
           </div>
 
-          <div className="bg-white rounded-lg p-4 shadow-sm border border-gray-200">
+          <div className="bg-white rounded-lg p-4 shadow-sm border border-gray-200 dark:border-gray-700">
             <p className="text-sm text-gray-600 mb-1">Maximum Loan Amount</p>
             <div className="flex items-baseline">
-              <p className="text-3xl font-bold text-gray-900">
+              <p className="text-3xl font-bold text-gray-900 dark:text-white">
                 ₹{(eligibility.maxLoanAmount / 100000).toFixed(1)}L
               </p>
             </div>
@@ -63,10 +63,10 @@ function CreditEligibilitySection() {
             </p>
           </div>
 
-          <div className="bg-white rounded-lg p-4 shadow-sm border border-gray-200">
+          <div className="bg-white rounded-lg p-4 shadow-sm border border-gray-200 dark:border-gray-700">
             <p className="text-sm text-gray-600 mb-1">Interest Rate</p>
             <div className="flex items-baseline">
-              <p className="text-3xl font-bold text-gray-900">{eligibility.interestRate}%</p>
+              <p className="text-3xl font-bold text-gray-900 dark:text-white">{eligibility.interestRate}%</p>
               <p className="text-sm text-gray-600 ml-2">p.a.</p>
             </div>
             <p className="text-sm text-gray-600 mt-3">
@@ -75,7 +75,7 @@ function CreditEligibilitySection() {
           </div>
         </div>
 
-        <div className="bg-white rounded-lg p-6 border border-gray-200">
+        <div className="bg-white rounded-lg p-6 border border-gray-200 dark:border-gray-700">
           <h3 className="font-bold text-gray-900 mb-4 flex items-center">
             <Info className="h-5 w-5 mr-2 text-blue-600" />
             Score Breakdown
@@ -85,10 +85,10 @@ function CreditEligibilitySection() {
               <div key={index}>
                 <div className="flex items-center justify-between mb-2">
                   <div className="flex items-center">
-                    <span className="text-sm font-medium text-gray-900">{factor.name}</span>
-                    <span className="ml-2 text-xs text-gray-600">({factor.weight}% weight)</span>
+                    <span className="text-sm font-medium text-gray-900 dark:text-white">{factor.name}</span>
+                    <span className="ml-2 text-xs text-gray-600 dark:text-gray-300">({factor.weight}% weight)</span>
                   </div>
-                  <span className="text-sm font-bold text-gray-900">{factor.score}/100</span>
+                  <span className="text-sm font-bold text-gray-900 dark:text-white">{factor.score}/100</span>
                 </div>
                 <div className="w-full bg-gray-200 rounded-full h-2">
                   <div
@@ -110,7 +110,7 @@ function CreditEligibilitySection() {
               <span className="text-primary-700 font-bold text-sm">1</span>
             </div>
             <div className="ml-4">
-              <h4 className="font-semibold text-gray-900">Review Loan Terms</h4>
+              <h4 className="font-semibold text-gray-900 dark:text-white">Review Loan Terms</h4>
               <p className="text-sm text-gray-600 mt-1">
                 Understand the interest rates, repayment schedule, and associated fees
               </p>
@@ -121,7 +121,7 @@ function CreditEligibilitySection() {
               <span className="text-primary-700 font-bold text-sm">2</span>
             </div>
             <div className="ml-4">
-              <h4 className="font-semibold text-gray-900">Submit Required Documents</h4>
+              <h4 className="font-semibold text-gray-900 dark:text-white">Submit Required Documents</h4>
               <p className="text-sm text-gray-600 mt-1">
                 Land records, Aadhaar card, bank statements, and farming income proof
               </p>
@@ -132,7 +132,7 @@ function CreditEligibilitySection() {
               <span className="text-primary-700 font-bold text-sm">3</span>
             </div>
             <div className="ml-4">
-              <h4 className="font-semibold text-gray-900">Loan Processing & Approval</h4>
+              <h4 className="font-semibold text-gray-900 dark:text-white">Loan Processing & Approval</h4>
               <p className="text-sm text-gray-600 mt-1">
                 Typically takes 3-5 business days for final approval and disbursement
               </p>
@@ -184,17 +184,17 @@ function InsurancePlanCard({ plan }: { plan: InsurancePlan }) {
       )}
 
       <div className="mb-4">
-        <h3 className="text-xl font-bold text-gray-900">{plan.name}</h3>
+        <h3 className="text-xl font-bold text-gray-900 dark:text-white">{plan.name}</h3>
         <p className="text-sm text-gray-600 mt-2">{plan.coverage}</p>
       </div>
 
       <div className="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-lg p-4 mb-4 border border-blue-200">
         <div className="flex items-baseline mb-2">
-          <span className="text-3xl font-bold text-gray-900">₹{(plan.premium / 1000).toFixed(0)}k</span>
+          <span className="text-3xl font-bold text-gray-900 dark:text-white">₹{(plan.premium / 1000).toFixed(0)}k</span>
           <span className="text-sm text-gray-600 ml-2">/ season</span>
         </div>
-        <p className="text-sm text-gray-700">
-          Coverage up to <span className="font-bold text-gray-900">₹{(plan.coverageAmount / 100000).toFixed(1)}L</span>
+        <p className="text-sm text-gray-700 dark:text-gray-300">
+          Coverage up to <span className="font-bold text-gray-900 dark:text-white">₹{(plan.coverageAmount / 100000).toFixed(1)}L</span>
         </p>
       </div>
 
@@ -270,7 +270,7 @@ function InsuranceSection() {
             <Info className="h-5 w-5 text-blue-600 mr-3 mt-0.5 flex-shrink-0" />
             <div>
               <p className="text-sm font-semibold text-gray-900 mb-1">Why Insurance Matters</p>
-              <p className="text-sm text-gray-700">
+              <p className="text-sm text-gray-700 dark:text-gray-300">
                 Farmers with crop insurance experience 40% less financial stress and can reinvest in their farms more confidently. Government subsidies may cover up to 50% of premium costs.
               </p>
             </div>
@@ -292,28 +292,28 @@ function InsuranceSection() {
               <span className="text-primary-700 font-bold">1</span>
             </div>
             <h4 className="font-semibold text-gray-900 mb-2">Select Plan</h4>
-            <p className="text-sm text-gray-600">Choose the insurance plan that best fits your needs</p>
+            <p className="text-sm text-gray-600 dark:text-gray-300">Choose the insurance plan that best fits your needs</p>
           </div>
           <div className="text-center">
             <div className="w-12 h-12 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-3">
               <span className="text-primary-700 font-bold">2</span>
             </div>
             <h4 className="font-semibold text-gray-900 mb-2">Submit Details</h4>
-            <p className="text-sm text-gray-600">Provide farm details and required documents</p>
+            <p className="text-sm text-gray-600 dark:text-gray-300">Provide farm details and required documents</p>
           </div>
           <div className="text-center">
             <div className="w-12 h-12 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-3">
               <span className="text-primary-700 font-bold">3</span>
             </div>
             <h4 className="font-semibold text-gray-900 mb-2">Pay Premium</h4>
-            <p className="text-sm text-gray-600">Complete payment with available subsidy options</p>
+            <p className="text-sm text-gray-600 dark:text-gray-300">Complete payment with available subsidy options</p>
           </div>
           <div className="text-center">
             <div className="w-12 h-12 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-3">
               <span className="text-primary-700 font-bold">4</span>
             </div>
             <h4 className="font-semibold text-gray-900 mb-2">Get Covered</h4>
-            <p className="text-sm text-gray-600">Receive policy document and start protection</p>
+            <p className="text-sm text-gray-600 dark:text-gray-300">Receive policy document and start protection</p>
           </div>
         </div>
       </div>
@@ -328,13 +328,13 @@ function CreditInsurance() {
     <div className="space-y-6">
       <div>
         <h1 className="text-3xl font-bold text-gray-900 flex items-center">
-          <TrendingUp className="h-8 w-8 mr-3 text-primary-600" />
+          <TrendingUp className="h-8 w-8 mr-3 text-primary-600 dark:text-primary-400" />
           Credit & Insurance
         </h1>
-        <p className="mt-2 text-gray-600">Financial services to support and protect your farming operations</p>
+        <p className="mt-2 text-gray-600 dark:text-gray-300">Financial services to support and protect your farming operations</p>
       </div>
 
-      <div className="flex space-x-4 border-b border-gray-200">
+      <div className="flex space-x-4 border-b border-gray-200 dark:border-gray-700">
         <button
           onClick={() => setActiveTab('credit')}
           className={`px-4 py-2 font-medium border-b-2 transition-colors ${

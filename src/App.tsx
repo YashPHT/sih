@@ -12,14 +12,12 @@ import Marketplace from './pages/Marketplace'
 import Traceability from './pages/Traceability'
 import PolicymakerDashboard from './pages/PolicymakerDashboard'
 import { NotificationContext } from './context/NotificationContext'
-import { useTranslation } from 'react-i18next'
 
 function AppContent() {
-  const { t } = useTranslation()
   const notificationHook = useNotification()
 
   const dashboardConfig = {
-    appName: t('appName'),
+    appName: 'AgriAdvisory',
     logo: <Sprout className="h-8 w-8 text-primary-600 dark:text-primary-400" />,
     navigation: defaultNavigation,
     showTopbar: true,
