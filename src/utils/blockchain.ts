@@ -1,5 +1,8 @@
-import { SupplyChainEvent, BlockchainVerification, DigitalSignature, VerificationIssue } from '../types'
+import { SupplyChainEvent, BlockchainVerification, VerificationIssue } from '../types'
 
+/**
+ * Generate SHA-256 hash from string data
+ */
 export async function generateHash(data: string): Promise<string> {
   const encoder = new TextEncoder()
   const dataBuffer = encoder.encode(data)
@@ -9,6 +12,60 @@ export async function generateHash(data: string): Promise<string> {
   return hashHex
 }
 
+/**
+ * Create canonical JSON string with sorted keys for consistent hashing
+ */
+function canonicalJSON(obj: any): string {
+  if (obj === null || obj === undefined) {
+    return String(obj)
+  }
+  
+  if (typeof obj !== 'object') {
+    return JSON.stringify(obj)
+  }
+  
+  if (Array.isArray(obj)) {
+    return '[' + obj.map(item => canonicalJSON(item)).join(',') + ']'
+  }
+  
+  const sortedKeys = Object.keys(obj).sort()
+  const pairs = sortedKeys.map(key => `"${key}":${canonicalJSON(obj[key])}`)
+  return '{' + pairs.join(',') + '}'
+}
+
+/**
+ * Calculate hash for blockchain event
+ * IMPORTANT: This function must be used for BOTH:
+ * 1. Creating hashes when generating seed data
+ * 2. Verifying hashes in the verification function
+ * 
+ * The hash is calculated from previousHash + timestamp + event data
+ * to ensure consistency between creation and verification.
+ */
+export async function calculateEventHash(
+  previousHash: string,
+  timestamp: string,
+  eventData: any
+): Promise<string> {
+  // Convert timestamp to consistent format (string)
+  const timestampStr = String(timestamp)
+  
+  // Create canonical JSON string (sorted keys, no spaces)
+  const dataStr = canonicalJSON(eventData)
+  
+  // Concatenate in exact order: previousHash + timestamp + data
+  const content = `${previousHash}${timestampStr}${dataStr}`
+  
+  // Calculate SHA-256 hash
+  const hash = await generateHash(content)
+  
+  return hash
+}
+
+/**
+ * Create event hash for a new event (backwards compatibility)
+ * This wraps the new calculateEventHash function
+ */
 export async function createEventHash(
   batchId: string,
   eventType: string,
@@ -18,19 +75,20 @@ export async function createEventHash(
   data: Record<string, string | number | boolean> | object,
   previousHash: string
 ): Promise<string> {
-  const eventData = JSON.stringify({
+  // Build event data object in consistent structure
+  const eventData = {
     batchId,
     eventType,
     timestamp,
     location,
     actor,
-    data,
-    previousHash
-  })
-  return await generateHash(eventData)
+    data
+  }
+  
+  return await calculateEventHash(previousHash, timestamp, eventData)
 }
 
-export function verifySignature(signature: string, publicKey: string, data: any): boolean {
+export function verifySignature(signature: string, publicKey: string): boolean {
   return signature.length > 0 && publicKey.length > 0
 }
 
@@ -74,15 +132,20 @@ export async function verifyChain(events: SupplyChainEvent[]): Promise<Blockchai
   for (let i = 0; i < events.length; i++) {
     const event = events[i]
     
-    const locationStr = typeof event.location === 'string' ? event.location : JSON.stringify(event.location)
-    const calculatedHash = await createEventHash(
-      event.batchId,
-      event.eventType,
+    // Build event data in consistent structure for hash calculation
+    const eventData = {
+      batchId: event.batchId,
+      eventType: event.eventType,
+      timestamp: event.timestamp,
+      location: event.location,
+      actor: event.actor,
+      data: event.data
+    }
+    
+    const calculatedHash = await calculateEventHash(
+      event.previousHash,
       event.timestamp,
-      locationStr,
-      event.actor,
-      event.data,
-      event.previousHash
+      eventData
     )
 
     if (calculatedHash !== event.currentHash) {
@@ -114,7 +177,7 @@ export async function verifyChain(events: SupplyChainEvent[]): Promise<Blockchai
     }
 
     if (event.signatures && event.signatures.length > 0) {
-      const allValid = event.signatures.every(sig => verifySignature(sig.signature, sig.publicKey, event.data))
+      const allValid = event.signatures.every(sig => verifySignature(sig.signature, sig.publicKey))
       if (allValid) {
         checks.signatures.passed++
       } else {
