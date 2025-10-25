@@ -101,6 +101,11 @@
       "high": "उच्च",
       "medium": "मध्यम",
       "low": "निम्न"
+    },
+    "advisories": {
+      "preMonsoon": "प्री-मानसून सिंचाई आवश्यक",
+      "nitrogen": "नाइट्रोजन उर्वरक डालें",
+      "aphidMonitoring": "एफिड निगरानी अलर्ट"
     }
   },
   "marketplace": {
@@ -270,25 +275,23 @@
     "exporting": "निर्यात किया जा रहा है...",
     "reportExported": "रिपोर्ट सफलतापूर्वक निर्यात की गई!",
     "dataSource": "डेटा स्रोत",
-    "dataSourceNote": "सभी मेट्रिक्स राज्य-स्तरीय कृषि विभागों, बाजार खुफिया और उद्योग रिपोर्टों से एकत्रित। तैनाती पर लाइव डेटा एकीकरण उपलब्ध।"
+    "dataSourceNote": "सभी मेट्रिक्स राज्य-स्तरीय कृषि विभागों, बाजार खुफिया और उद्योग रिपोर्टों से एकत्रित। तैनाती पर लाइव डेटा एकीकरण उपलब्ध।",
+    "processingCapacityTitle": "प्रसंस्करण क्षमता",
+    "importReductionTitle": "आयात में कमी",
+    "achievementLabel": "उपलब्धि",
+    "utilizationLabel": "उपयोग",
+    "targetOnTrack": "लक्ष्य ट्रैक पर है",
+    "needsAttention": "ध्यान देने की आवश्यकता है",
+    "productionVsDemandAnalysis": "उत्पादन बनाम मांग विश्लेषण",
+    "trackProductionLevels": "समय के साथ बाजार की मांग के मुकाबले उत्पादन स्तर को ट्रैक करें"
   },
   "language": {
     "switchLanguage": "भाषा बदलें",
     "currentLanguage": "वर्तमान भाषा",
     "selectLanguage": "भाषा चुनें",
-    "moreComingSoon": "अधिक भाषाएं जल्द आ रही हैं...",
     "languages": {
       "en": "English",
-      "hi": "हिन्दी (Hindi)",
-      "mr": "मराठी (Marathi)",
-      "te": "తెలుగు (Telugu)",
-      "ta": "தமிழ் (Tamil)",
-      "gu": "ગુજરાતી (Gujarati)",
-      "ur": "اردو (Urdu)",
-      "kn": "ಕನ್ನಡ (Kannada)",
-      "or": "ଓଡ଼ିଆ (Odia)",
-      "bn": "বাংলা (Bengali)",
-      "ml": "മലയാളം (Malayalam)"
+      "hi": "हिन्दी (Hindi)"
     }
   },
   "messages": {

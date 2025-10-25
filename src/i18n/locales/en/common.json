@@ -101,6 +101,11 @@
       "high": "high",
       "medium": "medium",
       "low": "low"
+    },
+    "advisories": {
+      "preMonsoon": "Pre-Monsoon Irrigation Required",
+      "nitrogen": "Apply Nitrogen Fertilizer",
+      "aphidMonitoring": "Aphid Monitoring Alert"
     }
   },
   "marketplace": {
@@ -270,25 +275,23 @@
     "exporting": "Exporting...",
     "reportExported": "Report exported successfully!",
     "dataSource": "Data Source",
-    "dataSourceNote": "All metrics aggregated from state-level agricultural departments, market intelligence, and industry reports. Live data integration available upon deployment."
+    "dataSourceNote": "All metrics aggregated from state-level agricultural departments, market intelligence, and industry reports. Live data integration available upon deployment.",
+    "processingCapacityTitle": "Processing Capacity",
+    "importReductionTitle": "Import Reduction",
+    "achievementLabel": "Achievement",
+    "utilizationLabel": "Utilization",
+    "targetOnTrack": "Target on track",
+    "needsAttention": "Needs attention",
+    "productionVsDemandAnalysis": "Production vs Demand Analysis",
+    "trackProductionLevels": "Track production levels against market demand over time"
   },
   "language": {
     "switchLanguage": "Switch Language",
     "currentLanguage": "Current Language",
     "selectLanguage": "Select Language",
-    "moreComingSoon": "More languages coming soon...",
     "languages": {
       "en": "English",
-      "hi": "हिन्दी (Hindi)",
-      "mr": "मराठी (Marathi)",
-      "te": "తెలుగు (Telugu)",
-      "ta": "தமிழ் (Tamil)",
-      "gu": "ગુજરાતી (Gujarati)",
-      "ur": "اردو (Urdu)",
-      "kn": "ಕನ್ನಡ (Kannada)",
-      "or": "ଓଡ଼ିଆ (Odia)",
-      "bn": "বাংলা (Bengali)",
-      "ml": "മലയാളം (Malayalam)"
+      "hi": "हिन्दी (Hindi)"
     }
   },
   "messages": {
