@@ -10,25 +10,25 @@ type SeverityStyle = {
 
 export const weatherSeverityStyles: Record<WeatherAlertSeverity, SeverityStyle> = {
   info: {
-    badge: 'bg-sky-100 text-sky-800',
-    subtle: 'bg-sky-50 border border-sky-200',
-    borderAccent: 'border-sky-400',
-    icon: 'text-sky-600',
-    text: 'text-sky-900'
+    badge: 'bg-sky-100 dark:bg-sky-900 text-sky-800 dark:text-sky-100',
+    subtle: 'bg-sky-50 dark:bg-sky-900/30 border border-sky-200 dark:border-sky-700',
+    borderAccent: 'border-sky-400 dark:border-sky-600',
+    icon: 'text-sky-600 dark:text-sky-400',
+    text: 'text-sky-900 dark:text-sky-100'
   },
   watch: {
-    badge: 'bg-amber-100 text-amber-800',
-    subtle: 'bg-amber-50 border border-amber-200',
-    borderAccent: 'border-amber-500',
-    icon: 'text-amber-600',
-    text: 'text-amber-900'
+    badge: 'bg-amber-100 dark:bg-amber-900 text-amber-800 dark:text-amber-100',
+    subtle: 'bg-amber-50 dark:bg-amber-900/30 border border-amber-200 dark:border-amber-700',
+    borderAccent: 'border-amber-500 dark:border-amber-600',
+    icon: 'text-amber-600 dark:text-amber-400',
+    text: 'text-amber-900 dark:text-amber-100'
   },
   warning: {
-    badge: 'bg-red-100 text-red-800',
-    subtle: 'bg-red-50 border border-red-200',
-    borderAccent: 'border-red-500',
-    icon: 'text-red-600',
-    text: 'text-red-900'
+    badge: 'bg-red-100 dark:bg-red-900 text-red-800 dark:text-red-100',
+    subtle: 'bg-red-50 dark:bg-red-900/30 border border-red-200 dark:border-red-700',
+    borderAccent: 'border-red-500 dark:border-red-600',
+    icon: 'text-red-600 dark:text-red-400',
+    text: 'text-red-900 dark:text-red-100'
   }
 }
 
