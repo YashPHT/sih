@@ -1,5 +1,5 @@
 /**
- * Dynamic pest prediction generator with extensive variations
+ * Dynamic pest prediction generator with ML-like predictions
  */
 
 import { PestPrediction } from '../types'
@@ -441,24 +441,4 @@ export function generateDynamicPestPredictions(): PestPrediction[] {
       estimatedImpact
     }
   })
-}
-
-/**
- * Calculate total possible pest prediction combinations
- */
-export function getTotalPestCombinations(): number {
-  return pestTemplates.reduce((total, template) => {
-    const cropOptions = template.affectedCropsOptions.length
-    const probabilityVariations = 45 // 45-90%
-    
-    const measuresCombinations = template.preventiveMeasuresTemplates.reduce((prod, templates) =>
-      prod * templates.length, 1
-    )
-    
-    const symptomsCombinations = template.symptomsTemplates.reduce((prod, templates) =>
-      prod * templates.length, 1
-    )
-    
-    return total + (cropOptions * probabilityVariations * measuresCombinations * symptomsCombinations)
-  }, 0)
 }

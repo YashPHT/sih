@@ -1,7 +1,6 @@
 /**
  * Dynamic AI prediction generation utilities
  * Provides varied, ML-like predictions that change on each load
- * Enhanced with template-based generation for thousands of combinations
  */
 
 import { generateDynamicAdvisories as generateTemplateAdvisories } from '../lib/dynamicAdvisories'
@@ -75,10 +74,9 @@ export function generateDynamicPredictions(basePrice = 8500, months = 6): Dynami
 
 /**
  * Generate dynamic crop advisories with variation
- * Enhanced to use template-based generation for thousands of combinations
  */
 export function generateDynamicAdvisories(): DynamicAdvisory[] {
-  // Use the new template-based system for much more variety
+  // Use the dynamic advisory system for varied recommendations
   const templateAdvisories = generateTemplateAdvisories()
   
   // Convert to the expected format

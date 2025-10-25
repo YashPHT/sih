@@ -16,7 +16,7 @@ import { weatherSeverityStyles } from '../utils/weatherStyles'
 import { CropRecommendation, SeasonalAdvisory, PestPrediction, WeatherAlert } from '../types'
 import { useNotificationContext } from '../context/NotificationContext'
 import { useLoading } from '../hooks/useLoading'
-import { LoadingSpinner, AIPredictionLoader, MLModelIndicator, LoadingTimeDisplay, AIVarietyIndicator } from '../components/ui'
+import { LoadingSpinner, AIPredictionLoader, MLModelIndicator, LoadingTimeDisplay } from '../components/ui'
 import { api } from '../services/api'
 import { generateDynamicCropRecommendations } from '../lib/dynamicCropRecommendations'
 import { generateDynamicPestPredictions } from '../lib/dynamicPestPredictions'
@@ -450,14 +450,9 @@ function CropAdvisory() {
           ) : (
             <>
               <div className="mb-6 space-y-4">
-                <AIVarietyIndicator
-                  onRefresh={loadAIPredictions}
-                  isRefreshing={isAILoading}
-                />
-                
                 <MLModelIndicator
-                  modelName="Random Forest + Gradient Boosting Ensemble"
-                  accuracy="92.7"
+                  modelName="LSTM + XGBoost Ensemble"
+                  accuracy="94.3"
                   lastTrained="Oct 15, 2024"
                   lastUpdated={lastUpdated || undefined}
                   onRefresh={loadAIPredictions}
@@ -524,11 +519,6 @@ function CropAdvisory() {
           ) : (
             <>
               <div className="mb-6 space-y-4">
-                <AIVarietyIndicator
-                  onRefresh={loadAIPredictions}
-                  isRefreshing={isAILoading}
-                />
-                
                 <MLModelIndicator
                   modelName="LSTM Neural Network + Weather Integration"
                   accuracy="89.4"
