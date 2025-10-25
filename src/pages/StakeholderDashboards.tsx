@@ -129,11 +129,11 @@ function StakeholderDashboards() {
   return (
     <div className="space-y-8">
       <div>
-        <h1 className="text-3xl font-bold text-gray-900 flex items-center">
-          <Users className="h-8 w-8 mr-3 text-primary-600" />
+        <h1 className="text-3xl font-bold text-gray-900 dark:text-white flex items-center">
+          <Users className="h-8 w-8 mr-3 text-primary-600 dark:text-primary-400" />
           Stakeholder Dashboards
         </h1>
-        <p className="mt-2 text-gray-600 max-w-3xl">
+        <p className="mt-2 text-gray-600 dark:text-gray-300 max-w-3xl">
           Craft the demo narrative by moving between farmer, FPO, processor, and retailer vantage points.
           Each view reuses the shared dashboard shell to spotlight the KPIs, recommended actions, and
           communication threads that matter most for that stakeholder.
@@ -141,7 +141,7 @@ function StakeholderDashboards() {
       </div>
 
       <div className="card">
-        <h2 className="text-sm font-semibold text-gray-500 uppercase tracking-wide">Select stakeholder role</h2>
+        <h2 className="text-sm font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wide">Select stakeholder role</h2>
         <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
           {roleTabs.map((role) => {
             const RoleIcon = role.icon
@@ -152,36 +152,36 @@ function StakeholderDashboards() {
                 key={role.id}
                 type="button"
                 onClick={() => setActiveRole(role.id)}
-                className={`w-full text-left rounded-xl border px-5 py-4 transition shadow-sm focus:outline-none focus:ring-2 focus:ring-primary-500 ${
+                className={`w-full text-left rounded-xl border px-5 py-4 transition shadow-sm focus:outline-none focus:ring-2 focus:ring-primary-500 dark:focus:ring-primary-400 ${
                   isActive
-                    ? 'border-primary-600 bg-primary-600 text-white shadow-lg'
-                    : 'border-gray-200 bg-gray-50 hover:bg-white'
+                    ? 'border-primary-600 bg-primary-600 dark:bg-primary-700 text-white shadow-lg'
+                    : 'border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 hover:bg-white dark:hover:bg-gray-700'
                 }`}
               >
-                <RoleIcon className={`h-6 w-6 ${isActive ? 'text-white' : 'text-primary-600'}`} />
+                <RoleIcon className={`h-6 w-6 ${isActive ? 'text-white' : 'text-primary-600 dark:text-primary-400'}`} />
                 <p className="mt-3 text-lg font-semibold">{role.label}</p>
-                <p className={`text-sm mt-1 ${isActive ? 'text-primary-100' : 'text-gray-500'}`}>{role.description}</p>
+                <p className={`text-sm mt-1 ${isActive ? 'text-primary-100' : 'text-gray-500 dark:text-gray-400'}`}>{role.description}</p>
               </button>
             )
           })}
         </div>
       </div>
 
-      <div className="card bg-gradient-to-r from-primary-50 via-emerald-50 to-green-50 border-primary-200">
+      <div className="card bg-gradient-to-r from-primary-50 via-emerald-50 to-green-50 dark:from-primary-900/30 dark:via-emerald-900/30 dark:to-green-900/30 border-primary-200 dark:border-primary-700">
         <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
           <div>
-            <p className="text-sm font-semibold text-primary-700 uppercase tracking-wide">
+            <p className="text-sm font-semibold text-primary-700 dark:text-primary-300 uppercase tracking-wide">
               {activeRoleMeta?.label} narrative focus
             </p>
-            <h2 className="text-2xl font-bold text-gray-900 mt-2">{dashboard.highlight.title}</h2>
-            <p className="text-lg font-semibold text-primary-700 mt-4">
+            <h2 className="text-2xl font-bold text-gray-900 dark:text-white mt-2">{dashboard.highlight.title}</h2>
+            <p className="text-lg font-semibold text-primary-700 dark:text-primary-300 mt-4">
               {dashboard.highlight.subtitle}
             </p>
-            <p className="text-sm text-gray-700 mt-3 max-w-2xl">{dashboard.highlight.context}</p>
+            <p className="text-sm text-gray-700 dark:text-gray-300 mt-3 max-w-2xl">{dashboard.highlight.context}</p>
           </div>
-          <div className="bg-white/80 border border-primary-200 rounded-xl p-5 shadow-sm w-full lg:w-auto lg:min-w-[280px]">
-            <p className="text-xs font-semibold uppercase text-gray-500 tracking-wide">Demo talking points</p>
-            <ul className="mt-3 space-y-2 text-sm text-gray-700">
+          <div className="bg-white/80 dark:bg-gray-800/80 border border-primary-200 dark:border-primary-600 rounded-xl p-5 shadow-sm w-full lg:w-auto lg:min-w-[280px]">
+            <p className="text-xs font-semibold uppercase text-gray-500 dark:text-gray-400 tracking-wide">Demo talking points</p>
+            <ul className="mt-3 space-y-2 text-sm text-gray-700 dark:text-gray-300">
               <li>• Reinforce value delivered to this stakeholder.</li>
               <li>• Transition smoothly into marketplace or logistics story.</li>
               <li>• Highlight next action the team can take immediately.</li>
@@ -199,10 +199,10 @@ function StakeholderDashboards() {
             <div key={kpi.id} className="card">
               <div className="flex items-start justify-between">
                 <div>
-                  <p className="text-sm text-gray-500">{kpi.label}</p>
-                  <p className="text-3xl font-bold text-gray-900 mt-3">{kpi.value}</p>
+                  <p className="text-sm text-gray-500 dark:text-gray-400">{kpi.label}</p>
+                  <p className="text-3xl font-bold text-gray-900 dark:text-white mt-3">{kpi.value}</p>
                 </div>
-                <div className={`flex items-center px-3 py-1 rounded-full text-sm font-medium ${trend.classes}`}>
+                <div className={`flex items-center px-3 py-1 rounded-full text-sm font-medium ${trend.classes} dark:bg-opacity-20`}>
                   <TrendIcon className="h-4 w-4 mr-1" />
                   <span>{kpi.change}</span>
                 </div>
@@ -215,8 +215,8 @@ function StakeholderDashboards() {
       {activeRole === 'policymaker' ? (
         <>
           <div className="card">
-            <h2 className="text-xl font-bold text-gray-900 mb-6 flex items-center">
-              <Brain className="h-5 w-5 mr-2 text-primary-600" />
+            <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-6 flex items-center">
+              <Brain className="h-5 w-5 mr-2 text-primary-600 dark:text-primary-400" />
               AI-Powered Price Forecasting
             </h2>
             <div className="space-y-8">
@@ -227,8 +227,8 @@ function StakeholderDashboards() {
           </div>
 
           <div className="card">
-            <h2 className="text-xl font-bold text-gray-900 mb-6 flex items-center">
-              <TrendingUp className="h-5 w-5 mr-2 text-primary-600" />
+            <h2 className="text-xl font-bold text-gray-900 dark:text-white mb-6 flex items-center">
+              <TrendingUp className="h-5 w-5 mr-2 text-primary-600 dark:text-primary-400" />
               Demand-Supply Analytics
             </h2>
             <div className="space-y-8">
@@ -251,43 +251,43 @@ function StakeholderDashboards() {
           <div className="grid grid-cols-1 xl:grid-cols-3 gap-6">
         <div className="xl:col-span-2 card">
           <div className="flex items-center justify-between mb-4">
-            <h2 className="text-xl font-bold text-gray-900 flex items-center">
-              <ClipboardCheck className="h-5 w-5 mr-2 text-primary-600" />
+            <h2 className="text-xl font-bold text-gray-900 dark:text-white flex items-center">
+              <ClipboardCheck className="h-5 w-5 mr-2 text-primary-600 dark:text-primary-400" />
               Recommended Actions
             </h2>
-            <span className="text-sm text-gray-500">{dashboard.actions.length} prioritized items</span>
+            <span className="text-sm text-gray-500 dark:text-gray-400">{dashboard.actions.length} prioritized items</span>
           </div>
           <div className="space-y-4">
             {dashboard.actions.map((action) => (
-              <div key={action.id} className="relative border border-gray-200 rounded-lg p-5 pl-6 hover:border-primary-300 transition">
+              <div key={action.id} className="relative border border-gray-200 dark:border-gray-700 rounded-lg p-5 pl-6 hover:border-primary-300 dark:hover:border-primary-600 transition">
                 <span
                   className={`absolute left-0 top-0 bottom-0 w-1 rounded-l-lg ${
                     action.impact === 'high'
-                      ? 'bg-red-500'
+                      ? 'bg-red-500 dark:bg-red-600'
                       : action.impact === 'medium'
-                      ? 'bg-amber-500'
-                      : 'bg-blue-500'
+                      ? 'bg-amber-500 dark:bg-amber-600'
+                      : 'bg-blue-500 dark:bg-blue-600'
                   }`}
                 />
                 <div className="flex items-start justify-between gap-4">
                   <div>
-                    <p className="text-xs uppercase tracking-wide text-gray-500">{action.owner}</p>
-                    <h3 className="text-lg font-semibold text-gray-900 mt-1">{action.title}</h3>
-                    <p className="text-sm text-gray-600 mt-2">{action.description}</p>
+                    <p className="text-xs uppercase tracking-wide text-gray-500 dark:text-gray-400">{action.owner}</p>
+                    <h3 className="text-lg font-semibold text-gray-900 dark:text-white mt-1">{action.title}</h3>
+                    <p className="text-sm text-gray-600 dark:text-gray-300 mt-2">{action.description}</p>
                   </div>
                   <span
                     className={`badge ${
                       action.impact === 'high'
-                        ? 'bg-red-100 text-red-800'
+                        ? 'bg-red-100 dark:bg-red-900/30 text-red-800 dark:text-red-300'
                         : action.impact === 'medium'
-                        ? 'bg-amber-100 text-amber-800'
-                        : 'bg-blue-100 text-blue-800'
+                        ? 'bg-amber-100 dark:bg-amber-900/30 text-amber-800 dark:text-amber-300'
+                        : 'bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-300'
                     }`}
                   >
                     {action.impact.toUpperCase()} IMPACT
                   </span>
                 </div>
-                <div className="mt-4 flex items-center justify-between text-xs text-gray-500">
+                <div className="mt-4 flex items-center justify-between text-xs text-gray-500 dark:text-gray-400">
                   <span>Due {action.dueDate}</span>
                   <span>Owner: {action.owner}</span>
                 </div>
@@ -297,18 +297,18 @@ function StakeholderDashboards() {
         </div>
         <div className="card">
           <div className="flex items-center justify-between mb-4">
-            <h2 className="text-xl font-bold text-gray-900 flex items-center">
-              <MessageCircle className="h-5 w-5 mr-2 text-primary-600" />
+            <h2 className="text-xl font-bold text-gray-900 dark:text-white flex items-center">
+              <MessageCircle className="h-5 w-5 mr-2 text-primary-600 dark:text-primary-400" />
               Communication Threads
             </h2>
-            <span className="text-sm text-gray-500">Stay ahead of stakeholder conversations</span>
+            <span className="text-sm text-gray-500 dark:text-gray-400">Stay ahead of stakeholder conversations</span>
           </div>
           <div className="space-y-4">
             {dashboard.communications.map((thread) => (
               <div key={thread.id} className="border border-gray-200 rounded-lg p-4 hover:border-primary-300 transition">
                 <div className="flex items-start justify-between gap-3">
                   <div>
-                    <p className="text-xs uppercase tracking-wide text-gray-500">{thread.topic}</p>
+                    <p className="text-xs uppercase tracking-wide text-gray-500 dark:text-gray-400">{thread.topic}</p>
                     <h3 className="text-lg font-semibold text-gray-900 mt-1">{thread.counterpart}</h3>
                     <p className="text-sm text-gray-600 mt-3 italic">“{thread.lastMessage}”</p>
                   </div>
@@ -316,9 +316,9 @@ function StakeholderDashboards() {
                     {communicationStatusLabels[thread.status]}
                   </span>
                 </div>
-                <div className="mt-4 flex items-center justify-between text-xs text-gray-500">
+                <div className="mt-4 flex items-center justify-between text-xs text-gray-500 dark:text-gray-400">
                   <span>Last updated {thread.lastUpdated}</span>
-                  <span className="font-medium text-primary-600">View thread →</span>
+                  <span className="font-medium text-primary-600 dark:text-primary-400">View thread →</span>
                 </div>
               </div>
             ))}
@@ -328,16 +328,16 @@ function StakeholderDashboards() {
 
       <div className="card space-y-6">
         <div className="flex items-center justify-between">
-          <h2 className="text-xl font-bold text-gray-900 flex items-center">
-            <ShoppingCart className="h-5 w-5 mr-2 text-primary-600" />
+          <h2 className="text-xl font-bold text-gray-900 dark:text-white flex items-center">
+            <ShoppingCart className="h-5 w-5 mr-2 text-primary-600 dark:text-primary-400" />
             Marketplace & Logistics Snapshot
           </h2>
-          <span className="text-sm text-gray-500">Bridge supply assurance with fulfillment confidence</span>
+          <span className="text-sm text-gray-500 dark:text-gray-400">Bridge supply assurance with fulfillment confidence</span>
         </div>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           <div>
             <h3 className="text-sm font-semibold text-gray-500 uppercase tracking-wide flex items-center">
-              <ShoppingCart className="h-4 w-4 mr-2 text-primary-600" />
+              <ShoppingCart className="h-4 w-4 mr-2 text-primary-600 dark:text-primary-400" />
               Active opportunities
             </h3>
             <div className="mt-3 space-y-4">
@@ -348,7 +348,7 @@ function StakeholderDashboards() {
                 >
                   <div className="flex items-start justify-between gap-3">
                     <div>
-                      <p className="text-xs uppercase tracking-wide text-gray-500">{opportunity.buyer}</p>
+                      <p className="text-xs uppercase tracking-wide text-gray-500 dark:text-gray-400">{opportunity.buyer}</p>
                       <h4 className="text-lg font-semibold text-gray-900 mt-1">{opportunity.requirement}</h4>
                     </div>
                     <span className={`badge ${opportunityStatusClasses[opportunity.status]}`}>
@@ -356,7 +356,7 @@ function StakeholderDashboards() {
                     </span>
                   </div>
                   <div className="mt-3 text-sm text-gray-600 space-y-1">
-                    <p>Value: <span className="font-semibold text-gray-900">{opportunity.value}</span></p>
+                    <p>Value: <span className="font-semibold text-gray-900 dark:text-white">{opportunity.value}</span></p>
                     <p>Timeline: {opportunity.timeline}</p>
                   </div>
                 </div>
@@ -365,7 +365,7 @@ function StakeholderDashboards() {
           </div>
           <div>
             <h3 className="text-sm font-semibold text-gray-500 uppercase tracking-wide flex items-center">
-              <Truck className="h-4 w-4 mr-2 text-primary-600" />
+              <Truck className="h-4 w-4 mr-2 text-primary-600 dark:text-primary-400" />
               Logistics movements
             </h3>
             <div className="mt-3 space-y-4">
@@ -373,16 +373,16 @@ function StakeholderDashboards() {
                 <div key={shipment.id} className="border border-gray-200 rounded-lg p-4 hover:border-primary-300 transition">
                   <div className="flex items-start justify-between gap-3">
                     <div>
-                      <p className="text-xs uppercase tracking-wide text-gray-500">{shipment.mode}</p>
+                      <p className="text-xs uppercase tracking-wide text-gray-500 dark:text-gray-400">{shipment.mode}</p>
                       <h4 className="text-lg font-semibold text-gray-900 mt-1">{shipment.route}</h4>
                     </div>
                     <span className={`badge ${logisticsStatusClasses[shipment.status]}`}>
                       {logisticsStatusLabels[shipment.status]}
                     </span>
                   </div>
-                  <div className="mt-3 flex items-center justify-between text-sm text-gray-600">
+                  <div className="mt-3 flex items-center justify-between text-sm text-gray-600 dark:text-gray-300">
                     <span>{shipment.eta}</span>
-                    <span className="font-semibold text-gray-900">{shipment.progress}%</span>
+                    <span className="font-semibold text-gray-900 dark:text-white">{shipment.progress}%</span>
                   </div>
                   <div className="mt-2 w-full bg-gray-100 rounded-full h-2">
                     <div
@@ -397,7 +397,7 @@ function StakeholderDashboards() {
               <div className="mt-6 space-y-4">
                 <div className="flex items-center justify-between">
                   <h4 className="text-xs font-semibold uppercase tracking-wide text-gray-500 flex items-center gap-2">
-                    <CloudRain className="h-4 w-4 text-primary-600" />
+                    <CloudRain className="h-4 w-4 text-primary-600 dark:text-primary-400" />
                     Weather-driven logistics alerts
                   </h4>
                   <p className="text-xs text-gray-400">
@@ -416,7 +416,7 @@ function StakeholderDashboards() {
                         <div>
                           <span className={`badge ${badgeClass}`}>{alert.severity.toUpperCase()}</span>
                           <h5 className={`mt-2 text-base font-semibold ${textClass}`}>{alert.title}</h5>
-                          <p className="mt-1 text-xs uppercase tracking-wide text-gray-500">Logistics intelligence</p>
+                          <p className="mt-1 text-xs uppercase tracking-wide text-gray-500 dark:text-gray-400">Logistics intelligence</p>
                         </div>
                         <AlertTriangle className={`h-5 w-5 ${iconClass}`} />
                       </div>
@@ -448,13 +448,13 @@ function StakeholderDashboards() {
 
       <div className="card space-y-4">
         <div className="flex items-center justify-between">
-          <h2 className="text-xl font-bold text-gray-900 flex items-center">
-            <Map className="h-5 w-5 mr-2 text-primary-600" />
+          <h2 className="text-xl font-bold text-gray-900 dark:text-white flex items-center">
+            <Map className="h-5 w-5 mr-2 text-primary-600 dark:text-primary-400" />
             Warehouse & Logistics Visibility Map
           </h2>
-          <span className="text-sm text-gray-500">Interactive geospatial view of supply chain infrastructure</span>
+          <span className="text-sm text-gray-500 dark:text-gray-400">Interactive geospatial view of supply chain infrastructure</span>
         </div>
-        <p className="text-sm text-gray-600">
+        <p className="text-sm text-gray-600 dark:text-gray-300">
           Track warehouses, processing facilities, and active transport routes in real-time. 
           Use filters to focus on specific commodities or operational statuses.
         </p>

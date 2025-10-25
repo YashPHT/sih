@@ -291,7 +291,7 @@ export default function Traceability() {
               }`}
             >
               <div className="flex items-start justify-between mb-2">
-                <h3 className="font-semibold text-gray-900">{batch.crop}</h3>
+                <h3 className="font-semibold text-gray-900 dark:text-white">{batch.crop}</h3>
                 {batch.isVerified ? (
                   <CheckCircle className="h-5 w-5 text-green-500" />
                 ) : (
@@ -299,7 +299,7 @@ export default function Traceability() {
                 )}
               </div>
               <p className="text-sm text-gray-600 mb-1">{batch.quantity}</p>
-              <p className="text-xs text-gray-500">{batch.originFarm}</p>
+              <p className="text-xs text-gray-500 dark:text-gray-400">{batch.originFarm}</p>
               <div className="mt-3 flex items-center justify-between">
                 <span className={`text-xs px-2 py-1 rounded-full ${
                   batch.status === 'active' 
@@ -308,7 +308,7 @@ export default function Traceability() {
                 }`}>
                   {batch.status === 'active' ? 'In Progress' : 'Completed'}
                 </span>
-                <span className="text-xs text-gray-500">{batch.events.length} events</span>
+                <span className="text-xs text-gray-500 dark:text-gray-400">{batch.events.length} events</span>
               </div>
             </div>
           ))}
@@ -319,7 +319,7 @@ export default function Traceability() {
             <div className="bg-white rounded-lg shadow-md">
               <div className="border-b border-gray-200 px-6 py-4">
                 <div className="flex items-center justify-between mb-2">
-                  <h2 className="text-2xl font-bold text-gray-900">{selectedBatch.crop}</h2>
+                  <h2 className="text-2xl font-bold text-gray-900 dark:text-white">{selectedBatch.crop}</h2>
                   <button
                     onClick={() => setShowQRCode(!showQRCode)}
                     className="flex items-center space-x-2 bg-emerald-600 text-white px-4 py-2 rounded-lg hover:bg-emerald-700 transition"
@@ -328,7 +328,7 @@ export default function Traceability() {
                     <span>{showQRCode ? 'Hide' : 'Show'} QR Code</span>
                   </button>
                 </div>
-                <p className="text-sm text-gray-600">Batch: {selectedBatch.batchNumber}</p>
+                <p className="text-sm text-gray-600 dark:text-gray-300">Batch: {selectedBatch.batchNumber}</p>
               </div>
 
               {showQRCode && (
@@ -353,7 +353,7 @@ export default function Traceability() {
                 </div>
               )}
 
-              <div className="border-b border-gray-200">
+              <div className="border-b border-gray-200 dark:border-gray-700">
                 <div className="flex space-x-1 px-6">
                   <button
                     onClick={() => setActiveTab('overview')}
@@ -394,15 +394,15 @@ export default function Traceability() {
                     <div className="grid grid-cols-2 gap-4">
                       <div className="bg-gray-50 p-4 rounded-lg">
                         <p className="text-sm text-gray-600 mb-1">Quantity</p>
-                        <p className="text-lg font-semibold text-gray-900">{selectedBatch.quantity}</p>
+                        <p className="text-lg font-semibold text-gray-900 dark:text-white">{selectedBatch.quantity}</p>
                       </div>
                       <div className="bg-gray-50 p-4 rounded-lg">
                         <p className="text-sm text-gray-600 mb-1">Origin</p>
-                        <p className="text-lg font-semibold text-gray-900">{selectedBatch.originFarm}</p>
+                        <p className="text-lg font-semibold text-gray-900 dark:text-white">{selectedBatch.originFarm}</p>
                       </div>
                       <div className="bg-gray-50 p-4 rounded-lg">
                         <p className="text-sm text-gray-600 mb-1">Created</p>
-                        <p className="text-lg font-semibold text-gray-900">{formatDate(selectedBatch.createdAt)}</p>
+                        <p className="text-lg font-semibold text-gray-900 dark:text-white">{formatDate(selectedBatch.createdAt)}</p>
                       </div>
                       <div className="bg-gray-50 p-4 rounded-lg">
                         <p className="text-sm text-gray-600 mb-1">Status</p>
@@ -421,8 +421,8 @@ export default function Traceability() {
                                 <Icon className="h-4 w-4" />
                               </div>
                               <div className="flex-1">
-                                <p className="font-medium text-gray-900">{formatEventType(event.eventType)}</p>
-                                <p className="text-sm text-gray-500">{formatDate(event.timestamp)}</p>
+                                <p className="font-medium text-gray-900 dark:text-white">{formatEventType(event.eventType)}</p>
+                                <p className="text-sm text-gray-500 dark:text-gray-400">{formatDate(event.timestamp)}</p>
                               </div>
                               {index < selectedBatch.events.length - 1 && (
                                 <div className="w-8 h-px bg-gray-300"></div>
@@ -457,7 +457,7 @@ export default function Traceability() {
 
                 {activeTab === 'events' && (
                   <div className="space-y-6">
-                    <h3 className="text-lg font-semibold text-gray-900">
+                    <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
                       Chronological Event Timeline
                     </h3>
                     <div className="relative">
@@ -476,7 +476,7 @@ export default function Traceability() {
                                     <h4 className="font-semibold text-gray-900 text-lg">
                                       {formatEventType(event.eventType)}
                                     </h4>
-                                    <div className="flex items-center space-x-4 mt-1 text-sm text-gray-600">
+                                    <div className="flex items-center space-x-4 mt-1 text-sm text-gray-600 dark:text-gray-300">
                                       <div className="flex items-center space-x-1">
                                         <Clock className="h-4 w-4" />
                                         <span>{formatDate(event.timestamp)}</span>
@@ -490,19 +490,19 @@ export default function Traceability() {
                                 <div className="space-y-2 mt-3">
                                   <div className="flex items-start space-x-2">
                                     <MapPin className="h-4 w-4 text-gray-500 mt-0.5" />
-                                    <span className="text-sm text-gray-700">{event.location}</span>
+                                    <span className="text-sm text-gray-700 dark:text-gray-300">{event.location}</span>
                                   </div>
                                   <div className="flex items-start space-x-2">
                                     <User className="h-4 w-4 text-gray-500 mt-0.5" />
-                                    <span className="text-sm text-gray-700">{event.actor}</span>
+                                    <span className="text-sm text-gray-700 dark:text-gray-300">{event.actor}</span>
                                   </div>
                                 </div>
-                                <div className="mt-3 pt-3 border-t border-gray-200">
+                                <div className="mt-3 pt-3 border-t border-gray-200 dark:border-gray-700">
                                   <p className="text-sm font-medium text-gray-700 mb-2">Event Details:</p>
                                   <div className="grid grid-cols-2 gap-2">
                                     {Object.entries(event.data).map(([key, value]) => (
                                       <div key={key} className="text-sm">
-                                        <span className="text-gray-600">{key.replace(/([A-Z])/g, ' $1').trim()}:</span>
+                                        <span className="text-gray-600 dark:text-gray-300">{key.replace(/([A-Z])/g, ' $1').trim()}:</span>
                                         <span className="text-gray-900 ml-1 font-medium">{String(value)}</span>
                                       </div>
                                     ))}
@@ -539,12 +539,12 @@ export default function Traceability() {
                           </div>
                           <div className="grid grid-cols-2 gap-4 mt-3">
                             <div>
-                              <p className="text-sm text-gray-600">Total Blocks</p>
-                              <p className="text-2xl font-bold text-gray-900">{verification.totalBlocks}</p>
+                              <p className="text-sm text-gray-600 dark:text-gray-300">Total Blocks</p>
+                              <p className="text-2xl font-bold text-gray-900 dark:text-white">{verification.totalBlocks}</p>
                             </div>
                             <div>
-                              <p className="text-sm text-gray-600">Invalid Blocks</p>
-                              <p className="text-2xl font-bold text-gray-900">{verification.invalidBlocks.length}</p>
+                              <p className="text-sm text-gray-600 dark:text-gray-300">Invalid Blocks</p>
+                              <p className="text-2xl font-bold text-gray-900 dark:text-white">{verification.invalidBlocks.length}</p>
                             </div>
                           </div>
                         </div>
@@ -558,9 +558,9 @@ export default function Traceability() {
                           <div key={event.id} className="bg-gray-50 rounded-lg p-4">
                             <div className="flex items-center justify-between mb-3">
                               <div className="flex items-center space-x-2">
-                                <span className="text-sm font-medium text-gray-900">Block #{event.blockNumber}</span>
-                                <span className="text-xs text-gray-500">|</span>
-                                <span className="text-sm text-gray-700">{formatEventType(event.eventType)}</span>
+                                <span className="text-sm font-medium text-gray-900 dark:text-white">Block #{event.blockNumber}</span>
+                                <span className="text-xs text-gray-500 dark:text-gray-400">|</span>
+                                <span className="text-sm text-gray-700 dark:text-gray-300">{formatEventType(event.eventType)}</span>
                               </div>
                               {verification?.invalidBlocks.includes(event.blockNumber) ? (
                                 <XCircle className="h-5 w-5 text-red-500" />

@@ -13,7 +13,7 @@ import {
   Download,
   Map as MapIcon
 } from 'lucide-react'
-import { useTranslation } from 'react-i18next'
+
 import { LineChart, Line, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, PieChart, Pie, Cell } from 'recharts'
 import { policymakerData, statesList, seasonsList } from '../data/policymakerData'
 import LogisticsMap from '../components/LogisticsMap'
@@ -23,7 +23,7 @@ import { useNotificationContext } from '../context/NotificationContext'
 const COLORS = ['#10b981', '#3b82f6', '#f59e0b', '#ef4444', '#8b5cf6']
 
 function PolicymakerDashboard() {
-  const { t } = useTranslation()
+  
   const [selectedState, setSelectedState] = useState<string>('all')
   const [selectedSeason, setSelectedSeason] = useState<string>('all')
   const { showNotification } = useNotificationContext()
@@ -90,11 +90,11 @@ function PolicymakerDashboard() {
     <div className="space-y-8">
       <div>
         <h1 className="text-3xl font-bold text-gray-900 flex items-center">
-          <Brain className="h-8 w-8 mr-3 text-primary-600" />
-          {t('policymaker.intelligenceDashboard')}
+          <Brain className="h-8 w-8 mr-3 text-primary-600 dark:text-primary-400" />
+          Policymaker Intelligence Dashboard
         </h1>
         <p className="mt-2 text-gray-600 max-w-3xl">
-          {t('policymaker.strategicInsights')}
+          Strategic insights for agricultural policy and planning
         </p>
       </div>
 
@@ -102,24 +102,24 @@ function PolicymakerDashboard() {
         <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
           <div className="flex-1">
             <div className="flex items-center gap-3">
-              <Filter className="h-5 w-5 text-primary-600" />
-              <h2 className="text-lg font-bold text-gray-900">{t('policymaker.dataFilters')}</h2>
+              <Filter className="h-5 w-5 text-primary-600 dark:text-primary-400" />
+              <h2 className="text-lg font-bold text-gray-900 dark:text-white">Data Filters</h2>
             </div>
             <p className="text-sm text-gray-600 mt-2">
-              {t('policymaker.refineInsights')}
+              Refine insights by state and season
             </p>
           </div>
           <div className="flex flex-wrap gap-4">
             <div>
               <label className="block text-xs font-semibold text-gray-700 uppercase tracking-wide mb-2">
-                {t('policymaker.state')}
+                State
               </label>
               <select
                 value={selectedState}
                 onChange={(e) => setSelectedState(e.target.value)}
                 className="form-select px-4 py-2 border border-gray-300 rounded-lg bg-white text-gray-900 font-medium focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
               >
-                <option value="all">{t('policymaker.allStates')}</option>
+                <option value="all">All States</option>
                 {statesList.map(state => (
                   <option key={state} value={state}>{state}</option>
                 ))}
@@ -127,14 +127,14 @@ function PolicymakerDashboard() {
             </div>
             <div>
               <label className="block text-xs font-semibold text-gray-700 uppercase tracking-wide mb-2">
-                {t('dashboard.season')}
+                Season
               </label>
               <select
                 value={selectedSeason}
                 onChange={(e) => setSelectedSeason(e.target.value)}
                 className="form-select px-4 py-2 border border-gray-300 rounded-lg bg-white text-gray-900 font-medium focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
               >
-                <option value="all">{t('policymaker.allSeasons')}</option>
+                <option value="all">All Seasons</option>
                 {seasonsList.map(season => (
                   <option key={season} value={season}>{season}</option>
                 ))}
@@ -150,11 +150,11 @@ function PolicymakerDashboard() {
             <div className="flex-1">
               <div className="flex items-center gap-2 mb-2">
                 <TrendingDown className="h-5 w-5 text-red-600" />
-                <p className="text-sm font-semibold text-red-800 uppercase tracking-wide">{t('policymaker.importDependency')}</p>
+                <p className="text-sm font-semibold text-red-800 uppercase tracking-wide">Import Dependency</p>
               </div>
               <p className="text-4xl font-bold text-red-900">{aggregatedKPIs.importDependency.toFixed(1)}%</p>
               <p className="text-sm text-red-700 mt-2">
-                {t('policymaker.oilseedImports')}
+                For critical oilseeds
               </p>
             </div>
             <div className={`flex items-center justify-center w-12 h-12 rounded-full ${
@@ -174,13 +174,13 @@ function PolicymakerDashboard() {
             <div className="flex-1">
               <div className="flex items-center gap-2 mb-2">
                 <Package className="h-5 w-5 text-blue-600" />
-                <p className="text-sm font-semibold text-blue-800 uppercase tracking-wide">{t('policymaker.productionVsTarget')}</p>
+                <p className="text-sm font-semibold text-blue-800 uppercase tracking-wide">Production vs Target</p>
               </div>
               <p className="text-4xl font-bold text-blue-900">
                 {(aggregatedKPIs.productionTarget / 1000).toFixed(1)}K MT
               </p>
               <p className="text-sm text-blue-700 mt-2">
-                {t('policymaker.achievementLabel')}: {targetAchievementRate.toFixed(1)}%
+                Achievement: {targetAchievementRate.toFixed(1)}%
               </p>
             </div>
             <div className="flex items-center justify-center w-12 h-12 rounded-full bg-blue-200">
@@ -194,13 +194,13 @@ function PolicymakerDashboard() {
             <div className="flex-1">
               <div className="flex items-center gap-2 mb-2">
                 <Factory className="h-5 w-5 text-green-600" />
-                <p className="text-sm font-semibold text-green-800 uppercase tracking-wide">{t('policymaker.processingCapacityTitle')}</p>
+                <p className="text-sm font-semibold text-green-800 uppercase tracking-wide">Processing Capacity</p>
               </div>
               <p className="text-4xl font-bold text-green-900">
                 {(aggregatedKPIs.processingCapacity / 1000).toFixed(1)}K MT
               </p>
               <p className="text-sm text-green-700 mt-2">
-                {t('policymaker.utilizationLabel')}: {aggregatedKPIs.processingUtilization.toFixed(1)}%
+                Utilization: {aggregatedKPIs.processingUtilization.toFixed(1)}%
               </p>
             </div>
             <div className="flex items-center justify-center w-12 h-12 rounded-full bg-green-200">
@@ -214,13 +214,13 @@ function PolicymakerDashboard() {
             <div className="flex-1">
               <div className="flex items-center gap-2 mb-2">
                 <TrendingDown className="h-5 w-5 text-purple-600" />
-                <p className="text-sm font-semibold text-purple-800 uppercase tracking-wide">{t('policymaker.importReductionTitle')}</p>
+                <p className="text-sm font-semibold text-purple-800 uppercase tracking-wide">Import Reduction Target</p>
               </div>
               <p className="text-4xl font-bold text-purple-900">
                 {importReductionRate > 0 ? '+' : ''}{importReductionRate.toFixed(1)}%
               </p>
               <p className="text-sm text-purple-700 mt-2">
-                {importReductionRate > 0 ? t('policymaker.targetOnTrack') : t('policymaker.needsAttention')}
+                {importReductionRate > 0 ? 'Target on track' : 'Needs attention'}
               </p>
             </div>
             <div className="flex items-center justify-center w-12 h-12 rounded-full bg-purple-200">
@@ -234,11 +234,11 @@ function PolicymakerDashboard() {
         <div className="flex items-center justify-between mb-6">
           <div>
             <h2 className="text-xl font-bold text-gray-900 flex items-center">
-              <TrendingUp className="h-5 w-5 mr-2 text-primary-600" />
-              {t('policymaker.productionVsDemandAnalysis')}
+              <TrendingUp className="h-5 w-5 mr-2 text-primary-600 dark:text-primary-400" />
+              Production vs Demand Analysis
             </h2>
             <p className="text-sm text-gray-600 mt-1">
-              {t('policymaker.trackProductionLevels')}
+              Track production levels against market demand
             </p>
           </div>
         </div>
@@ -293,7 +293,7 @@ function PolicymakerDashboard() {
           <div className="flex items-center justify-between mb-6">
             <div>
               <h2 className="text-xl font-bold text-gray-900 flex items-center">
-                <TrendingDown className="h-5 w-5 mr-2 text-primary-600" />
+                <TrendingDown className="h-5 w-5 mr-2 text-primary-600 dark:text-primary-400" />
                 Import Reduction Trend
               </h2>
               <p className="text-sm text-gray-600 mt-1">
@@ -334,7 +334,7 @@ function PolicymakerDashboard() {
           <div className="flex items-center justify-between mb-6">
             <div>
               <h2 className="text-xl font-bold text-gray-900 flex items-center">
-                <Package className="h-5 w-5 mr-2 text-primary-600" />
+                <Package className="h-5 w-5 mr-2 text-primary-600 dark:text-primary-400" />
                 Crop Production Distribution
               </h2>
               <p className="text-sm text-gray-600 mt-1">
@@ -374,7 +374,7 @@ function PolicymakerDashboard() {
         <div className="flex items-center justify-between mb-6">
           <div>
             <h2 className="text-xl font-bold text-gray-900 flex items-center">
-              <MapIcon className="h-5 w-5 mr-2 text-primary-600" />
+              <MapIcon className="h-5 w-5 mr-2 text-primary-600 dark:text-primary-400" />
               Supply Chain Infrastructure Map
             </h2>
             <p className="text-sm text-gray-600 mt-1">

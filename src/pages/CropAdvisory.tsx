@@ -23,7 +23,7 @@ function CropRecommendationCard({ crop, onSelect, isLoading }: { crop: CropRecom
   return (
     <div className="card hover:shadow-lg transition-shadow">
       <div className="flex items-center justify-between mb-4">
-        <h3 className="text-xl font-bold text-gray-900">{crop.cropName}</h3>
+        <h3 className="text-xl font-bold text-gray-900 dark:text-white">{crop.cropName}</h3>
         <div className="flex items-center">
           <div className="relative w-16 h-16">
             <svg className="transform -rotate-90 w-16 h-16">
@@ -45,11 +45,11 @@ function CropRecommendationCard({ crop, onSelect, isLoading }: { crop: CropRecom
                 fill="transparent"
                 strokeDasharray={`${2 * Math.PI * 28}`}
                 strokeDashoffset={`${2 * Math.PI * 28 * (1 - crop.suitabilityScore / 100)}`}
-                className="text-primary-600"
+                className="text-primary-600 dark:text-primary-400"
               />
             </svg>
             <div className="absolute inset-0 flex items-center justify-center">
-              <span className="text-sm font-bold text-gray-900">{crop.suitabilityScore}%</span>
+              <span className="text-sm font-bold text-gray-900 dark:text-white">{crop.suitabilityScore}%</span>
             </div>
           </div>
         </div>
@@ -57,24 +57,24 @@ function CropRecommendationCard({ crop, onSelect, isLoading }: { crop: CropRecom
 
       <div className="space-y-3 mb-4">
         <div className="flex items-center text-sm">
-          <TrendingUp className="h-4 w-4 mr-2 text-primary-600" />
-          <span className="text-gray-600">Estimated Yield:</span>
-          <span className="ml-auto font-semibold text-gray-900">{crop.estimatedYield}</span>
+          <TrendingUp className="h-4 w-4 mr-2 text-primary-600 dark:text-primary-400" />
+          <span className="text-gray-600 dark:text-gray-300">Estimated Yield:</span>
+          <span className="ml-auto font-semibold text-gray-900 dark:text-white">{crop.estimatedYield}</span>
         </div>
         <div className="flex items-center text-sm">
           <Droplet className="h-4 w-4 mr-2 text-blue-600" />
-          <span className="text-gray-600">Water Requirement:</span>
-          <span className="ml-auto font-semibold text-gray-900">{crop.waterRequirement}</span>
+          <span className="text-gray-600 dark:text-gray-300">Water Requirement:</span>
+          <span className="ml-auto font-semibold text-gray-900 dark:text-white">{crop.waterRequirement}</span>
         </div>
         <div className="flex items-center text-sm">
           <DollarSign className="h-4 w-4 mr-2 text-green-600" />
-          <span className="text-gray-600">Profit Potential:</span>
-          <span className="ml-auto font-semibold text-gray-900">{crop.profitPotential}</span>
+          <span className="text-gray-600 dark:text-gray-300">Profit Potential:</span>
+          <span className="ml-auto font-semibold text-gray-900 dark:text-white">{crop.profitPotential}</span>
         </div>
         <div className="flex items-center text-sm">
           <Calendar className="h-4 w-4 mr-2 text-amber-600" />
-          <span className="text-gray-600">Season:</span>
-          <span className="ml-auto font-semibold text-gray-900">{crop.season}</span>
+          <span className="text-gray-600 dark:text-gray-300">Season:</span>
+          <span className="ml-auto font-semibold text-gray-900 dark:text-white">{crop.season}</span>
         </div>
       </div>
 
@@ -120,7 +120,7 @@ function WeatherImpactCard({ alert }: { alert: WeatherAlert }) {
         <div>
           <span className={`badge ${badgeClass}`}>{alert.severity.toUpperCase()}</span>
           <p className={`mt-3 text-lg font-semibold leading-snug ${headingClass}`}>{alert.title}</p>
-          <p className="mt-1 text-xs uppercase tracking-wide text-gray-500">
+          <p className="mt-1 text-xs uppercase tracking-wide text-gray-500 dark:text-gray-400">
             {alertCategoryLabels[alert.category]}
           </p>
         </div>
@@ -129,10 +129,10 @@ function WeatherImpactCard({ alert }: { alert: WeatherAlert }) {
       <p className="mt-3 text-sm text-gray-700 leading-relaxed">{alert.description}</p>
       {alert.impactAreas.length > 0 && (
         <div className="mt-4">
-          <p className="text-xs font-semibold uppercase tracking-wide text-gray-500">Impact areas</p>
+          <p className="text-xs font-semibold uppercase tracking-wide text-gray-500 dark:text-gray-400">Impact areas</p>
           <div className="mt-2 flex flex-wrap gap-2">
             {alert.impactAreas.map((area) => (
-              <span key={area} className="badge bg-white border border-gray-200 text-gray-800">
+              <span key={area} className="badge bg-white border border-gray-200 text-gray-800 dark:text-gray-200">
                 {area}
               </span>
             ))}
@@ -141,7 +141,7 @@ function WeatherImpactCard({ alert }: { alert: WeatherAlert }) {
       )}
       {alert.recommendedActions.length > 0 && (
         <div className="mt-4">
-          <p className="text-xs font-semibold uppercase tracking-wide text-gray-500">Recommended actions</p>
+          <p className="text-xs font-semibold uppercase tracking-wide text-gray-500 dark:text-gray-400">Recommended actions</p>
           <ul className="mt-2 space-y-1 text-sm text-gray-700 list-disc list-inside">
             {alert.recommendedActions.map((action) => (
               <li key={action}>{action}</li>
@@ -196,8 +196,8 @@ function SeasonalAdvisoryCard({ advisory, onUpdateStatus }: { advisory: Seasonal
             {getCategoryIcon(advisory.category)}
           </div>
           <div>
-            <h3 className="font-bold text-gray-900">{advisory.title}</h3>
-            <p className="text-sm text-gray-600">{new Date(advisory.actionDate).toLocaleDateString()}</p>
+            <h3 className="font-bold text-gray-900 dark:text-white">{advisory.title}</h3>
+            <p className="text-sm text-gray-600 dark:text-gray-300">{new Date(advisory.actionDate).toLocaleDateString()}</p>
           </div>
         </div>
         <div className="flex items-center gap-2">
@@ -229,7 +229,7 @@ function PestPredictionCard({ pest }: { pest: PestPrediction }) {
     <div className="card hover:shadow-lg transition-shadow">
       <div className="flex items-start justify-between mb-4">
         <div>
-          <h3 className="text-xl font-bold text-gray-900">{pest.pestName}</h3>
+          <h3 className="text-xl font-bold text-gray-900 dark:text-white">{pest.pestName}</h3>
           <div className="flex items-center gap-2 mt-2">
             <span className={`badge ${
               pest.riskLevel === 'high' ? 'bg-red-100 text-red-800' :
@@ -238,7 +238,7 @@ function PestPredictionCard({ pest }: { pest: PestPrediction }) {
             }`}>
               {pest.riskLevel.toUpperCase()} RISK
             </span>
-            <span className="text-sm text-gray-600">
+            <span className="text-sm text-gray-600 dark:text-gray-300">
               {pest.probability}% probability
             </span>
           </div>
@@ -272,7 +272,7 @@ function PestPredictionCard({ pest }: { pest: PestPrediction }) {
               />
             </svg>
             <div className="absolute inset-0 flex items-center justify-center">
-              <span className="text-lg font-bold text-gray-900">{pest.probability}%</span>
+              <span className="text-lg font-bold text-gray-900 dark:text-white">{pest.probability}%</span>
             </div>
           </div>
         </div>
@@ -373,13 +373,13 @@ function CropAdvisory() {
     <div className="space-y-6">
       <div>
         <h1 className="text-3xl font-bold text-gray-900 flex items-center">
-          <Sprout className="h-8 w-8 mr-3 text-primary-600" />
+          <Sprout className="h-8 w-8 mr-3 text-primary-600 dark:text-primary-400" />
           Crop Advisory
         </h1>
-        <p className="mt-2 text-gray-600">AI-powered insights for optimal crop planning and management</p>
+        <p className="mt-2 text-gray-600 dark:text-gray-300">AI-powered insights for optimal crop planning and management</p>
       </div>
 
-      <div className="flex space-x-4 border-b border-gray-200">
+      <div className="flex space-x-4 border-b border-gray-200 dark:border-gray-700">
         <button
           onClick={() => setActiveTab('recommendations')}
           className={`px-4 py-2 font-medium border-b-2 transition-colors ${
@@ -416,7 +416,7 @@ function CropAdvisory() {
         <div>
           <div className="mb-6 card bg-blue-50 border-blue-200">
             <h2 className="font-bold text-gray-900 mb-2">🤖 AI Insights</h2>
-            <p className="text-sm text-gray-700">
+            <p className="text-sm text-gray-700 dark:text-gray-300">
               Based on your soil analysis, weather patterns, historical data, and market trends, we've identified the best crops for your farm this season. These recommendations are personalized using machine learning models trained on regional agricultural data.
             </p>
           </div>
@@ -432,14 +432,14 @@ function CropAdvisory() {
         <div>
           <div className="mb-6 card bg-blue-50 border-blue-200">
             <h2 className="font-bold text-gray-900 mb-2">📅 Seasonal Action Plan</h2>
-            <p className="text-sm text-gray-700">
+            <p className="text-sm text-gray-700 dark:text-gray-300">
               Stay on top of critical farming activities with timely advisories. Our AI analyzes weather forecasts, crop growth stages, and best practices to give you actionable recommendations.
             </p>
           </div>
           {cropWeatherAlerts.length > 0 && (
             <div className="mb-6">
               <h3 className="text-lg font-semibold text-gray-900 flex items-center gap-2">
-                <CloudRain className="h-5 w-5 text-primary-600" />
+                <CloudRain className="h-5 w-5 text-primary-600 dark:text-primary-400" />
                 Weather impact on advisories
               </h3>
               <div className="mt-3 grid grid-cols-1 lg:grid-cols-2 gap-4">
@@ -461,7 +461,7 @@ function CropAdvisory() {
         <div>
           <div className="mb-6 card bg-blue-50 border-blue-200">
             <h2 className="font-bold text-gray-900 mb-2">🐛 Predictive Pest Management</h2>
-            <p className="text-sm text-gray-700">
+            <p className="text-sm text-gray-700 dark:text-gray-300">
               Our AI model analyzes weather conditions, historical pest patterns, and regional data to predict potential pest outbreaks. Take preventive action before infestations occur.
             </p>
           </div>

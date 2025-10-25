@@ -13,14 +13,12 @@ import {
   CloudRain,
   ShoppingCart
 } from 'lucide-react'
-import { useTranslation } from 'react-i18next'
 import { mockSeasonalAdvisories, mockPestPredictions, mockCropRecommendations } from '../data/mockData'
 import { mockMarketplaceLots } from '../data/marketplaceData'
 import { useWeatherData } from '../hooks/useWeatherData'
 import { formatForecastHour, formatRelativeTime, weatherSeverityStyles } from '../utils/weatherStyles'
 
 function Dashboard() {
-  const { t } = useTranslation()
   const { data: weatherData, loading: weatherLoading, isFallback: weatherFallback, error: weatherError, refetch: refetchWeather } = useWeatherData()
   const forecastPreview = weatherData?.forecast.slice(0, 4) ?? []
   const alertPreview = weatherData?.alerts.slice(0, 3) ?? []
@@ -39,42 +37,33 @@ function Dashboard() {
     .sort((a, b) => b.engagementScore - a.engagementScore)[0]
   const marketplaceLotsInPlay = activeMarketplaceLots.length
 
-  const getAdvisoryTitle = (title: string) => {
-    const titleMap: Record<string, string> = {
-      'Pre-Monsoon Irrigation Required': t('dashboard.advisories.preMonsoon'),
-      'Apply Nitrogen Fertilizer': t('dashboard.advisories.nitrogen'),
-      'Aphid Monitoring Alert': t('dashboard.advisories.aphidMonitoring')
-    }
-    return titleMap[title] || title
-  }
-
   return (
     <div className="space-y-8">
       <div>
-        <h1 className="text-3xl font-bold text-gray-900 dark:text-white">{t('dashboard.welcomeTitle')}</h1>
-        <p className="mt-2 text-gray-600 dark:text-gray-300">{t('dashboard.welcomeDescription')}</p>
+        <h1 className="text-3xl font-bold text-gray-900 dark:text-white">Welcome to AgriAdvisory Platform</h1>
+        <p className="mt-2 text-gray-600 dark:text-gray-300">Your comprehensive agricultural intelligence dashboard</p>
       </div>
 
       <div className="card bg-gradient-to-br from-sky-50 to-blue-100 dark:from-sky-900/30 dark:to-blue-900/30 border-sky-200 dark:border-sky-700">
         <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-6">
           <div>
-            <p className="text-sm font-semibold text-sky-700 dark:text-sky-300 uppercase tracking-wide">{t('dashboard.weatherOverview')}</p>
+            <p className="text-sm font-semibold text-sky-700 dark:text-sky-300 uppercase tracking-wide">Weather Overview</p>
             <div className="mt-2 flex items-baseline gap-3">
               <span className="text-4xl font-bold text-sky-900 dark:text-sky-100">
                 {weatherLoading || !weatherData ? '--' : `${weatherData.current.temperature}°C`}
               </span>
               <span className="text-sky-800 dark:text-sky-200 capitalize text-base">
-                {weatherLoading || !weatherData ? t('dashboard.loadingForecast') : weatherData.current.description}
+                {weatherLoading || !weatherData ? 'Loading forecast...' : weatherData.current.description}
               </span>
             </div>
             <p className="mt-1 text-sm text-sky-800 dark:text-sky-200">
-              {weatherData?.location ?? t('dashboard.detectingLocation')}
+              {weatherData?.location ?? 'Detecting location...'}
             </p>
             <div className="mt-4 grid grid-cols-2 sm:grid-cols-4 gap-3">
               <div className="bg-white/80 dark:bg-gray-800/80 border border-sky-100 dark:border-sky-700 rounded-lg p-3 shadow-sm">
                 <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wide text-sky-700 dark:text-sky-300">
                   <Thermometer className="h-4 w-4" />
-                  <span>{t('dashboard.feelsLike')}</span>
+                  <span>Feels Like</span>
                 </div>
                 <p className="mt-2 text-lg font-semibold text-gray-900 dark:text-gray-100">
                   {weatherLoading || !weatherData ? '--' : `${weatherData.current.feelsLike}°C`}
@@ -83,7 +72,7 @@ function Dashboard() {
               <div className="bg-white/80 dark:bg-gray-800/80 border border-sky-100 dark:border-sky-700 rounded-lg p-3 shadow-sm">
                 <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wide text-sky-700 dark:text-sky-300">
                   <Droplet className="h-4 w-4" />
-                  <span>{t('dashboard.humidity')}</span>
+                  <span>Humidity</span>
                 </div>
                 <p className="mt-2 text-lg font-semibold text-gray-900 dark:text-gray-100">
                   {weatherLoading || !weatherData ? '--' : `${weatherData.current.humidity}%`}
@@ -92,7 +81,7 @@ function Dashboard() {
               <div className="bg-white/80 dark:bg-gray-800/80 border border-sky-100 dark:border-sky-700 rounded-lg p-3 shadow-sm">
                 <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wide text-sky-700 dark:text-sky-300">
                   <Wind className="h-4 w-4" />
-                  <span>{t('dashboard.wind')}</span>
+                  <span>Wind</span>
                 </div>
                 <p className="mt-2 text-lg font-semibold text-gray-900 dark:text-gray-100">
                   {weatherLoading || !weatherData ? '--' : `${weatherData.current.windSpeed} km/h`}
@@ -101,7 +90,7 @@ function Dashboard() {
               <div className="bg-white/80 dark:bg-gray-800/80 border border-sky-100 dark:border-sky-700 rounded-lg p-3 shadow-sm">
                 <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wide text-sky-700 dark:text-sky-300">
                   <CloudRain className="h-4 w-4" />
-                  <span>{t('dashboard.rainChance')}</span>
+                  <span>Rain Chance</span>
                 </div>
                 <p className="mt-2 text-lg font-semibold text-gray-900 dark:text-gray-100">
                   {weatherLoading || !weatherData ? '--' : `${weatherData.current.precipitationChance}%`}
@@ -110,7 +99,7 @@ function Dashboard() {
             </div>
             {weatherFallback && (
               <p className="mt-3 text-xs font-medium text-sky-700 dark:text-sky-300">
-                {t('dashboard.showingSimulatedData')}
+                Showing simulated data
               </p>
             )}
             {weatherError && (
@@ -127,17 +116,17 @@ function Dashboard() {
               className="inline-flex items-center gap-1 text-xs font-medium text-sky-700 dark:text-sky-300 hover:text-sky-900 dark:hover:text-sky-100 transition-colors"
             >
               <RefreshCcw className="h-4 w-4" />
-              {t('common.refresh')}
+              Refresh
             </button>
             <p className="text-xs text-sky-700 dark:text-sky-300">
-              {weatherData ? t('dashboard.updatedAgo', { time: formatRelativeTime(weatherData.lastUpdated) }) : t('dashboard.awaitingUpdate')}
+              {weatherData ? `Updated ${formatRelativeTime(weatherData.lastUpdated)}` : 'Awaiting update'}
             </p>
           </div>
         </div>
         <div className="mt-6">
-          <p className="text-xs font-semibold uppercase tracking-wide text-sky-700 dark:text-sky-300">{t('dashboard.upcomingForecast')}</p>
+          <p className="text-xs font-semibold uppercase tracking-wide text-sky-700 dark:text-sky-300">Upcoming Forecast</p>
           {forecastPreview.length === 0 ? (
-            <p className="mt-2 text-sm text-sky-800 dark:text-sky-200">{t('dashboard.forecastNotAvailable')}</p>
+            <p className="mt-2 text-sm text-sky-800 dark:text-sky-200">Forecast not available</p>
           ) : (
             <div className="mt-3 grid grid-cols-2 md:grid-cols-4 gap-3">
               {forecastPreview.map((entry) => (
@@ -162,7 +151,7 @@ function Dashboard() {
         </div>
         {alertPreview.length > 0 && (
           <div className="mt-6">
-            <p className="text-xs font-semibold uppercase tracking-wide text-sky-700 dark:text-sky-300">{t('dashboard.weatherAlerts')}</p>
+            <p className="text-xs font-semibold uppercase tracking-wide text-sky-700 dark:text-sky-300">Weather Alerts</p>
             <div className="mt-2 flex flex-wrap gap-2">
               {alertPreview.map((alert) => {
                 const badgeClass = weatherSeverityStyles[alert.severity]?.badge ?? 'bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-200'
@@ -181,9 +170,9 @@ function Dashboard() {
         <div className="card bg-gradient-to-br from-green-50 to-green-100 dark:from-green-900/30 dark:to-green-800/30 border-green-200 dark:border-green-700">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-sm font-medium text-green-800 dark:text-green-300">{t('dashboard.cropRecommendations')}</p>
+              <p className="text-sm font-medium text-green-800 dark:text-green-300">Crop Recommendations</p>
               <p className="text-3xl font-bold text-green-900 dark:text-green-100 mt-2">{mockCropRecommendations.length}</p>
-              <p className="text-sm text-green-700 dark:text-green-300 mt-1">{t('dashboard.availableForSeason')}</p>
+              <p className="text-sm text-green-700 dark:text-green-300 mt-1">Available for Season</p>
             </div>
             <Sprout className="h-12 w-12 text-green-600 dark:text-green-400" />
           </div>
@@ -192,9 +181,9 @@ function Dashboard() {
         <div className="card bg-gradient-to-br from-amber-50 to-amber-100 dark:from-amber-900/30 dark:to-amber-800/30 border-amber-200 dark:border-amber-700">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-sm font-medium text-amber-800 dark:text-amber-300">{t('dashboard.activeAlerts')}</p>
+              <p className="text-sm font-medium text-amber-800 dark:text-amber-300">Active Alerts</p>
               <p className="text-3xl font-bold text-amber-900 dark:text-amber-100 mt-2">{highPriorityAdvisories}</p>
-              <p className="text-sm text-amber-700 dark:text-amber-300 mt-1">{t('dashboard.highPriorityActions')}</p>
+              <p className="text-sm text-amber-700 dark:text-amber-300 mt-1">High Priority Actions</p>
             </div>
             <AlertTriangle className="h-12 w-12 text-amber-600 dark:text-amber-400" />
           </div>
@@ -203,9 +192,9 @@ function Dashboard() {
         <div className="card bg-gradient-to-br from-red-50 to-red-100 dark:from-red-900/30 dark:to-red-800/30 border-red-200 dark:border-red-700">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-sm font-medium text-red-800 dark:text-red-300">{t('dashboard.pestRisks')}</p>
+              <p className="text-sm font-medium text-red-800 dark:text-red-300">Pest Risks</p>
               <p className="text-3xl font-bold text-red-900 dark:text-red-100 mt-2">{highRiskPests}</p>
-              <p className="text-sm text-red-700 dark:text-red-300 mt-1">{t('dashboard.highRiskDetected')}</p>
+              <p className="text-sm text-red-700 dark:text-red-300 mt-1">High Risk Detected</p>
             </div>
             <AlertTriangle className="h-12 w-12 text-red-600 dark:text-red-400" />
           </div>
@@ -217,16 +206,16 @@ function Dashboard() {
           <div>
             <h2 className="text-xl font-bold text-gray-900 dark:text-white flex items-center">
               <ShoppingCart className="h-5 w-5 mr-2 text-emerald-600 dark:text-emerald-400" />
-              {t('dashboard.marketplacePipeline')}
+              Marketplace Pipeline
             </h2>
             <p className="text-gray-600 dark:text-gray-300 mt-2">
               {marketplaceLotsInPlay > 0
-                ? t('dashboard.activeLotsTracking', { count: marketplaceLotsInPlay, value: formatCurrency(marketplacePipelineValue) })
-                : t('dashboard.allLotsFulfilled')}
+                ? `Tracking ${marketplaceLotsInPlay} active lots worth ${formatCurrency(marketplacePipelineValue)}`
+                : 'All lots fulfilled'}
             </p>
             {leadMarketplaceLot && (
               <p className="text-sm text-emerald-700 dark:text-emerald-300 mt-3">
-                {t('dashboard.spotlightLot', { crop: leadMarketplaceLot.crop, location: leadMarketplaceLot.location, engagement: leadMarketplaceLot.engagementScore })}
+                Spotlight: {leadMarketplaceLot.crop} from {leadMarketplaceLot.location} (Engagement Score: {leadMarketplaceLot.engagementScore})
               </p>
             )}
           </div>
@@ -234,7 +223,7 @@ function Dashboard() {
             to="/marketplace"
             className="btn-primary flex items-center justify-center w-full md:w-auto"
           >
-            {t('dashboard.openMarketplace')}
+            Open Marketplace
             <ArrowRight className="h-4 w-4 ml-2" />
           </Link>
         </div>
@@ -245,10 +234,10 @@ function Dashboard() {
           <div className="flex items-center justify-between mb-4">
             <h2 className="text-xl font-bold text-gray-900 dark:text-white flex items-center">
               <Sprout className="h-5 w-5 mr-2 text-primary-600 dark:text-primary-400" />
-              {t('dashboard.topCropRecommendation')}
+              Top Crop Recommendation
             </h2>
             <Link to="/crop-advisory" className="text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 text-sm font-medium flex items-center">
-              {t('dashboard.viewAll')}
+              View All
               <ArrowRight className="h-4 w-4 ml-1" />
             </Link>
           </div>
@@ -256,21 +245,21 @@ function Dashboard() {
             <div className="flex items-center justify-between mb-3">
               <h3 className="text-lg font-bold text-gray-900 dark:text-white">{topRecommendation.cropName}</h3>
               <div className="bg-primary-600 dark:bg-primary-700 text-white px-3 py-1 rounded-full text-sm font-bold">
-                {topRecommendation.suitabilityScore}% {t('dashboard.match')}
+                {topRecommendation.suitabilityScore}% Match
               </div>
             </div>
             <div className="grid grid-cols-2 gap-3 text-sm">
               <div>
-                <p className="text-gray-600 dark:text-gray-300">{t('dashboard.expectedYield')}</p>
+                <p className="text-gray-600 dark:text-gray-300">Expected Yield</p>
                 <p className="font-semibold text-gray-900 dark:text-gray-100">{topRecommendation.estimatedYield}</p>
               </div>
               <div>
-                <p className="text-gray-600 dark:text-gray-300">{t('dashboard.profitPotential')}</p>
+                <p className="text-gray-600 dark:text-gray-300">Profit Potential</p>
                 <p className="font-semibold text-gray-900 dark:text-gray-100">{topRecommendation.profitPotential}</p>
               </div>
             </div>
             <div className="mt-3">
-              <p className="text-gray-600 dark:text-gray-300 text-sm">{t('dashboard.season')}</p>
+              <p className="text-gray-600 dark:text-gray-300 text-sm">Season</p>
               <p className="font-semibold text-gray-900 dark:text-gray-100">{topRecommendation.season}</p>
             </div>
           </div>
@@ -280,10 +269,10 @@ function Dashboard() {
           <div className="flex items-center justify-between mb-4">
             <h2 className="text-xl font-bold text-gray-900 dark:text-white flex items-center">
               <Calendar className="h-5 w-5 mr-2 text-primary-600 dark:text-primary-400" />
-              {t('dashboard.upcomingActions')}
+              Upcoming Actions
             </h2>
             <Link to="/crop-advisory" className="text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 text-sm font-medium flex items-center">
-              {t('dashboard.viewAll')}
+              View All
               <ArrowRight className="h-4 w-4 ml-1" />
             </Link>
           </div>
@@ -305,10 +294,10 @@ function Dashboard() {
                             : 'bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-300'
                         }`}
                       >
-                        {t(`dashboard.priority.${advisory.priority}`)}
+                        {advisory.priority.toUpperCase()}
                       </span>
                     </div>
-                    <h3 className="font-semibold text-gray-900 dark:text-gray-100 text-sm">{getAdvisoryTitle(advisory.title)}</h3>
+                    <h3 className="font-semibold text-gray-900 dark:text-gray-100 text-sm">{advisory.title}</h3>
                     <p className="text-xs text-gray-600 dark:text-gray-400 mt-1">{new Date(advisory.actionDate).toLocaleDateString()}</p>
                   </div>
                 </div>
@@ -323,20 +312,20 @@ function Dashboard() {
           <div>
             <h2 className="text-xl font-bold text-gray-900 dark:text-white flex items-center">
               <TrendingUp className="h-5 w-5 mr-2 text-blue-600 dark:text-blue-400" />
-              {t('dashboard.creditInsuranceServices')}
+              Credit & Insurance Services
             </h2>
-            <p className="text-gray-600 dark:text-gray-300 mt-2">{t('dashboard.accessFinancialServices')}</p>
+            <p className="text-gray-600 dark:text-gray-300 mt-2">Access financial services for your farm</p>
             <div className="flex gap-4 mt-4">
               <div>
-                <p className="text-sm text-gray-600 dark:text-gray-400">{t('dashboard.creditScore')}</p>
+                <p className="text-sm text-gray-600 dark:text-gray-400">Credit Score</p>
                 <p className="text-2xl font-bold text-gray-900 dark:text-gray-100">745</p>
               </div>
               <div>
-                <p className="text-sm text-gray-600 dark:text-gray-400">{t('dashboard.maxLoanAmount')}</p>
+                <p className="text-sm text-gray-600 dark:text-gray-400">Max Loan Amount</p>
                 <p className="text-2xl font-bold text-gray-900 dark:text-gray-100">₹5,00,000</p>
               </div>
               <div>
-                <p className="text-sm text-gray-600 dark:text-gray-400">{t('dashboard.interestRate')}</p>
+                <p className="text-sm text-gray-600 dark:text-gray-400">Interest Rate</p>
                 <p className="text-2xl font-bold text-gray-900 dark:text-gray-100">7.5%</p>
               </div>
             </div>
@@ -345,7 +334,7 @@ function Dashboard() {
             to="/credit-insurance"
             className="btn-primary flex items-center"
           >
-            {t('dashboard.exploreOptions')}
+            Explore Options
             <ArrowRight className="h-4 w-4 ml-2" />
           </Link>
         </div>

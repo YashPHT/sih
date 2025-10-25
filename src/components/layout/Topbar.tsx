@@ -2,8 +2,6 @@ import { Link, useLocation } from 'react-router-dom'
 import { Menu, Moon, Sun } from 'lucide-react'
 import { NavigationItem } from '../../types/navigation'
 import { ReactNode, useState, useEffect } from 'react'
-import { useTranslation } from 'react-i18next'
-import { LanguageSwitcher } from '../LanguageSwitcher'
 
 export interface TopbarProps {
   appName: string
@@ -23,7 +21,6 @@ export function Topbar({
   className = ''
 }: TopbarProps) {
   const location = useLocation()
-  const { t } = useTranslation()
   const [darkMode, setDarkMode] = useState(false)
 
   useEffect(() => {
@@ -76,7 +73,7 @@ export function Topbar({
                 } ${item.disabled ? 'opacity-50 cursor-not-allowed pointer-events-none' : ''}`}
               >
                 {item.icon && <item.icon className="h-4 w-4 mr-2" />}
-                {t(`navigation.${item.id}`) || item.label}
+                {item.label}
                 {item.badge && (
                   <span className="ml-2 px-2 py-0.5 text-xs rounded-full bg-primary-600 text-white">
                     {item.badge}
@@ -87,7 +84,6 @@ export function Topbar({
           </div>
 
           <div className="flex items-center space-x-2">
-            <LanguageSwitcher />
             <button
               onClick={toggleDarkMode}
               className="p-2 rounded-md text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
