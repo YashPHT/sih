@@ -234,17 +234,99 @@ export type SupplyChainEventType =
   | 'distribution'
   | 'retail-delivery'
 
+export type EPCISEventType = 'ObjectEvent' | 'AggregationEvent' | 'TransformationEvent' | 'TransactionEvent'
+
+export interface DigitalSignature {
+  signer: string
+  role: string
+  publicKey: string
+  signature: string
+  signedAt: string
+  verified?: boolean
+}
+
+export interface IoTVerification {
+  device: string
+  type: string
+  reading: string
+  calibrationDate?: string
+  certified?: boolean
+  standard?: string
+  coordinates?: { lat: number; lon: number }
+  timestamp?: string
+  signature: string
+  verified?: boolean
+}
+
+export interface SatelliteVerification {
+  provider: string
+  acquisitionDate: string
+  ndvi: number
+  areaCrossCheck: string
+  dataHash: string
+}
+
+export interface LabCertification {
+  labName: string
+  reportId: string
+  parameters: Record<string, string>
+  grade?: string
+  verifiableCredential: string
+  signature: string
+  verified?: boolean
+}
+
+export interface AssetQuantity {
+  assetType: string
+  assetId: string
+  quantity: { value: number; uom: string }
+  variety?: string
+  product?: string
+}
+
+export interface TransformationData {
+  inputs: AssetQuantity[]
+  outputs: AssetQuantity[]
+  losses?: { value: number; uom: string; reason: string }
+  massBalanceVerified: boolean
+}
+
+export interface LocationData {
+  name: string
+  gln?: string
+  coordinates?: { lat: number; lon: number }
+  region?: string
+}
+
+export interface ConsentRecord {
+  purpose: string
+  grantedAt: string
+  expiresAt: string
+  canRevoke: boolean
+}
+
 export interface SupplyChainEvent {
   id: string
   batchId: string
   eventType: SupplyChainEventType
+  epcisType?: EPCISEventType
   timestamp: string
-  location: string
+  location: string | LocationData
   actor: string
+  actorDID?: string
   data: Record<string, string | number | boolean>
   previousHash: string
   currentHash: string
   blockNumber: number
+  signatures?: DigitalSignature[]
+  iotVerifications?: IoTVerification[]
+  satelliteVerification?: SatelliteVerification
+  labCertification?: LabCertification
+  transformationData?: TransformationData
+  offChainDataHash?: string
+  offChainStorage?: string
+  consensusSignatures?: number
+  consentRecords?: ConsentRecord[]
 }
 
 export interface TraceabilityBatch {
@@ -257,6 +339,42 @@ export interface TraceabilityBatch {
   status: 'active' | 'completed'
   events: SupplyChainEvent[]
   isVerified: boolean
+  provenanceDAG?: ProvenanceDAG
+}
+
+export interface ProvenanceNode {
+  id: string
+  type: string
+  percentage: number
+  label?: string
+}
+
+export interface ProvenanceEdge {
+  from: string
+  to: string
+  type: 'transformation' | 'blending' | 'aggregation' | 'split'
+}
+
+export interface ProvenanceDAG {
+  nodes: ProvenanceNode[]
+  edges: ProvenanceEdge[]
+  sourceFarms?: Array<{
+    farmerId: string
+    location: string
+    percentage: number
+  }>
+}
+
+export interface VerificationCheck {
+  passed: number
+  failed: number
+}
+
+export interface VerificationIssue {
+  blockIndex: number
+  type: string
+  severity: 'critical' | 'warning'
+  description: string
 }
 
 export interface BlockchainVerification {
@@ -264,6 +382,35 @@ export interface BlockchainVerification {
   totalBlocks: number
   invalidBlocks: number[]
   message: string
+  checks: {
+    hashIntegrity: VerificationCheck
+    signatures: VerificationCheck
+    massBalance: VerificationCheck
+    timestamps: VerificationCheck
+  }
+  issues: VerificationIssue[]
+}
+
+export interface ConsortiumMember {
+  org: string
+  role: string
+  nodes: number
+  status: 'active' | 'inactive'
+}
+
+export interface NetworkInfo {
+  networkType: string
+  consensus: string
+  consortium: ConsortiumMember[]
+  totalNodes: number
+  blockTime: string
+  finality: string
+}
+
+export interface TraceabilityKPI {
+  label: string
+  value: string
+  description: string
 }
 
 export interface GeoLocation {
