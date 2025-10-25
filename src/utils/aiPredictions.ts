@@ -1,7 +1,10 @@
 /**
  * Dynamic AI prediction generation utilities
  * Provides varied, ML-like predictions that change on each load
+ * Enhanced with template-based generation for thousands of combinations
  */
+
+import { generateDynamicAdvisories as generateTemplateAdvisories } from '../lib/dynamicAdvisories'
 
 export interface DynamicPricePrediction {
   date: string
@@ -72,55 +75,20 @@ export function generateDynamicPredictions(basePrice = 8500, months = 6): Dynami
 
 /**
  * Generate dynamic crop advisories with variation
+ * Enhanced to use template-based generation for thousands of combinations
  */
 export function generateDynamicAdvisories(): DynamicAdvisory[] {
-  const advisories = [
-    // Irrigation advisories (pick randomly)
-    [
-      "Pre-Monsoon irrigation recommended for optimal soil moisture",
-      "Initiate irrigation cycle - soil moisture at 65%",
-      "Light irrigation advised - temperature forecast: 32-35°C",
-      "Monitor soil moisture - consider drip irrigation"
-    ],
-    
-    // Fertilizer advisories
-    [
-      "Apply Nitrogen fertilizer (40 kg/ha) based on soil test",
-      "Urea application recommended - 2 bags per acre",
-      "Balanced NPK (19:19:19) suggested for this growth stage",
-      "Organic manure application optimal in next 3-5 days"
-    ],
-    
-    // Pest/disease alerts
-    [
-      "Aphid monitoring alert - population increasing in region",
-      "Early blight risk detected - preventive spray recommended",
-      "Leaf miner activity reported nearby - inspect crops",
-      "Fungal infection risk: 68% - apply protective fungicide"
-    ],
-    
-    // Weather-based advisories
-    [
-      "Heavy rainfall predicted - ensure proper drainage",
-      "Heat wave warning - increase irrigation frequency",
-      "Hailstorm possible - cover sensitive crops if feasible",
-      "Ideal sowing conditions forecasted for next week"
-    ]
-  ]
+  // Use the new template-based system for much more variety
+  const templateAdvisories = generateTemplateAdvisories()
   
-  const categories = ['irrigation', 'fertilization', 'pest-control', 'weather']
-  
-  // Randomly select one from each category
-  return advisories.map((category, idx) => {
-    const randomIndex = Math.floor(Math.random() * category.length)
-    return {
-      text: category[randomIndex],
-      timestamp: new Date(),
-      priority: (['high', 'medium', 'low'][Math.floor(Math.random() * 3)]) as 'high' | 'medium' | 'low',
-      confidence: Math.round(75 + Math.random() * 20), // 75-95% confidence
-      category: categories[idx]
-    }
-  })
+  // Convert to the expected format
+  return templateAdvisories.map(advisory => ({
+    text: advisory.text,
+    timestamp: advisory.timestamp,
+    priority: advisory.priority,
+    confidence: advisory.confidence,
+    category: advisory.type
+  }))
 }
 
 /**

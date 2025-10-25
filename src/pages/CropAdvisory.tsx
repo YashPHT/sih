@@ -10,15 +10,16 @@ import {
   Clock,
   CloudRain
 } from 'lucide-react'
-import { mockCropRecommendations, mockSeasonalAdvisories, mockPestPredictions } from '../data/mockData'
+import { mockSeasonalAdvisories } from '../data/mockData'
 import { useWeatherData } from '../hooks/useWeatherData'
 import { weatherSeverityStyles } from '../utils/weatherStyles'
 import { CropRecommendation, SeasonalAdvisory, PestPrediction, WeatherAlert } from '../types'
 import { useNotificationContext } from '../context/NotificationContext'
 import { useLoading } from '../hooks/useLoading'
-import { LoadingSpinner, AIPredictionLoader, MLModelIndicator, LoadingTimeDisplay } from '../components/ui'
+import { LoadingSpinner, AIPredictionLoader, MLModelIndicator, LoadingTimeDisplay, AIVarietyIndicator } from '../components/ui'
 import { api } from '../services/api'
-import { addDynamicVariation } from '../utils/aiPredictions'
+import { generateDynamicCropRecommendations } from '../lib/dynamicCropRecommendations'
+import { generateDynamicPestPredictions } from '../lib/dynamicPestPredictions'
 
 function CropRecommendationCard({ crop, onSelect, isLoading }: { crop: CropRecommendation; onSelect: (crop: CropRecommendation) => void; isLoading?: boolean }) {
   return (
@@ -350,11 +351,12 @@ function CropAdvisory() {
   }
   
   const handleLoadingComplete = () => {
-    // Add dynamic variation to recommendations
-    const dynamicCrops = addDynamicVariation(mockCropRecommendations)
+    // Generate dynamic recommendations with thousands of variations
+    const dynamicCrops = generateDynamicCropRecommendations()
+    const dynamicPests = generateDynamicPestPredictions()
     
     setCropRecommendations(dynamicCrops)
-    setPestPredictions(mockPestPredictions)
+    setPestPredictions(dynamicPests)
     setLastUpdated(new Date())
     setIsAILoading(false)
   }
@@ -447,7 +449,12 @@ function CropAdvisory() {
             />
           ) : (
             <>
-              <div className="mb-6 space-y-2">
+              <div className="mb-6 space-y-4">
+                <AIVarietyIndicator
+                  onRefresh={loadAIPredictions}
+                  isRefreshing={isAILoading}
+                />
+                
                 <MLModelIndicator
                   modelName="Random Forest + Gradient Boosting Ensemble"
                   accuracy="92.7"
@@ -516,7 +523,12 @@ function CropAdvisory() {
             />
           ) : (
             <>
-              <div className="mb-6">
+              <div className="mb-6 space-y-4">
+                <AIVarietyIndicator
+                  onRefresh={loadAIPredictions}
+                  isRefreshing={isAILoading}
+                />
+                
                 <MLModelIndicator
                   modelName="LSTM Neural Network + Weather Integration"
                   accuracy="89.4"
