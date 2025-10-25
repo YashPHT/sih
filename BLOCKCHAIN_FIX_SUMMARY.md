@@ -27,11 +27,12 @@ Updated all blockchain event hashes in `src/data/traceabilityData.ts` with **cry
 - Block 8: Hash updated to `b4a567edf575b95ae5d672ebd5e65da328d3fdf9eb5c5771c89b0844f25b7b47`
 - Block 9: Hash updated to `1cfa7a40766a640a0f16effd00dc0b132b9cd4c8b452d366d4be54bdc2c8f74d`
 
-#### Batch 2: Basmati Rice (4 blocks)
-- Block 0: Genesis hash updated to `3cca3c4167be2637c310a1b2530a2ed184f03853fc592b396381f74904dc3dbe`
-- Block 1: Hash updated to `861eb3c3394c479e9c687b92f0ee5543609008b8931db5775b592b2c0dbcf934`
-- Block 2: Hash updated to `f70cdb5d78447778ea3472f9e55d2f4eb3e62f9bb728b66f32088202decaa747`
-- Block 3: Hash updated to `97c8c2330258e6ffca9875e386479c22840729e016cbc376ee9bfdd6fef6891b`
+#### Batch 2: Basmati Rice (4 blocks) - UPDATED 2024
+**Note: Regenerated on 2024-10-25 using actual event data (see BASMATI_RICE_FIX.md)**
+- Block 0: Genesis hash updated to `0c33c37aeff2692d9ec94f7f10416d894fdee6f13ff875de9802966941c0ff2a`
+- Block 1: Hash updated to `ee225e3fed78d3f6514acbb42114745e9edd9c37cd8a36dd1ad1e89e8f11a0cc`
+- Block 2: Hash updated to `6b771190b31bc70388ffb68674933217994564f556840df3da2c1a542a880178`
+- Block 3: Hash updated to `afd6575a48f0ad2c6b3d3ced99519a4f35e04cd89889f657861821c67959c909`
 
 ## Verification Results
 
