@@ -523,7 +523,7 @@ export const mockBatches: TraceabilityBatch[] = [
           lotId: 'LOT-HR-2024-001'
         },
         previousHash: '0000000000000000000000000000000000000000000000000000000000000000',
-        currentHash: '3cca3c4167be2637c310a1b2530a2ed184f03853fc592b396381f74904dc3dbe',
+        currentHash: '0c33c37aeff2692d9ec94f7f10416d894fdee6f13ff875de9802966941c0ff2a',
         blockNumber: 0,
         signatures: [
           {
@@ -582,8 +582,8 @@ export const mockBatches: TraceabilityBatch[] = [
           waterVolume: '15000 liters',
           duration: '8 hours'
         },
-        previousHash: '3cca3c4167be2637c310a1b2530a2ed184f03853fc592b396381f74904dc3dbe',
-        currentHash: '861eb3c3394c479e9c687b92f0ee5543609008b8931db5775b592b2c0dbcf934',
+        previousHash: '0c33c37aeff2692d9ec94f7f10416d894fdee6f13ff875de9802966941c0ff2a',
+        currentHash: 'ee225e3fed78d3f6514acbb42114745e9edd9c37cd8a36dd1ad1e89e8f11a0cc',
         blockNumber: 1,
         signatures: [
           {
@@ -626,8 +626,8 @@ export const mockBatches: TraceabilityBatch[] = [
           leafColor: 'Bright Green',
           pestObservations: 'Minor aphid presence'
         },
-        previousHash: '861eb3c3394c479e9c687b92f0ee5543609008b8931db5775b592b2c0dbcf934',
-        currentHash: 'f70cdb5d78447778ea3472f9e55d2f4eb3e62f9bb728b66f32088202decaa747',
+        previousHash: 'ee225e3fed78d3f6514acbb42114745e9edd9c37cd8a36dd1ad1e89e8f11a0cc',
+        currentHash: '6b771190b31bc70388ffb68674933217994564f556840df3da2c1a542a880178',
         blockNumber: 2,
         signatures: [
           {
@@ -669,8 +669,8 @@ export const mockBatches: TraceabilityBatch[] = [
           quantity: '5 liters',
           method: 'Organic spray application'
         },
-        previousHash: 'f70cdb5d78447778ea3472f9e55d2f4eb3e62f9bb728b66f32088202decaa747',
-        currentHash: '97c8c2330258e6ffca9875e386479c22840729e016cbc376ee9bfdd6fef6891b',
+        previousHash: '6b771190b31bc70388ffb68674933217994564f556840df3da2c1a542a880178',
+        currentHash: 'afd6575a48f0ad2c6b3d3ced99519a4f35e04cd89889f657861821c67959c909',
         blockNumber: 3,
         signatures: [
           {

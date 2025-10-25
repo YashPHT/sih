@@ -15,7 +15,7 @@ export async function generateHash(data: string): Promise<string> {
 /**
  * Create canonical JSON string with sorted keys for consistent hashing
  */
-function canonicalJSON(obj: any): string {
+function canonicalJSON(obj: unknown): string {
   if (obj === null || obj === undefined) {
     return String(obj)
   }
@@ -29,7 +29,7 @@ function canonicalJSON(obj: any): string {
   }
   
   const sortedKeys = Object.keys(obj).sort()
-  const pairs = sortedKeys.map(key => `"${key}":${canonicalJSON(obj[key])}`)
+  const pairs = sortedKeys.map(key => `"${key}":${canonicalJSON((obj as Record<string, unknown>)[key])}`)
   return '{' + pairs.join(',') + '}'
 }
 
@@ -45,7 +45,7 @@ function canonicalJSON(obj: any): string {
 export async function calculateEventHash(
   previousHash: string,
   timestamp: string,
-  eventData: any
+  eventData: Record<string, unknown>
 ): Promise<string> {
   // Convert timestamp to consistent format (string)
   const timestampStr = String(timestamp)
