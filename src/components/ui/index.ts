@@ -17,6 +17,8 @@ export { Card } from './Card'
 export type { CardProps } from './Card'
 
 export { AILoadingAnimation, AIProcessingAnimation } from './AILoadingAnimation'
+export { AIPredictionLoader, VariableSpinner } from './AIPredictionLoader'
+export { LoadingTimeDisplay } from './LoadingTimeDisplay'
 export { ChartSkeleton, AdvisorySkeleton, CardSkeleton, MetricsSkeleton } from './SkeletonLoaders'
 export { MLModelIndicator, PredictionCard } from './MLModelIndicator'
 export { LoadingSpinner } from './LoadingSpinner'

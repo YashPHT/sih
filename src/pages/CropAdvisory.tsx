@@ -16,9 +16,9 @@ import { weatherSeverityStyles } from '../utils/weatherStyles'
 import { CropRecommendation, SeasonalAdvisory, PestPrediction, WeatherAlert } from '../types'
 import { useNotificationContext } from '../context/NotificationContext'
 import { useLoading } from '../hooks/useLoading'
-import { LoadingSpinner, AILoadingAnimation, MLModelIndicator } from '../components/ui'
+import { LoadingSpinner, AIPredictionLoader, MLModelIndicator, LoadingTimeDisplay } from '../components/ui'
 import { api } from '../services/api'
-import { simulateAIProcessing, addDynamicVariation } from '../utils/aiPredictions'
+import { addDynamicVariation } from '../utils/aiPredictions'
 
 function CropRecommendationCard({ crop, onSelect, isLoading }: { crop: CropRecommendation; onSelect: (crop: CropRecommendation) => void; isLoading?: boolean }) {
   return (
@@ -344,10 +344,12 @@ function CropAdvisory() {
   const { showNotification } = useNotificationContext()
   const { isLoading, withLoading } = useLoading()
 
-  const loadAIPredictions = async () => {
+  const loadAIPredictions = () => {
     setIsAILoading(true)
-    await simulateAIProcessing()
-    
+    // Loading will be handled by AIPredictionLoader component
+  }
+  
+  const handleLoadingComplete = () => {
     // Add dynamic variation to recommendations
     const dynamicCrops = addDynamicVariation(mockCropRecommendations)
     
@@ -437,19 +439,15 @@ function CropAdvisory() {
       {activeTab === 'recommendations' && (
         <div>
           {isAILoading ? (
-            <AILoadingAnimation
+            <AIPredictionLoader
+              onComplete={handleLoadingComplete}
+              complexity="simple"
               title="AI Model Processing..."
               subtitle="Analyzing soil data, weather patterns, and market trends"
-              steps={[
-                'Loading soil analysis data',
-                'Analyzing weather patterns',
-                'Computing crop suitability with ML model',
-                'Calculating profit potential'
-              ]}
             />
           ) : (
             <>
-              <div className="mb-6">
+              <div className="mb-6 space-y-2">
                 <MLModelIndicator
                   modelName="Random Forest + Gradient Boosting Ensemble"
                   accuracy="92.7"
@@ -458,6 +456,7 @@ function CropAdvisory() {
                   onRefresh={loadAIPredictions}
                   isRefreshing={isAILoading}
                 />
+                <LoadingTimeDisplay feature="AI Model Processing..." />
               </div>
               
               <div className="mb-6 card bg-blue-50 dark:bg-blue-900/30 border-blue-200 dark:border-blue-700">
@@ -509,15 +508,11 @@ function CropAdvisory() {
       {activeTab === 'pest' && (
         <div>
           {isAILoading ? (
-            <AILoadingAnimation
+            <AIPredictionLoader
+              onComplete={handleLoadingComplete}
+              complexity="simple"
               title="AI Model Processing..."
               subtitle="Analyzing weather conditions and pest patterns"
-              steps={[
-                'Loading regional pest data',
-                'Analyzing weather conditions',
-                'Computing outbreak probabilities',
-                'Generating prevention strategies'
-              ]}
             />
           ) : (
             <>

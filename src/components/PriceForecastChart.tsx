@@ -3,26 +3,46 @@ import { Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer
 import { TrendingUp, TrendingDown, Minus, Brain } from 'lucide-react'
 import { cropPriceHistories } from '../data/priceHistoryData'
 import { generatePriceForecast, calculateMarketInsights } from '../utils/forecasting'
-import { AILoadingAnimation, MLModelIndicator } from './ui'
-import { simulateAIProcessing } from '../utils/aiPredictions'
+import { AIPredictionLoader, MLModelIndicator } from './ui'
 
 interface PriceForecastChartProps {
   cropName: string
 }
 
+interface ForecastEntry {
+  date: string
+  predictedPrice: number
+  confidenceInterval: {
+    upper: number
+    lower: number
+  }
+}
+
+interface MarketInsights {
+  trend: {
+    direction: 'upward' | 'downward' | 'stable'
+    description: string
+  }
+  averagePrice: number
+  priceRange: {
+    min: number
+    max: number
+  }
+  volatility: number
+  volatilityLevel: string
+  recommendation: string
+}
+
 function PriceForecastChart({ cropName }: PriceForecastChartProps) {
   const [isLoading, setIsLoading] = useState(true)
   const [lastUpdated, setLastUpdated] = useState<Date | null>(null)
-  const [forecast, setForecast] = useState<any[]>([])
-  const [insights, setInsights] = useState<any>(null)
+  const [forecast, setForecast] = useState<ForecastEntry[]>([])
+  const [insights, setInsights] = useState<MarketInsights | null>(null)
   
   const cropData = cropPriceHistories.find(c => c.crop === cropName)
   
-  const loadForecast = async () => {
+  const handleLoadingComplete = () => {
     if (!cropData) return
-    
-    setIsLoading(true)
-    await simulateAIProcessing()
     
     // Add slight randomness to forecast to make it look dynamic
     const baseForecast = generatePriceForecast(cropData.history, 6)
@@ -41,9 +61,17 @@ function PriceForecastChart({ cropName }: PriceForecastChartProps) {
     setIsLoading(false)
   }
   
+  const loadForecast = () => {
+    if (!cropData) return
+    
+    setIsLoading(true)
+    // Loading will be handled by AIPredictionLoader component
+  }
+  
   useEffect(() => {
-    loadForecast()
-  }, [cropName])
+    if (!cropData) return
+    setIsLoading(true)
+  }, [cropName, cropData])
   
   if (!cropData) {
     return <div className="text-gray-500 dark:text-gray-400">No data available for {cropName}</div>
@@ -51,15 +79,11 @@ function PriceForecastChart({ cropName }: PriceForecastChartProps) {
   
   if (isLoading || !insights) {
     return (
-      <AILoadingAnimation
+      <AIPredictionLoader
+        onComplete={handleLoadingComplete}
+        complexity="complex"
         title="AI Price Forecasting..."
         subtitle="Analyzing historical prices and market trends"
-        steps={[
-          'Loading historical price data',
-          'Analyzing market trends',
-          'Computing predictions with LSTM model',
-          'Calculating confidence intervals'
-        ]}
       />
     )
   }
