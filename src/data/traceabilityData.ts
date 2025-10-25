@@ -55,7 +55,7 @@ export const mockBatches: TraceabilityBatch[] = [
           lotId: 'LOT-MH-2024-001'
         },
         previousHash: '0000000000000000000000000000000000000000000000000000000000000000',
-        currentHash: 'a1b2c3d4e5f6789012345678901234567890abcdef1234567890abcdef123456',
+        currentHash: '16dd6ebe79d16c44badc682fc7aa84d0bdcfa13035d896f0ac26ddd4b3d9bf83',
         blockNumber: 0,
         signatures: [
           {
@@ -125,8 +125,8 @@ export const mockBatches: TraceabilityBatch[] = [
           quality: 'Grade A',
           lotId: 'LOT-MH-2024-001'
         },
-        previousHash: 'a1b2c3d4e5f6789012345678901234567890abcdef1234567890abcdef123456',
-        currentHash: 'b2c3d4e5f6789012345678901234567890abcdef1234567890abcdef1234567',
+        previousHash: '16dd6ebe79d16c44badc682fc7aa84d0bdcfa13035d896f0ac26ddd4b3d9bf83',
+        currentHash: 'da3c27b6425f1479381e761f60e70b1f2da960df46c52a3941c0b18609bc4382',
         blockNumber: 1,
         signatures: [
           {
@@ -197,8 +197,8 @@ export const mockBatches: TraceabilityBatch[] = [
           grade: 'Grade A',
           lotId: 'LOT-MH-2024-001'
         },
-        previousHash: 'b2c3d4e5f6789012345678901234567890abcdef1234567890abcdef1234567',
-        currentHash: 'c3d4e5f6789012345678901234567890abcdef1234567890abcdef12345678',
+        previousHash: 'da3c27b6425f1479381e761f60e70b1f2da960df46c52a3941c0b18609bc4382',
+        currentHash: '6f4b9d78a17e70c72f41105f416e1d99078acd55bb5fa4f6cae6462990fc6149',
         blockNumber: 2,
         signatures: [
           {
@@ -256,8 +256,8 @@ export const mockBatches: TraceabilityBatch[] = [
           batchId: 'OIL-2025-10-25-01',
           byproductBatchId: 'CAKE-2025-10-25-01'
         },
-        previousHash: 'c3d4e5f6789012345678901234567890abcdef1234567890abcdef12345678',
-        currentHash: 'd4e5f6789012345678901234567890abcdef1234567890abcdef123456789',
+        previousHash: '6f4b9d78a17e70c72f41105f416e1d99078acd55bb5fa4f6cae6462990fc6149',
+        currentHash: 'e612659d14aea0bcccf2c2ac5387600c5b1e3fd98a5ea451ec08186f42b42082',
         blockNumber: 3,
         transformationData: {
           inputs: [
@@ -359,8 +359,8 @@ export const mockBatches: TraceabilityBatch[] = [
           expiryDate: '2025-10-26',
           retailBatchId: 'R-2025-1234'
         },
-        previousHash: 'd4e5f6789012345678901234567890abcdef1234567890abcdef123456789',
-        currentHash: 'e5f6789012345678901234567890abcdef1234567890abcdef1234567890',
+        previousHash: 'e612659d14aea0bcccf2c2ac5387600c5b1e3fd98a5ea451ec08186f42b42082',
+        currentHash: '05e6a116a27ce65086242753fcfe8c76c94e8365899cfa7087e8ed0c3fcc8d9d',
         blockNumber: 4,
         signatures: [
           {
@@ -404,8 +404,8 @@ export const mockBatches: TraceabilityBatch[] = [
           destination: 'Retail Distribution Centers - Mumbai',
           eta: '2024-10-27T10:00:00Z'
         },
-        previousHash: 'e5f6789012345678901234567890abcdef1234567890abcdef1234567890',
-        currentHash: 'f6789012345678901234567890abcdef1234567890abcdef12345678901',
+        previousHash: '05e6a116a27ce65086242753fcfe8c76c94e8365899cfa7087e8ed0c3fcc8d9d',
+        currentHash: 'e1aac4c783f3d3adea17baa797c707e5740b29e4cbd6ed4857727e72e96d548b',
         blockNumber: 5,
         signatures: [
           {
@@ -464,8 +464,8 @@ export const mockBatches: TraceabilityBatch[] = [
           shelfPlacement: 'Premium Oil Section',
           retailPrice: '₹180/L'
         },
-        previousHash: 'f6789012345678901234567890abcdef1234567890abcdef12345678901',
-        currentHash: '789012345678901234567890abcdef1234567890abcdef123456789012',
+        previousHash: 'e1aac4c783f3d3adea17baa797c707e5740b29e4cbd6ed4857727e72e96d548b',
+        currentHash: '3dee62e71533e4e592af548bdcdf64a0a1396972672a6399bc360e09f5dbc865',
         blockNumber: 6,
         signatures: [
           {

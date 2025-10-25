@@ -21,8 +21,6 @@ import {
   AlertTriangle,
   Plus,
   Network,
-  Eye,
-  EyeOff,
   FileCheck,
   Satellite,
   Lock,
