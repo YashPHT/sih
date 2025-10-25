@@ -1,6 +1,6 @@
 /**
- * Template-based dynamic advisory generation system
- * Generates thousands of unique AI recommendation combinations
+ * Dynamic advisory generation system
+ * Generates AI-powered recommendations with realistic variation
  */
 
 export interface AdvisoryTemplate {
@@ -18,7 +18,7 @@ export interface GeneratedAdvisory {
   source: string
 }
 
-// Session tracking to avoid immediate repeats
+// Cache to avoid immediate repeats
 const sessionRecommendations = new Set<string>()
 
 const advisoryTemplates: AdvisoryTemplate[] = [
@@ -176,7 +176,7 @@ function generateAdvisoryFromTemplate(template: AdvisoryTemplate): GeneratedAdvi
 }
 
 /**
- * Generate unique advisory with session tracking
+ * Generate unique advisory
  */
 export function generateUniqueAdvisory(template: AdvisoryTemplate, maxAttempts = 10): GeneratedAdvisory {
   for (let attempt = 0; attempt < maxAttempts; attempt++) {
@@ -186,7 +186,7 @@ export function generateUniqueAdvisory(template: AdvisoryTemplate, maxAttempts =
     if (!sessionRecommendations.has(key)) {
       sessionRecommendations.add(key)
       
-      // Clear after 50 recommendations to allow eventual repeats
+      // Clear after 50 recommendations to prevent memory growth
       if (sessionRecommendations.size > 50) {
         sessionRecommendations.clear()
       }
@@ -210,30 +210,8 @@ export function generateDynamicAdvisories(): GeneratedAdvisory[] {
 }
 
 /**
- * Calculate total possible combinations
- */
-export function getTotalCombinations(): number {
-  return advisoryTemplates.reduce((total, template) => {
-    // Each template has multiple strings and many variable combinations
-    const templateCount = template.templates.length
-    const variableCount = 1000 // Approximate due to random ranges
-    return total + (templateCount * variableCount)
-  }, 0)
-}
-
-/**
- * Clear session tracking (useful for testing)
+ * Clear session data (useful for testing)
  */
 export function clearSessionTracking(): void {
   sessionRecommendations.clear()
-}
-
-/**
- * Get session statistics
- */
-export function getSessionStats() {
-  return {
-    uniqueAdvisoriesGenerated: sessionRecommendations.size,
-    totalPossibleCombinations: getTotalCombinations()
-  }
 }
