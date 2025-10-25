@@ -2,8 +2,7 @@ import { useState, useEffect } from 'react'
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts'
 import { TrendingUp, TrendingDown, Minus, AlertTriangle, CheckCircle, AlertCircle } from 'lucide-react'
 import { DemandSupplyData } from '../data/priceHistoryData'
-import { AILoadingAnimation, MLModelIndicator } from './ui'
-import { simulateAIProcessing } from '../utils/aiPredictions'
+import { AIPredictionLoader, MLModelIndicator } from './ui'
 
 interface DemandSupplyChartProps {
   data: DemandSupplyData
@@ -14,9 +13,12 @@ function DemandSupplyChart({ data }: DemandSupplyChartProps) {
   const [isLoading, setIsLoading] = useState(true)
   const [lastUpdated, setLastUpdated] = useState<Date | null>(null)
 
-  const loadForecast = async () => {
+  const loadForecast = () => {
     setIsLoading(true)
-    await simulateAIProcessing(1500, 2500)
+    // Loading will be handled by AIPredictionLoader component
+  }
+  
+  const handleLoadingComplete = () => {
     setLastUpdated(new Date())
     setIsLoading(false)
   }
@@ -70,15 +72,11 @@ function DemandSupplyChart({ data }: DemandSupplyChartProps) {
   
   if (isLoading) {
     return (
-      <AILoadingAnimation
+      <AIPredictionLoader
+        onComplete={handleLoadingComplete}
+        complexity="medium"
         title="AI Demand-Supply Analysis..."
         subtitle="Analyzing market trends and computing forecasts"
-        steps={[
-          'Loading historical demand-supply data',
-          'Analyzing market trends',
-          'Computing 6-month forecasts',
-          'Generating policy recommendations'
-        ]}
       />
     )
   }

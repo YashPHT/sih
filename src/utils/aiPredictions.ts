@@ -175,9 +175,10 @@ export function generatePestRiskPredictions(): PestRiskPrediction[] {
 
 /**
  * Add random delay to simulate ML model processing time
- * Returns a promise that resolves after 2-3 seconds
+ * Now uses the new variable loading system by default
+ * Returns a promise that resolves after a variable duration
  */
-export function simulateAIProcessing(minMs = 2000, maxMs = 3000): Promise<void> {
+export function simulateAIProcessing(minMs = 1500, maxMs = 4000): Promise<void> {
   const delay = minMs + Math.random() * (maxMs - minMs)
   return new Promise(resolve => setTimeout(resolve, delay))
 }

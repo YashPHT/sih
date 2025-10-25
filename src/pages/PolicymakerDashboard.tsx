@@ -19,8 +19,7 @@ import { policymakerData, statesList, seasonsList } from '../data/policymakerDat
 import LogisticsMap from '../components/LogisticsMap'
 import { logisticsGeoData } from '../data/logisticsGeoData'
 import { useNotificationContext } from '../context/NotificationContext'
-import { AILoadingAnimation, MLModelIndicator } from '../components/ui'
-import { simulateAIProcessing } from '../utils/aiPredictions'
+import { AIPredictionLoader, MLModelIndicator } from '../components/ui'
 
 const COLORS = ['#10b981', '#3b82f6', '#f59e0b', '#ef4444', '#8b5cf6']
 
@@ -33,9 +32,12 @@ function PolicymakerDashboard() {
   const [isAILoading, setIsAILoading] = useState(true)
   const [lastUpdated, setLastUpdated] = useState<Date | null>(null)
 
-  const loadPolicyData = async () => {
+  const loadPolicyData = () => {
     setIsAILoading(true)
-    await simulateAIProcessing(1500, 2500)
+    // Loading will be handled by AIPredictionLoader component
+  }
+  
+  const handleLoadingComplete = () => {
     setLastUpdated(new Date())
     setIsAILoading(false)
   }
@@ -113,15 +115,11 @@ function PolicymakerDashboard() {
             Strategic insights for agricultural policy and planning
           </p>
         </div>
-        <AILoadingAnimation
+        <AIPredictionLoader
+          onComplete={handleLoadingComplete}
+          complexity="complex"
           title="AI Model Processing..."
           subtitle="Analyzing national agricultural data and generating insights"
-          steps={[
-            'Loading production and import data',
-            'Analyzing state-wise trends',
-            'Computing demand-supply forecasts',
-            'Generating policy recommendations'
-          ]}
         />
       </div>
     )
