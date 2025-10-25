@@ -149,6 +149,48 @@ npm run type-check
 npm run lint
 ```
 
+## Deployment
+
+### Deploy to Render
+
+This application is ready for deployment on Render with one-click setup:
+
+[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy)
+
+**Quick Steps:**
+1. Push your code to GitHub
+2. Connect repository to Render
+3. Render detects `render.yaml` and auto-configures
+4. Deploy completes in 5-10 minutes
+5. Your app is live with a public URL!
+
+📖 **Complete deployment guide:** See [DEPLOYMENT_GUIDE.md](./DEPLOYMENT_GUIDE.md) for detailed instructions, troubleshooting, and best practices.
+
+**Configuration files included:**
+- `render.yaml` - Render Blueprint configuration
+- `.env.example` - Environment variables template
+- Production-ready build scripts in `package.json`
+
+**Deployment Requirements:**
+- Node.js 18+
+- Free tier compatible (512MB RAM)
+- No database required (uses mock data)
+- Optional: OpenWeatherMap API key for live weather
+
+### Production Build
+
+Test production build locally before deploying:
+
+```bash
+# Build for production
+npm run build
+
+# Serve production build
+npm run start
+
+# Visit http://localhost:3000
+```
+
 ## Demo Data
 
 The application uses mock data to demonstrate functionality. In production, this would be replaced with real API calls to:
