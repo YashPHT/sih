@@ -344,18 +344,18 @@ function StakeholderDashboards() {
               {dashboard.opportunities.map((opportunity) => (
                 <div
                   key={opportunity.id}
-                  className="border border-dashed border-gray-300 rounded-lg p-4 hover:border-primary-300 transition"
+                  className="border border-dashed border-gray-300 dark:border-gray-700 rounded-lg p-4 hover:border-primary-300 dark:hover:border-primary-600 transition"
                 >
                   <div className="flex items-start justify-between gap-3">
                     <div>
                       <p className="text-xs uppercase tracking-wide text-gray-500 dark:text-gray-400">{opportunity.buyer}</p>
-                      <h4 className="text-lg font-semibold text-gray-900 mt-1">{opportunity.requirement}</h4>
+                      <h4 className="text-lg font-semibold text-gray-900 dark:text-white mt-1">{opportunity.requirement}</h4>
                     </div>
                     <span className={`badge ${opportunityStatusClasses[opportunity.status]}`}>
                       {opportunityStatusLabels[opportunity.status]}
                     </span>
                   </div>
-                  <div className="mt-3 text-sm text-gray-600 space-y-1">
+                  <div className="mt-3 text-sm text-gray-600 dark:text-gray-300 space-y-1">
                     <p>Value: <span className="font-semibold text-gray-900 dark:text-white">{opportunity.value}</span></p>
                     <p>Timeline: {opportunity.timeline}</p>
                   </div>
@@ -370,11 +370,11 @@ function StakeholderDashboards() {
             </h3>
             <div className="mt-3 space-y-4">
               {dashboard.logistics.map((shipment) => (
-                <div key={shipment.id} className="border border-gray-200 rounded-lg p-4 hover:border-primary-300 transition">
+                <div key={shipment.id} className="border border-gray-200 dark:border-gray-700 rounded-lg p-4 hover:border-primary-300 dark:hover:border-primary-600 transition">
                   <div className="flex items-start justify-between gap-3">
                     <div>
                       <p className="text-xs uppercase tracking-wide text-gray-500 dark:text-gray-400">{shipment.mode}</p>
-                      <h4 className="text-lg font-semibold text-gray-900 mt-1">{shipment.route}</h4>
+                      <h4 className="text-lg font-semibold text-gray-900 dark:text-white mt-1">{shipment.route}</h4>
                     </div>
                     <span className={`badge ${logisticsStatusClasses[shipment.status]}`}>
                       {logisticsStatusLabels[shipment.status]}

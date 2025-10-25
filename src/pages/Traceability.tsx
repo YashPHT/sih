@@ -178,53 +178,53 @@ export default function Traceability() {
 
       {showCreateBatch && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-          <div className="bg-white rounded-lg p-8 max-w-md w-full mx-4">
-            <h2 className="text-2xl font-bold text-gray-900 mb-4">Create New Batch</h2>
+          <div className="bg-white dark:bg-gray-800 rounded-lg p-8 max-w-md w-full mx-4">
+            <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">Create New Batch</h2>
             <div className="space-y-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Crop Name</label>
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Crop Name</label>
                 <input
                   type="text"
                   value={newBatchData.crop}
                   onChange={(e) => setNewBatchData({ ...newBatchData, crop: e.target.value })}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                  className="w-full px-3 py-2 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500 dark:focus:ring-emerald-400"
                   placeholder="e.g., Organic Tomatoes"
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Quantity</label>
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Quantity</label>
                 <input
                   type="text"
                   value={newBatchData.quantity}
                   onChange={(e) => setNewBatchData({ ...newBatchData, quantity: e.target.value })}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                  className="w-full px-3 py-2 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500 dark:focus:ring-emerald-400"
                   placeholder="e.g., 1000 kg"
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Origin Farm</label>
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Origin Farm</label>
                 <input
                   type="text"
                   value={newBatchData.originFarm}
                   onChange={(e) => setNewBatchData({ ...newBatchData, originFarm: e.target.value })}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                  className="w-full px-3 py-2 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500 dark:focus:ring-emerald-400"
                   placeholder="e.g., Sunshine Farm, Karnataka"
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Farmer Name</label>
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Farmer Name</label>
                 <input
                   type="text"
                   value={newBatchData.actor}
                   onChange={(e) => setNewBatchData({ ...newBatchData, actor: e.target.value })}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                  className="w-full px-3 py-2 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500 dark:focus:ring-emerald-400"
                   placeholder="e.g., John Doe (Farmer)"
                 />
               </div>
               <div className="flex space-x-3 mt-6">
                 <button
                   onClick={handleCreateBatch}
-                  className="flex-1 bg-emerald-600 text-white px-4 py-2 rounded-lg font-semibold hover:bg-emerald-700 transition"
+                  className="flex-1 bg-emerald-600 dark:bg-emerald-500 text-white px-4 py-2 rounded-lg font-semibold hover:bg-emerald-700 dark:hover:bg-emerald-600 transition"
                 >
                   Create Batch
                 </button>
@@ -233,7 +233,7 @@ export default function Traceability() {
                     setShowCreateBatch(false)
                     setNewBatchData({ crop: '', quantity: '', originFarm: '', actor: '' })
                   }}
-                  className="flex-1 bg-gray-200 text-gray-700 px-4 py-2 rounded-lg font-semibold hover:bg-gray-300 transition"
+                  className="flex-1 bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-100 px-4 py-2 rounded-lg font-semibold hover:bg-gray-300 dark:hover:bg-gray-600 transition"
                 >
                   Cancel
                 </button>
@@ -243,28 +243,28 @@ export default function Traceability() {
         </div>
       )}
 
-      <div className="bg-blue-50 border border-blue-200 rounded-lg p-6">
+      <div className="bg-blue-50 dark:bg-blue-900/30 border border-blue-200 dark:border-blue-700 rounded-lg p-6">
         <div className="flex items-start space-x-3">
-          <Info className="h-6 w-6 text-blue-600 flex-shrink-0 mt-1" />
+          <Info className="h-6 w-6 text-blue-600 dark:text-blue-400 flex-shrink-0 mt-1" />
           <div>
-            <h3 className="text-lg font-semibold text-blue-900 mb-2">
+            <h3 className="text-lg font-semibold text-blue-900 dark:text-blue-100 mb-2">
               How Blockchain Traceability Works
             </h3>
-            <p className="text-blue-800 mb-3">
+            <p className="text-blue-800 dark:text-blue-200 mb-3">
               Each step in the supply chain creates a unique cryptographic "block" containing:
             </p>
-            <ul className="list-disc list-inside text-blue-700 space-y-1 mb-3">
+            <ul className="list-disc list-inside text-blue-700 dark:text-blue-300 space-y-1 mb-3">
               <li><strong>Event Data:</strong> Details about what happened (planting, harvesting, etc.)</li>
               <li><strong>Timestamp:</strong> When the event occurred</li>
               <li><strong>Actor:</strong> Who performed the action</li>
               <li><strong>Previous Hash:</strong> Link to the previous event's unique fingerprint</li>
               <li><strong>Current Hash:</strong> This event's unique cryptographic fingerprint</li>
             </ul>
-            <p className="text-blue-800 mb-2">
+            <p className="text-blue-800 dark:text-blue-200 mb-2">
               Each block's hash is calculated from its data plus the previous block's hash, creating an unbreakable chain. 
               Any tampering with past records breaks the chain and is immediately detected during verification.
             </p>
-            <div className="flex items-center space-x-2 text-sm text-blue-700 mt-3">
+            <div className="flex items-center space-x-2 text-sm text-blue-700 dark:text-blue-300 mt-3">
               <Shield className="h-4 w-4" />
               <span className="font-medium">This ensures complete transparency and prevents fraud in the supply chain.</span>
             </div>
@@ -274,8 +274,8 @@ export default function Traceability() {
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         <div className="lg:col-span-1 space-y-4">
-          <h2 className="text-xl font-bold text-gray-900 flex items-center space-x-2">
-            <Package className="h-6 w-6 text-emerald-600" />
+          <h2 className="text-xl font-bold text-gray-900 dark:text-white flex items-center space-x-2">
+            <Package className="h-6 w-6 text-emerald-600 dark:text-emerald-400" />
             <span>Available Batches</span>
           </h2>
           {batches.map((batch) => (
@@ -286,25 +286,25 @@ export default function Traceability() {
                 setShowQRCode(false)
                 setActiveTab('overview')
               }}
-              className={`bg-white rounded-lg shadow-md p-4 cursor-pointer transition hover:shadow-lg border-2 ${
-                selectedBatch?.id === batch.id ? 'border-emerald-500' : 'border-transparent'
+              className={`bg-white dark:bg-gray-800 rounded-lg shadow-md p-4 cursor-pointer transition hover:shadow-lg border-2 ${
+                selectedBatch?.id === batch.id ? 'border-emerald-500 dark:border-emerald-400' : 'border-transparent'
               }`}
             >
               <div className="flex items-start justify-between mb-2">
                 <h3 className="font-semibold text-gray-900 dark:text-white">{batch.crop}</h3>
                 {batch.isVerified ? (
-                  <CheckCircle className="h-5 w-5 text-green-500" />
+                  <CheckCircle className="h-5 w-5 text-green-500 dark:text-green-400" />
                 ) : (
-                  <XCircle className="h-5 w-5 text-red-500" />
+                  <XCircle className="h-5 w-5 text-red-500 dark:text-red-400" />
                 )}
               </div>
-              <p className="text-sm text-gray-600 mb-1">{batch.quantity}</p>
+              <p className="text-sm text-gray-600 dark:text-gray-300 mb-1">{batch.quantity}</p>
               <p className="text-xs text-gray-500 dark:text-gray-400">{batch.originFarm}</p>
               <div className="mt-3 flex items-center justify-between">
                 <span className={`text-xs px-2 py-1 rounded-full ${
                   batch.status === 'active' 
-                    ? 'bg-green-100 text-green-700' 
-                    : 'bg-gray-100 text-gray-700'
+                    ? 'bg-green-100 dark:bg-green-900 text-green-700 dark:text-green-100' 
+                    : 'bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300'
                 }`}>
                   {batch.status === 'active' ? 'In Progress' : 'Completed'}
                 </span>
@@ -316,13 +316,13 @@ export default function Traceability() {
 
         <div className="lg:col-span-2">
           {selectedBatch ? (
-            <div className="bg-white rounded-lg shadow-md">
-              <div className="border-b border-gray-200 px-6 py-4">
+            <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md">
+              <div className="border-b border-gray-200 dark:border-gray-700 px-6 py-4">
                 <div className="flex items-center justify-between mb-2">
                   <h2 className="text-2xl font-bold text-gray-900 dark:text-white">{selectedBatch.crop}</h2>
                   <button
                     onClick={() => setShowQRCode(!showQRCode)}
-                    className="flex items-center space-x-2 bg-emerald-600 text-white px-4 py-2 rounded-lg hover:bg-emerald-700 transition"
+                    className="flex items-center space-x-2 bg-emerald-600 dark:bg-emerald-500 text-white px-4 py-2 rounded-lg hover:bg-emerald-700 dark:hover:bg-emerald-600 transition"
                   >
                     <QrCode className="h-5 w-5" />
                     <span>{showQRCode ? 'Hide' : 'Show'} QR Code</span>
@@ -332,10 +332,10 @@ export default function Traceability() {
               </div>
 
               {showQRCode && (
-                <div className="border-b border-gray-200 px-6 py-6 bg-gray-50">
+                <div className="border-b border-gray-200 dark:border-gray-700 px-6 py-6 bg-gray-50 dark:bg-gray-800">
                   <div className="flex flex-col items-center">
-                    <p className="text-sm font-medium text-gray-700 mb-3">Scan to view full traceability</p>
-                    <div className="bg-white p-4 rounded-lg shadow-md">
+                    <p className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-3">Scan to view full traceability</p>
+                    <div className="bg-white dark:bg-gray-900 p-4 rounded-lg shadow-md">
                       <QRCodeSVG
                         value={JSON.stringify({
                           batchId: selectedBatch.batchNumber,
@@ -346,7 +346,7 @@ export default function Traceability() {
                         level="H"
                       />
                     </div>
-                    <p className="text-xs text-gray-500 mt-3 text-center max-w-xs">
+                    <p className="text-xs text-gray-500 dark:text-gray-400 mt-3 text-center max-w-xs">
                       Consumers can scan this QR code to view the complete journey of this product
                     </p>
                   </div>
@@ -359,8 +359,8 @@ export default function Traceability() {
                     onClick={() => setActiveTab('overview')}
                     className={`px-4 py-3 font-medium transition ${
                       activeTab === 'overview'
-                        ? 'text-emerald-600 border-b-2 border-emerald-600'
-                        : 'text-gray-500 hover:text-gray-700'
+                        ? 'text-emerald-600 dark:text-emerald-400 border-b-2 border-emerald-600 dark:border-emerald-400'
+                        : 'text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200'
                     }`}
                   >
                     Overview
@@ -369,8 +369,8 @@ export default function Traceability() {
                     onClick={() => setActiveTab('events')}
                     className={`px-4 py-3 font-medium transition ${
                       activeTab === 'events'
-                        ? 'text-emerald-600 border-b-2 border-emerald-600'
-                        : 'text-gray-500 hover:text-gray-700'
+                        ? 'text-emerald-600 dark:text-emerald-400 border-b-2 border-emerald-600 dark:border-emerald-400'
+                        : 'text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200'
                     }`}
                   >
                     Event Timeline
@@ -379,8 +379,8 @@ export default function Traceability() {
                     onClick={() => setActiveTab('verification')}
                     className={`px-4 py-3 font-medium transition ${
                       activeTab === 'verification'
-                        ? 'text-emerald-600 border-b-2 border-emerald-600'
-                        : 'text-gray-500 hover:text-gray-700'
+                        ? 'text-emerald-600 dark:text-emerald-400 border-b-2 border-emerald-600 dark:border-emerald-400'
+                        : 'text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200'
                     }`}
                   >
                     Blockchain Verification
@@ -392,26 +392,26 @@ export default function Traceability() {
                 {activeTab === 'overview' && (
                   <div className="space-y-6">
                     <div className="grid grid-cols-2 gap-4">
-                      <div className="bg-gray-50 p-4 rounded-lg">
-                        <p className="text-sm text-gray-600 mb-1">Quantity</p>
+                      <div className="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg">
+                        <p className="text-sm text-gray-600 dark:text-gray-300 mb-1">Quantity</p>
                         <p className="text-lg font-semibold text-gray-900 dark:text-white">{selectedBatch.quantity}</p>
                       </div>
-                      <div className="bg-gray-50 p-4 rounded-lg">
-                        <p className="text-sm text-gray-600 mb-1">Origin</p>
+                      <div className="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg">
+                        <p className="text-sm text-gray-600 dark:text-gray-300 mb-1">Origin</p>
                         <p className="text-lg font-semibold text-gray-900 dark:text-white">{selectedBatch.originFarm}</p>
                       </div>
-                      <div className="bg-gray-50 p-4 rounded-lg">
-                        <p className="text-sm text-gray-600 mb-1">Created</p>
+                      <div className="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg">
+                        <p className="text-sm text-gray-600 dark:text-gray-300 mb-1">Created</p>
                         <p className="text-lg font-semibold text-gray-900 dark:text-white">{formatDate(selectedBatch.createdAt)}</p>
                       </div>
-                      <div className="bg-gray-50 p-4 rounded-lg">
-                        <p className="text-sm text-gray-600 mb-1">Status</p>
-                        <p className="text-lg font-semibold text-gray-900 capitalize">{selectedBatch.status}</p>
+                      <div className="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg">
+                        <p className="text-sm text-gray-600 dark:text-gray-300 mb-1">Status</p>
+                        <p className="text-lg font-semibold text-gray-900 dark:text-white capitalize">{selectedBatch.status}</p>
                       </div>
                     </div>
 
                     <div>
-                      <h3 className="text-lg font-semibold text-gray-900 mb-3">Supply Chain Summary</h3>
+                      <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">Supply Chain Summary</h3>
                       <div className="space-y-2">
                         {selectedBatch.events.map((event, index) => {
                           const Icon = eventIcons[event.eventType]
@@ -461,19 +461,19 @@ export default function Traceability() {
                       Chronological Event Timeline
                     </h3>
                     <div className="relative">
-                      <div className="absolute left-6 top-0 bottom-0 w-0.5 bg-gray-200"></div>
+                      <div className="absolute left-6 top-0 bottom-0 w-0.5 bg-gray-200 dark:bg-gray-700"></div>
                       <div className="space-y-6">
                         {selectedBatch.events.map((event) => {
                           const Icon = eventIcons[event.eventType]
                           return (
                             <div key={event.id} className="relative pl-16">
-                              <div className={`absolute left-0 p-3 rounded-full ${eventColors[event.eventType]} border-4 border-white`}>
+                              <div className={`absolute left-0 p-3 rounded-full ${eventColors[event.eventType]} border-4 border-white dark:border-gray-800`}>
                                 <Icon className="h-6 w-6" />
                               </div>
-                              <div className="bg-gray-50 rounded-lg p-4">
+                              <div className="bg-gray-50 dark:bg-gray-700 rounded-lg p-4">
                                 <div className="flex items-start justify-between mb-2">
                                   <div>
-                                    <h4 className="font-semibold text-gray-900 text-lg">
+                                    <h4 className="font-semibold text-gray-900 dark:text-white text-lg">
                                       {formatEventType(event.eventType)}
                                     </h4>
                                     <div className="flex items-center space-x-4 mt-1 text-sm text-gray-600 dark:text-gray-300">
@@ -483,27 +483,27 @@ export default function Traceability() {
                                       </div>
                                     </div>
                                   </div>
-                                  <span className="text-xs bg-gray-200 text-gray-700 px-2 py-1 rounded">
+                                  <span className="text-xs bg-gray-200 dark:bg-gray-800 text-gray-700 dark:text-gray-300 px-2 py-1 rounded">
                                     Block #{event.blockNumber}
                                   </span>
                                 </div>
                                 <div className="space-y-2 mt-3">
                                   <div className="flex items-start space-x-2">
-                                    <MapPin className="h-4 w-4 text-gray-500 mt-0.5" />
+                                    <MapPin className="h-4 w-4 text-gray-500 dark:text-gray-400 mt-0.5" />
                                     <span className="text-sm text-gray-700 dark:text-gray-300">{event.location}</span>
                                   </div>
                                   <div className="flex items-start space-x-2">
-                                    <User className="h-4 w-4 text-gray-500 mt-0.5" />
+                                    <User className="h-4 w-4 text-gray-500 dark:text-gray-400 mt-0.5" />
                                     <span className="text-sm text-gray-700 dark:text-gray-300">{event.actor}</span>
                                   </div>
                                 </div>
                                 <div className="mt-3 pt-3 border-t border-gray-200 dark:border-gray-700">
-                                  <p className="text-sm font-medium text-gray-700 mb-2">Event Details:</p>
+                                  <p className="text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Event Details:</p>
                                   <div className="grid grid-cols-2 gap-2">
                                     {Object.entries(event.data).map(([key, value]) => (
                                       <div key={key} className="text-sm">
                                         <span className="text-gray-600 dark:text-gray-300">{key.replace(/([A-Z])/g, ' $1').trim()}:</span>
-                                        <span className="text-gray-900 ml-1 font-medium">{String(value)}</span>
+                                        <span className="text-gray-900 dark:text-white ml-1 font-medium">{String(value)}</span>
                                       </div>
                                     ))}
                                   </div>
@@ -520,20 +520,20 @@ export default function Traceability() {
                 {activeTab === 'verification' && (
                   <div className="space-y-6">
                     <div>
-                      <h3 className="text-lg font-semibold text-gray-900 mb-4">
+                      <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
                         Blockchain Hash Chain Verification
                       </h3>
                       {verification && (
                         <div className={`rounded-lg p-4 mb-6 ${
-                          verification.isValid ? 'bg-green-50 border border-green-200' : 'bg-red-50 border border-red-200'
+                          verification.isValid ? 'bg-green-50 dark:bg-green-900/30 border border-green-200 dark:border-green-700' : 'bg-red-50 dark:bg-red-900/30 border border-red-200 dark:border-red-700'
                         }`}>
                           <div className="flex items-center space-x-2 mb-2">
                             {verification.isValid ? (
-                              <CheckCircle className="h-6 w-6 text-green-600" />
+                              <CheckCircle className="h-6 w-6 text-green-600 dark:text-green-400" />
                             ) : (
-                              <XCircle className="h-6 w-6 text-red-600" />
+                              <XCircle className="h-6 w-6 text-red-600 dark:text-red-400" />
                             )}
-                            <span className={`font-bold text-lg ${verification.isValid ? 'text-green-900' : 'text-red-900'}`}>
+                            <span className={`font-bold text-lg ${verification.isValid ? 'text-green-900 dark:text-green-100' : 'text-red-900 dark:text-red-100'}`}>
                               {verification.message}
                             </span>
                           </div>
@@ -552,10 +552,10 @@ export default function Traceability() {
                     </div>
 
                     <div>
-                      <h4 className="font-semibold text-gray-900 mb-3">Hash Chain Details</h4>
+                      <h4 className="font-semibold text-gray-900 dark:text-white mb-3">Hash Chain Details</h4>
                       <div className="space-y-3">
                         {selectedBatch.events.map((event, index) => (
-                          <div key={event.id} className="bg-gray-50 rounded-lg p-4">
+                          <div key={event.id} className="bg-gray-50 dark:bg-gray-700 rounded-lg p-4">
                             <div className="flex items-center justify-between mb-3">
                               <div className="flex items-center space-x-2">
                                 <span className="text-sm font-medium text-gray-900 dark:text-white">Block #{event.blockNumber}</span>
@@ -563,31 +563,31 @@ export default function Traceability() {
                                 <span className="text-sm text-gray-700 dark:text-gray-300">{formatEventType(event.eventType)}</span>
                               </div>
                               {verification?.invalidBlocks.includes(event.blockNumber) ? (
-                                <XCircle className="h-5 w-5 text-red-500" />
+                                <XCircle className="h-5 w-5 text-red-500 dark:text-red-400" />
                               ) : (
-                                <CheckCircle className="h-5 w-5 text-green-500" />
+                                <CheckCircle className="h-5 w-5 text-green-500 dark:text-green-400" />
                               )}
                             </div>
                             <div className="space-y-2">
                               <div>
-                                <p className="text-xs text-gray-600 mb-1">Previous Hash:</p>
-                                <p className="text-xs font-mono bg-white px-2 py-1 rounded border border-gray-200 break-all">
+                                <p className="text-xs text-gray-600 dark:text-gray-300 mb-1">Previous Hash:</p>
+                                <p className="text-xs font-mono bg-white dark:bg-gray-900 px-2 py-1 rounded border border-gray-200 dark:border-gray-600 break-all text-gray-900 dark:text-gray-100">
                                   {event.previousHash}
                                 </p>
                               </div>
                               <div>
-                                <p className="text-xs text-gray-600 mb-1">Current Hash:</p>
-                                <p className="text-xs font-mono bg-white px-2 py-1 rounded border border-gray-200 break-all">
+                                <p className="text-xs text-gray-600 dark:text-gray-300 mb-1">Current Hash:</p>
+                                <p className="text-xs font-mono bg-white dark:bg-gray-900 px-2 py-1 rounded border border-gray-200 dark:border-gray-600 break-all text-gray-900 dark:text-gray-100">
                                   {event.currentHash}
                                 </p>
                               </div>
                             </div>
                             {index < selectedBatch.events.length - 1 && (
                               <div className="flex items-center justify-center mt-3">
-                                <div className="flex items-center space-x-2 text-emerald-600">
-                                  <div className="w-4 h-px bg-emerald-600"></div>
+                                <div className="flex items-center space-x-2 text-emerald-600 dark:text-emerald-400">
+                                  <div className="w-4 h-px bg-emerald-600 dark:bg-emerald-400"></div>
                                   <Link2 className="h-4 w-4" />
-                                  <div className="w-4 h-px bg-emerald-600"></div>
+                                  <div className="w-4 h-px bg-emerald-600 dark:bg-emerald-400"></div>
                                 </div>
                               </div>
                             )}
@@ -596,10 +596,10 @@ export default function Traceability() {
                       </div>
                     </div>
 
-                    <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
+                    <div className="bg-blue-50 dark:bg-blue-900/30 border border-blue-200 dark:border-blue-700 rounded-lg p-4">
                       <div className="flex items-start space-x-2">
-                        <Info className="h-5 w-5 text-blue-600 flex-shrink-0 mt-0.5" />
-                        <div className="text-sm text-blue-800">
+                        <Info className="h-5 w-5 text-blue-600 dark:text-blue-400 flex-shrink-0 mt-0.5" />
+                        <div className="text-sm text-blue-800 dark:text-blue-200">
                           <p className="font-medium mb-1">How Hash Chain Verification Works:</p>
                           <p>Each block's hash is calculated from its data plus the previous block's hash. This creates an unbreakable chain where any tampering with historical data would immediately be detected, as it would break the hash chain continuity.</p>
                         </div>
@@ -610,9 +610,9 @@ export default function Traceability() {
               </div>
             </div>
           ) : (
-            <div className="bg-white rounded-lg shadow-md p-12 text-center">
-              <Package className="h-16 w-16 text-gray-300 mx-auto mb-4" />
-              <p className="text-gray-600 text-lg">Select a batch to view its traceability details</p>
+            <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-12 text-center">
+              <Package className="h-16 w-16 text-gray-300 dark:text-gray-600 mx-auto mb-4" />
+              <p className="text-gray-600 dark:text-gray-300 text-lg">Select a batch to view its traceability details</p>
             </div>
           )}
         </div>

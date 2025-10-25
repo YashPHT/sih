@@ -89,35 +89,35 @@ function PolicymakerDashboard() {
   return (
     <div className="space-y-8">
       <div>
-        <h1 className="text-3xl font-bold text-gray-900 flex items-center">
+        <h1 className="text-3xl font-bold text-gray-900 dark:text-white flex items-center">
           <Brain className="h-8 w-8 mr-3 text-primary-600 dark:text-primary-400" />
           Policymaker Intelligence Dashboard
         </h1>
-        <p className="mt-2 text-gray-600 max-w-3xl">
+        <p className="mt-2 text-gray-600 dark:text-gray-300 max-w-3xl">
           Strategic insights for agricultural policy and planning
         </p>
       </div>
 
-      <div className="card bg-gradient-to-r from-primary-50 via-blue-50 to-indigo-50 border-primary-200">
+      <div className="card bg-gradient-to-r from-primary-50 via-blue-50 to-indigo-50 dark:from-primary-900/30 dark:via-blue-900/30 dark:to-indigo-900/30 border-primary-200 dark:border-primary-700">
         <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
           <div className="flex-1">
             <div className="flex items-center gap-3">
               <Filter className="h-5 w-5 text-primary-600 dark:text-primary-400" />
               <h2 className="text-lg font-bold text-gray-900 dark:text-white">Data Filters</h2>
             </div>
-            <p className="text-sm text-gray-600 mt-2">
+            <p className="text-sm text-gray-600 dark:text-gray-300 mt-2">
               Refine insights by state and season
             </p>
           </div>
           <div className="flex flex-wrap gap-4">
             <div>
-              <label className="block text-xs font-semibold text-gray-700 uppercase tracking-wide mb-2">
+              <label className="block text-xs font-semibold text-gray-700 dark:text-gray-300 uppercase tracking-wide mb-2">
                 State
               </label>
               <select
                 value={selectedState}
                 onChange={(e) => setSelectedState(e.target.value)}
-                className="form-select px-4 py-2 border border-gray-300 rounded-lg bg-white text-gray-900 font-medium focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
+                className="form-select px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 font-medium focus:ring-2 focus:ring-primary-500 dark:focus:ring-primary-400 focus:border-primary-500 dark:focus:border-primary-400"
               >
                 <option value="all">All States</option>
                 {statesList.map(state => (
@@ -126,13 +126,13 @@ function PolicymakerDashboard() {
               </select>
             </div>
             <div>
-              <label className="block text-xs font-semibold text-gray-700 uppercase tracking-wide mb-2">
+              <label className="block text-xs font-semibold text-gray-700 dark:text-gray-300 uppercase tracking-wide mb-2">
                 Season
               </label>
               <select
                 value={selectedSeason}
                 onChange={(e) => setSelectedSeason(e.target.value)}
-                className="form-select px-4 py-2 border border-gray-300 rounded-lg bg-white text-gray-900 font-medium focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
+                className="form-select px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 font-medium focus:ring-2 focus:ring-primary-500 dark:focus:ring-primary-400 focus:border-primary-500 dark:focus:border-primary-400"
               >
                 <option value="all">All Seasons</option>
                 {seasonsList.map(season => (
@@ -145,86 +145,86 @@ function PolicymakerDashboard() {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
-        <div className="card bg-gradient-to-br from-red-50 to-red-100 border-red-200">
+        <div className="card bg-gradient-to-br from-red-50 to-red-100 dark:from-red-900/30 dark:to-red-800/30 border-red-200 dark:border-red-700">
           <div className="flex items-start justify-between">
             <div className="flex-1">
               <div className="flex items-center gap-2 mb-2">
-                <TrendingDown className="h-5 w-5 text-red-600" />
-                <p className="text-sm font-semibold text-red-800 uppercase tracking-wide">Import Dependency</p>
+                <TrendingDown className="h-5 w-5 text-red-600 dark:text-red-400" />
+                <p className="text-sm font-semibold text-red-800 dark:text-red-200 uppercase tracking-wide">Import Dependency</p>
               </div>
-              <p className="text-4xl font-bold text-red-900">{aggregatedKPIs.importDependency.toFixed(1)}%</p>
-              <p className="text-sm text-red-700 mt-2">
+              <p className="text-4xl font-bold text-red-900 dark:text-red-100">{aggregatedKPIs.importDependency.toFixed(1)}%</p>
+              <p className="text-sm text-red-700 dark:text-red-300 mt-2">
                 For critical oilseeds
               </p>
             </div>
             <div className={`flex items-center justify-center w-12 h-12 rounded-full ${
-              aggregatedKPIs.importDependency < 20 ? 'bg-green-200' : 
-              aggregatedKPIs.importDependency < 40 ? 'bg-amber-200' : 'bg-red-200'
+              aggregatedKPIs.importDependency < 20 ? 'bg-green-200 dark:bg-green-900' : 
+              aggregatedKPIs.importDependency < 40 ? 'bg-amber-200 dark:bg-amber-900' : 'bg-red-200 dark:bg-red-900'
             }`}>
               <AlertCircle className={`h-6 w-6 ${
-                aggregatedKPIs.importDependency < 20 ? 'text-green-700' : 
-                aggregatedKPIs.importDependency < 40 ? 'text-amber-700' : 'text-red-700'
+                aggregatedKPIs.importDependency < 20 ? 'text-green-700 dark:text-green-300' : 
+                aggregatedKPIs.importDependency < 40 ? 'text-amber-700 dark:text-amber-300' : 'text-red-700 dark:text-red-300'
               }`} />
             </div>
           </div>
         </div>
 
-        <div className="card bg-gradient-to-br from-blue-50 to-blue-100 border-blue-200">
+        <div className="card bg-gradient-to-br from-blue-50 to-blue-100 dark:from-blue-900/30 dark:to-blue-800/30 border-blue-200 dark:border-blue-700">
           <div className="flex items-start justify-between">
             <div className="flex-1">
               <div className="flex items-center gap-2 mb-2">
-                <Package className="h-5 w-5 text-blue-600" />
-                <p className="text-sm font-semibold text-blue-800 uppercase tracking-wide">Production vs Target</p>
+                <Package className="h-5 w-5 text-blue-600 dark:text-blue-400" />
+                <p className="text-sm font-semibold text-blue-800 dark:text-blue-200 uppercase tracking-wide">Production vs Target</p>
               </div>
-              <p className="text-4xl font-bold text-blue-900">
+              <p className="text-4xl font-bold text-blue-900 dark:text-blue-100">
                 {(aggregatedKPIs.productionTarget / 1000).toFixed(1)}K MT
               </p>
-              <p className="text-sm text-blue-700 mt-2">
+              <p className="text-sm text-blue-700 dark:text-blue-300 mt-2">
                 Achievement: {targetAchievementRate.toFixed(1)}%
               </p>
             </div>
-            <div className="flex items-center justify-center w-12 h-12 rounded-full bg-blue-200">
-              <TrendingUp className="h-6 w-6 text-blue-700" />
+            <div className="flex items-center justify-center w-12 h-12 rounded-full bg-blue-200 dark:bg-blue-900">
+              <TrendingUp className="h-6 w-6 text-blue-700 dark:text-blue-300" />
             </div>
           </div>
         </div>
 
-        <div className="card bg-gradient-to-br from-green-50 to-green-100 border-green-200">
+        <div className="card bg-gradient-to-br from-green-50 to-green-100 dark:from-green-900/30 dark:to-green-800/30 border-green-200 dark:border-green-700">
           <div className="flex items-start justify-between">
             <div className="flex-1">
               <div className="flex items-center gap-2 mb-2">
-                <Factory className="h-5 w-5 text-green-600" />
-                <p className="text-sm font-semibold text-green-800 uppercase tracking-wide">Processing Capacity</p>
+                <Factory className="h-5 w-5 text-green-600 dark:text-green-400" />
+                <p className="text-sm font-semibold text-green-800 dark:text-green-200 uppercase tracking-wide">Processing Capacity</p>
               </div>
-              <p className="text-4xl font-bold text-green-900">
+              <p className="text-4xl font-bold text-green-900 dark:text-green-100">
                 {(aggregatedKPIs.processingCapacity / 1000).toFixed(1)}K MT
               </p>
-              <p className="text-sm text-green-700 mt-2">
+              <p className="text-sm text-green-700 dark:text-green-300 mt-2">
                 Utilization: {aggregatedKPIs.processingUtilization.toFixed(1)}%
               </p>
             </div>
-            <div className="flex items-center justify-center w-12 h-12 rounded-full bg-green-200">
-              <Factory className="h-6 w-6 text-green-700" />
+            <div className="flex items-center justify-center w-12 h-12 rounded-full bg-green-200 dark:bg-green-900">
+              <Factory className="h-6 w-6 text-green-700 dark:text-green-300" />
             </div>
           </div>
         </div>
 
-        <div className="card bg-gradient-to-br from-purple-50 to-purple-100 border-purple-200">
+        <div className="card bg-gradient-to-br from-purple-50 to-purple-100 dark:from-purple-900/30 dark:to-purple-800/30 border-purple-200 dark:border-purple-700">
           <div className="flex items-start justify-between">
             <div className="flex-1">
               <div className="flex items-center gap-2 mb-2">
-                <TrendingDown className="h-5 w-5 text-purple-600" />
-                <p className="text-sm font-semibold text-purple-800 uppercase tracking-wide">Import Reduction Target</p>
+                <TrendingDown className="h-5 w-5 text-purple-600 dark:text-purple-400" />
+                <p className="text-sm font-semibold text-purple-800 dark:text-purple-200 uppercase tracking-wide">Import Reduction Target</p>
               </div>
-              <p className="text-4xl font-bold text-purple-900">
+              <p className="text-4xl font-bold text-purple-900 dark:text-purple-100">
                 {importReductionRate > 0 ? '+' : ''}{importReductionRate.toFixed(1)}%
               </p>
-              <p className="text-sm text-purple-700 mt-2">
+              <p className="text-sm text-purple-700 dark:text-purple-300 mt-2">
                 {importReductionRate > 0 ? 'Target on track' : 'Needs attention'}
               </p>
             </div>
-            <div className="flex items-center justify-center w-12 h-12 rounded-full bg-purple-200">
-              <BarChart3 className="h-6 w-6 text-purple-700" />
+            <div className="flex items-center justify-center w-12 h-12 rounded-full bg-purple-200 dark:bg-purple-900">
+              <BarChart3 className="h-6 w-6 text-purple-700 dark:text-purple-300" />
             </div>
           </div>
         </div>
@@ -233,11 +233,11 @@ function PolicymakerDashboard() {
       <div className="card">
         <div className="flex items-center justify-between mb-6">
           <div>
-            <h2 className="text-xl font-bold text-gray-900 flex items-center">
+            <h2 className="text-xl font-bold text-gray-900 dark:text-white flex items-center">
               <TrendingUp className="h-5 w-5 mr-2 text-primary-600 dark:text-primary-400" />
               Production vs Demand Analysis
             </h2>
-            <p className="text-sm text-gray-600 mt-1">
+            <p className="text-sm text-gray-600 dark:text-gray-300 mt-1">
               Track production levels against market demand
             </p>
           </div>
@@ -292,11 +292,11 @@ function PolicymakerDashboard() {
         <div className="card">
           <div className="flex items-center justify-between mb-6">
             <div>
-              <h2 className="text-xl font-bold text-gray-900 flex items-center">
+              <h2 className="text-xl font-bold text-gray-900 dark:text-white flex items-center">
                 <TrendingDown className="h-5 w-5 mr-2 text-primary-600 dark:text-primary-400" />
                 Import Reduction Trend
               </h2>
-              <p className="text-sm text-gray-600 mt-1">
+              <p className="text-sm text-gray-600 dark:text-gray-300 mt-1">
                 Quarterly progress on reducing import dependency
               </p>
             </div>
@@ -333,11 +333,11 @@ function PolicymakerDashboard() {
         <div className="card">
           <div className="flex items-center justify-between mb-6">
             <div>
-              <h2 className="text-xl font-bold text-gray-900 flex items-center">
+              <h2 className="text-xl font-bold text-gray-900 dark:text-white flex items-center">
                 <Package className="h-5 w-5 mr-2 text-primary-600 dark:text-primary-400" />
                 Crop Production Distribution
               </h2>
-              <p className="text-sm text-gray-600 mt-1">
+              <p className="text-sm text-gray-600 dark:text-gray-300 mt-1">
                 Current production by commodity
               </p>
             </div>
@@ -373,11 +373,11 @@ function PolicymakerDashboard() {
       <div className="card">
         <div className="flex items-center justify-between mb-6">
           <div>
-            <h2 className="text-xl font-bold text-gray-900 flex items-center">
+            <h2 className="text-xl font-bold text-gray-900 dark:text-white flex items-center">
               <MapIcon className="h-5 w-5 mr-2 text-primary-600 dark:text-primary-400" />
               Supply Chain Infrastructure Map
             </h2>
-            <p className="text-sm text-gray-600 mt-1">
+            <p className="text-sm text-gray-600 dark:text-gray-300 mt-1">
               Geospatial overview of warehouses, processing units, and active logistics routes
             </p>
           </div>
@@ -390,20 +390,20 @@ function PolicymakerDashboard() {
         />
       </div>
 
-      <div className="card bg-gradient-to-r from-blue-50 to-indigo-50 border-blue-200">
+      <div className="card bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-900/30 dark:to-indigo-900/30 border-blue-200 dark:border-blue-700">
         <div className="flex items-start justify-between gap-6">
           <div className="flex-1">
-            <h2 className="text-xl font-bold text-gray-900 flex items-center">
-              <FileText className="h-5 w-5 mr-2 text-blue-600" />
+            <h2 className="text-xl font-bold text-gray-900 dark:text-white flex items-center">
+              <FileText className="h-5 w-5 mr-2 text-blue-600 dark:text-blue-400" />
               Narrative Insights & Policy Recommendations
             </h2>
             <div className="mt-4 space-y-4">
-              <div className="bg-white/80 border border-blue-200 rounded-lg p-4">
-                <h3 className="font-semibold text-gray-900 flex items-center gap-2">
-                  <MapPin className="h-4 w-4 text-blue-600" />
+              <div className="bg-white/80 dark:bg-gray-800/80 border border-blue-200 dark:border-blue-600 rounded-lg p-4">
+                <h3 className="font-semibold text-gray-900 dark:text-white flex items-center gap-2">
+                  <MapPin className="h-4 w-4 text-blue-600 dark:text-blue-400" />
                   Regional Production Gaps
                 </h3>
-                <p className="text-sm text-gray-700 mt-2">
+                <p className="text-sm text-gray-700 dark:text-gray-300 mt-2">
                   {selectedState === 'all' ? 'National analysis shows' : `${selectedState} analysis shows`} that 
                   current production levels are {targetAchievementRate >= 95 ? 'meeting' : 'falling short of'} targets 
                   by {Math.abs(100 - targetAchievementRate).toFixed(1)}%. 
@@ -411,12 +411,12 @@ function PolicymakerDashboard() {
                 </p>
               </div>
 
-              <div className="bg-white/80 border border-blue-200 rounded-lg p-4">
-                <h3 className="font-semibold text-gray-900 flex items-center gap-2">
-                  <Factory className="h-4 w-4 text-blue-600" />
+              <div className="bg-white/80 dark:bg-gray-800/80 border border-blue-200 dark:border-blue-600 rounded-lg p-4">
+                <h3 className="font-semibold text-gray-900 dark:text-white flex items-center gap-2">
+                  <Factory className="h-4 w-4 text-blue-600 dark:text-blue-400" />
                   Processing Capacity Utilization
                 </h3>
-                <p className="text-sm text-gray-700 mt-2">
+                <p className="text-sm text-gray-700 dark:text-gray-300 mt-2">
                   Current processing infrastructure operates at {aggregatedKPIs.processingUtilization.toFixed(1)}% capacity. 
                   {aggregatedKPIs.processingUtilization < 70 && ' Underutilization suggests potential for increased throughput without additional capital investment.'}
                   {aggregatedKPIs.processingUtilization >= 70 && aggregatedKPIs.processingUtilization < 90 && ' Capacity utilization is optimal for current demand levels.'}
@@ -424,12 +424,12 @@ function PolicymakerDashboard() {
                 </p>
               </div>
 
-              <div className="bg-white/80 border border-blue-200 rounded-lg p-4">
-                <h3 className="font-semibold text-gray-900 flex items-center gap-2">
-                  <TrendingDown className="h-4 w-4 text-blue-600" />
+              <div className="bg-white/80 dark:bg-gray-800/80 border border-blue-200 dark:border-blue-600 rounded-lg p-4">
+                <h3 className="font-semibold text-gray-900 dark:text-white flex items-center gap-2">
+                  <TrendingDown className="h-4 w-4 text-blue-600 dark:text-blue-400" />
                   Import Dependency Strategy
                 </h3>
-                <p className="text-sm text-gray-700 mt-2">
+                <p className="text-sm text-gray-700 dark:text-gray-300 mt-2">
                   Import dependency at {aggregatedKPIs.importDependency.toFixed(1)}% represents 
                   {aggregatedKPIs.importDependency < 20 ? ' minimal exposure to global market volatility. Continue monitoring to maintain self-sufficiency.' : 
                    aggregatedKPIs.importDependency < 40 ? ' moderate reliance on external sources. Strategic initiatives to boost domestic production recommended.' :
@@ -438,12 +438,12 @@ function PolicymakerDashboard() {
                 </p>
               </div>
 
-              <div className="bg-white/80 border border-blue-200 rounded-lg p-4">
-                <h3 className="font-semibold text-gray-900 flex items-center gap-2">
-                  <BarChart3 className="h-4 w-4 text-blue-600" />
+              <div className="bg-white/80 dark:bg-gray-800/80 border border-blue-200 dark:border-blue-600 rounded-lg p-4">
+                <h3 className="font-semibold text-gray-900 dark:text-white flex items-center gap-2">
+                  <BarChart3 className="h-4 w-4 text-blue-600 dark:text-blue-400" />
                   Seasonal Considerations
                 </h3>
-                <p className="text-sm text-gray-700 mt-2">
+                <p className="text-sm text-gray-700 dark:text-gray-300 mt-2">
                   {selectedSeason === 'all' ? 'Year-round data reflects' : `${selectedSeason} season data highlights`} the 
                   importance of aligning production cycles with market demand patterns. Peak demand periods require enhanced 
                   logistics coordination and strategic buffer stock management to stabilize prices and ensure supply security.
@@ -474,7 +474,7 @@ function PolicymakerDashboard() {
               onClick={() => {
                 showNotification('info', 'Full analysis document will be generated and sent to your registered email.')
               }}
-              className="px-4 py-2 border border-gray-300 rounded-lg text-gray-700 font-medium hover:bg-gray-50 transition-colors flex items-center justify-center whitespace-nowrap"
+              className="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg text-gray-700 dark:text-gray-300 font-medium hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors flex items-center justify-center whitespace-nowrap"
             >
               <FileText className="h-4 w-4 mr-2" />
               Full Analysis

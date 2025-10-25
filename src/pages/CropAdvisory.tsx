@@ -78,12 +78,12 @@ function CropRecommendationCard({ crop, onSelect, isLoading }: { crop: CropRecom
         </div>
       </div>
 
-      <div className="border-t border-gray-200 pt-4">
-        <p className="text-sm font-semibold text-gray-900 mb-2">Why this crop is recommended:</p>
+      <div className="border-t border-gray-200 dark:border-gray-700 pt-4">
+        <p className="text-sm font-semibold text-gray-900 dark:text-white mb-2">Why this crop is recommended:</p>
         <ul className="space-y-1">
           {crop.reasons.map((reason, index) => (
-            <li key={index} className="text-sm text-gray-600 flex items-start">
-              <span className="text-primary-600 mr-2">•</span>
+            <li key={index} className="text-sm text-gray-600 dark:text-gray-300 flex items-start">
+              <span className="text-primary-600 dark:text-primary-400 mr-2">•</span>
               <span>{reason}</span>
             </li>
           ))}
@@ -126,13 +126,13 @@ function WeatherImpactCard({ alert }: { alert: WeatherAlert }) {
         </div>
         <AlertTriangle className={`h-6 w-6 ${iconClass}`} />
       </div>
-      <p className="mt-3 text-sm text-gray-700 leading-relaxed">{alert.description}</p>
+      <p className="mt-3 text-sm text-gray-700 dark:text-gray-300 leading-relaxed">{alert.description}</p>
       {alert.impactAreas.length > 0 && (
         <div className="mt-4">
           <p className="text-xs font-semibold uppercase tracking-wide text-gray-500 dark:text-gray-400">Impact areas</p>
           <div className="mt-2 flex flex-wrap gap-2">
             {alert.impactAreas.map((area) => (
-              <span key={area} className="badge bg-white border border-gray-200 text-gray-800 dark:text-gray-200">
+              <span key={area} className="badge bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 text-gray-800 dark:text-gray-200">
                 {area}
               </span>
             ))}
@@ -142,7 +142,7 @@ function WeatherImpactCard({ alert }: { alert: WeatherAlert }) {
       {alert.recommendedActions.length > 0 && (
         <div className="mt-4">
           <p className="text-xs font-semibold uppercase tracking-wide text-gray-500 dark:text-gray-400">Recommended actions</p>
-          <ul className="mt-2 space-y-1 text-sm text-gray-700 list-disc list-inside">
+          <ul className="mt-2 space-y-1 text-sm text-gray-700 dark:text-gray-300 list-disc list-inside">
             {alert.recommendedActions.map((action) => (
               <li key={action}>{action}</li>
             ))}
@@ -187,11 +187,11 @@ function SeasonalAdvisoryCard({ advisory, onUpdateStatus }: { advisory: Seasonal
       <div className="flex items-start justify-between mb-3">
         <div className="flex items-center gap-3">
           <div className={`p-2 rounded-lg ${
-            advisory.category === 'irrigation' ? 'bg-blue-100 text-blue-600' :
-            advisory.category === 'fertilization' ? 'bg-green-100 text-green-600' :
-            advisory.category === 'pest-control' ? 'bg-red-100 text-red-600' :
-            advisory.category === 'weather' ? 'bg-amber-100 text-amber-600' :
-            'bg-gray-100 text-gray-600'
+            advisory.category === 'irrigation' ? 'bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-400' :
+            advisory.category === 'fertilization' ? 'bg-green-100 dark:bg-green-900 text-green-600 dark:text-green-400' :
+            advisory.category === 'pest-control' ? 'bg-red-100 dark:bg-red-900 text-red-600 dark:text-red-400' :
+            advisory.category === 'weather' ? 'bg-amber-100 dark:bg-amber-900 text-amber-600 dark:text-amber-400' :
+            'bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400'
           }`}>
             {getCategoryIcon(advisory.category)}
           </div>
@@ -202,16 +202,16 @@ function SeasonalAdvisoryCard({ advisory, onUpdateStatus }: { advisory: Seasonal
         </div>
         <div className="flex items-center gap-2">
           <span className={`badge ${
-            advisory.priority === 'high' ? 'bg-red-100 text-red-800' :
-            advisory.priority === 'medium' ? 'bg-amber-100 text-amber-800' :
-            'bg-gray-100 text-gray-800'
+            advisory.priority === 'high' ? 'bg-red-100 dark:bg-red-900 text-red-800 dark:text-red-100' :
+            advisory.priority === 'medium' ? 'bg-amber-100 dark:bg-amber-900 text-amber-800 dark:text-amber-100' :
+            'bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-100'
           }`}>
             {advisory.priority}
           </span>
           {getStatusIcon(advisory.status)}
         </div>
       </div>
-      <p className="text-gray-700 text-sm leading-relaxed">{advisory.description}</p>
+      <p className="text-gray-700 dark:text-gray-300 text-sm leading-relaxed">{advisory.description}</p>
       <button 
         onClick={() => onUpdateStatus(advisory)}
         className="btn-secondary w-full mt-4"
@@ -232,9 +232,9 @@ function PestPredictionCard({ pest }: { pest: PestPrediction }) {
           <h3 className="text-xl font-bold text-gray-900 dark:text-white">{pest.pestName}</h3>
           <div className="flex items-center gap-2 mt-2">
             <span className={`badge ${
-              pest.riskLevel === 'high' ? 'bg-red-100 text-red-800' :
-              pest.riskLevel === 'medium' ? 'bg-amber-100 text-amber-800' :
-              'bg-green-100 text-green-800'
+              pest.riskLevel === 'high' ? 'bg-red-100 dark:bg-red-900 text-red-800 dark:text-red-100' :
+              pest.riskLevel === 'medium' ? 'bg-amber-100 dark:bg-amber-900 text-amber-800 dark:text-amber-100' :
+              'bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-100'
             }`}>
               {pest.riskLevel.toUpperCase()} RISK
             </span>
@@ -279,19 +279,19 @@ function PestPredictionCard({ pest }: { pest: PestPrediction }) {
       </div>
 
       <div className="mb-4">
-        <p className="text-sm font-semibold text-gray-900 mb-2">Affected Crops:</p>
+        <p className="text-sm font-semibold text-gray-900 dark:text-white mb-2">Affected Crops:</p>
         <div className="flex flex-wrap gap-2">
           {pest.affectedCrops.map((crop, index) => (
-            <span key={index} className="badge bg-primary-100 text-primary-800">
+            <span key={index} className="badge bg-primary-100 dark:bg-primary-900 text-primary-800 dark:text-primary-100">
               {crop}
             </span>
           ))}
         </div>
       </div>
 
-      <div className="bg-amber-50 border border-amber-200 rounded-lg p-3 mb-4">
-        <p className="text-sm font-semibold text-amber-900">Estimated Impact:</p>
-        <p className="text-sm text-amber-800 mt-1">{pest.estimatedImpact}</p>
+      <div className="bg-amber-50 dark:bg-amber-900 border border-amber-200 dark:border-amber-700 rounded-lg p-3 mb-4">
+        <p className="text-sm font-semibold text-amber-900 dark:text-amber-100">Estimated Impact:</p>
+        <p className="text-sm text-amber-800 dark:text-amber-200 mt-1">{pest.estimatedImpact}</p>
       </div>
 
       <button
@@ -302,24 +302,24 @@ function PestPredictionCard({ pest }: { pest: PestPrediction }) {
       </button>
 
       {showDetails && (
-        <div className="mt-4 space-y-4 border-t border-gray-200 pt-4">
+        <div className="mt-4 space-y-4 border-t border-gray-200 dark:border-gray-700 pt-4">
           <div>
-            <p className="text-sm font-semibold text-gray-900 mb-2">Preventive Measures:</p>
+            <p className="text-sm font-semibold text-gray-900 dark:text-white mb-2">Preventive Measures:</p>
             <ul className="space-y-1">
               {pest.preventiveMeasures.map((measure, index) => (
-                <li key={index} className="text-sm text-gray-600 flex items-start">
-                  <span className="text-primary-600 mr-2">✓</span>
+                <li key={index} className="text-sm text-gray-600 dark:text-gray-300 flex items-start">
+                  <span className="text-primary-600 dark:text-primary-400 mr-2">✓</span>
                   <span>{measure}</span>
                 </li>
               ))}
             </ul>
           </div>
           <div>
-            <p className="text-sm font-semibold text-gray-900 mb-2">Early Symptoms:</p>
+            <p className="text-sm font-semibold text-gray-900 dark:text-white mb-2">Early Symptoms:</p>
             <ul className="space-y-1">
               {pest.earlySymptoms.map((symptom, index) => (
-                <li key={index} className="text-sm text-gray-600 flex items-start">
-                  <span className="text-amber-600 mr-2">⚠</span>
+                <li key={index} className="text-sm text-gray-600 dark:text-gray-300 flex items-start">
+                  <span className="text-amber-600 dark:text-amber-400 mr-2">⚠</span>
                   <span>{symptom}</span>
                 </li>
               ))}
@@ -372,7 +372,7 @@ function CropAdvisory() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-3xl font-bold text-gray-900 flex items-center">
+        <h1 className="text-3xl font-bold text-gray-900 dark:text-white flex items-center">
           <Sprout className="h-8 w-8 mr-3 text-primary-600 dark:text-primary-400" />
           Crop Advisory
         </h1>
@@ -384,8 +384,8 @@ function CropAdvisory() {
           onClick={() => setActiveTab('recommendations')}
           className={`px-4 py-2 font-medium border-b-2 transition-colors ${
             activeTab === 'recommendations'
-              ? 'border-primary-600 text-primary-600'
-              : 'border-transparent text-gray-600 hover:text-gray-900'
+              ? 'border-primary-600 text-primary-600 dark:text-primary-400'
+              : 'border-transparent text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100'
           }`}
         >
           Crop Recommendations
@@ -394,8 +394,8 @@ function CropAdvisory() {
           onClick={() => setActiveTab('advisories')}
           className={`px-4 py-2 font-medium border-b-2 transition-colors ${
             activeTab === 'advisories'
-              ? 'border-primary-600 text-primary-600'
-              : 'border-transparent text-gray-600 hover:text-gray-900'
+              ? 'border-primary-600 text-primary-600 dark:text-primary-400'
+              : 'border-transparent text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100'
           }`}
         >
           Seasonal Advisories
@@ -404,8 +404,8 @@ function CropAdvisory() {
           onClick={() => setActiveTab('pest')}
           className={`px-4 py-2 font-medium border-b-2 transition-colors ${
             activeTab === 'pest'
-              ? 'border-primary-600 text-primary-600'
-              : 'border-transparent text-gray-600 hover:text-gray-900'
+              ? 'border-primary-600 text-primary-600 dark:text-primary-400'
+              : 'border-transparent text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100'
           }`}
         >
           Pest Predictions
@@ -414,8 +414,8 @@ function CropAdvisory() {
 
       {activeTab === 'recommendations' && (
         <div>
-          <div className="mb-6 card bg-blue-50 border-blue-200">
-            <h2 className="font-bold text-gray-900 mb-2">🤖 AI Insights</h2>
+          <div className="mb-6 card bg-blue-50 dark:bg-blue-900/30 border-blue-200 dark:border-blue-700">
+            <h2 className="font-bold text-gray-900 dark:text-white mb-2">🤖 AI Insights</h2>
             <p className="text-sm text-gray-700 dark:text-gray-300">
               Based on your soil analysis, weather patterns, historical data, and market trends, we've identified the best crops for your farm this season. These recommendations are personalized using machine learning models trained on regional agricultural data.
             </p>
@@ -430,15 +430,15 @@ function CropAdvisory() {
 
       {activeTab === 'advisories' && (
         <div>
-          <div className="mb-6 card bg-blue-50 border-blue-200">
-            <h2 className="font-bold text-gray-900 mb-2">📅 Seasonal Action Plan</h2>
+          <div className="mb-6 card bg-blue-50 dark:bg-blue-900/30 border-blue-200 dark:border-blue-700">
+            <h2 className="font-bold text-gray-900 dark:text-white mb-2">📅 Seasonal Action Plan</h2>
             <p className="text-sm text-gray-700 dark:text-gray-300">
               Stay on top of critical farming activities with timely advisories. Our AI analyzes weather forecasts, crop growth stages, and best practices to give you actionable recommendations.
             </p>
           </div>
           {cropWeatherAlerts.length > 0 && (
             <div className="mb-6">
-              <h3 className="text-lg font-semibold text-gray-900 flex items-center gap-2">
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-white flex items-center gap-2">
                 <CloudRain className="h-5 w-5 text-primary-600 dark:text-primary-400" />
                 Weather impact on advisories
               </h3>
@@ -459,8 +459,8 @@ function CropAdvisory() {
 
       {activeTab === 'pest' && (
         <div>
-          <div className="mb-6 card bg-blue-50 border-blue-200">
-            <h2 className="font-bold text-gray-900 mb-2">🐛 Predictive Pest Management</h2>
+          <div className="mb-6 card bg-blue-50 dark:bg-blue-900/30 border-blue-200 dark:border-blue-700">
+            <h2 className="font-bold text-gray-900 dark:text-white mb-2">🐛 Predictive Pest Management</h2>
             <p className="text-sm text-gray-700 dark:text-gray-300">
               Our AI model analyzes weather conditions, historical pest patterns, and regional data to predict potential pest outbreaks. Take preventive action before infestations occur.
             </p>
