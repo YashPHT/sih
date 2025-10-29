@@ -37,6 +37,14 @@ A modern agricultural advisory platform providing AI-powered insights for crop p
 - **Rich Tooltips**: Detailed information popups with capacity bars, metrics, and status badges
 - **Status Indicators**: Color-coded markers and routes for instant visibility into operations
 
+### 🎨 Landing Page
+- **Modern Glassmorphism Design**: Backdrop-filter effects with smooth animations
+- **Animated Prism Background**: Canvas-based particle system with mouse interaction
+- **Theme Support**: Light/dark mode with persistent preferences
+- **Accessibility First**: Respects prefers-reduced-motion and includes ARIA labels
+- **Performance Optimized**: Automatic render suspension when tab is inactive
+- **Cross-browser Compatible**: Graceful fallbacks for Safari, Firefox, and older browsers
+
 ## Technology Stack
 
 - **Frontend**: React 18 with TypeScript
@@ -84,30 +92,41 @@ The built files will be in the `dist` directory.
 ## Project Structure
 
 ```
-src/
-├── components/      # Reusable React components
-│   ├── LogisticsMap.tsx     # Interactive map component
-│   └── MapLegend.tsx        # Map legend component
-├── data/            # Mock and fallback datasets
-│   ├── logisticsGeoData.ts  # Geospatial logistics data
-│   ├── traceabilityData.ts  # Blockchain demo batches
-│   └── weatherMock.ts       # Weather fallback data
-├── hooks/           # Custom React hooks (e.g., weather data)
-├── pages/           # Main routed views
-│   ├── Dashboard.tsx
-│   ├── CropAdvisory.tsx
-│   ├── CreditInsurance.tsx
-│   ├── StakeholderDashboards.tsx  # Includes logistics map
-│   ├── Marketplace.tsx
-│   └── Traceability.tsx     # Blockchain traceability module
-├── types/           # Shared TypeScript interfaces
-├── utils/           # Formatting helpers and style utilities
-│   └── blockchain.ts        # Hashing and verification utilities
-├── App.tsx          # Main application component
-├── index.css        # Global styles
-└── main.tsx         # Application entry point
-server/
-└── weatherRoutes.ts # Vite middleware exposing cached weather API
+/
+├── landing.html             # Landing page entry point
+├── index.html               # React app entry point
+├── public/
+│   ├── js/
+│   │   ├── prismRenderer.js     # Animated background effects
+│   │   ├── glassEffect.js       # Glassmorphism effects
+│   │   └── landing-theme.js     # Theme management
+│   └── favicon.svg
+├── src/
+│   ├── components/      # Reusable React components
+│   │   ├── LogisticsMap.tsx     # Interactive map component
+│   │   └── MapLegend.tsx        # Map legend component
+│   ├── data/            # Mock and fallback datasets
+│   │   ├── logisticsGeoData.ts  # Geospatial logistics data
+│   │   ├── traceabilityData.ts  # Blockchain demo batches
+│   │   └── weatherMock.ts       # Weather fallback data
+│   ├── hooks/           # Custom React hooks (e.g., weather data)
+│   ├── pages/           # Main routed views
+│   │   ├── Dashboard.tsx
+│   │   ├── CropAdvisory.tsx
+│   │   ├── CreditInsurance.tsx
+│   │   ├── StakeholderDashboards.tsx  # Includes logistics map
+│   │   ├── Marketplace.tsx
+│   │   └── Traceability.tsx     # Blockchain traceability module
+│   ├── types/           # Shared TypeScript interfaces
+│   ├── utils/           # Formatting helpers and style utilities
+│   │   └── blockchain.ts        # Hashing and verification utilities
+│   ├── App.tsx          # Main application component
+│   ├── index.css        # Global styles
+│   └── main.tsx         # Application entry point
+├── server/
+│   └── weatherRoutes.ts # Vite middleware exposing cached weather API
+└── docs/
+    └── landing.md       # Landing page documentation
 ```
 
 ## Features Demo
@@ -136,6 +155,183 @@ server/
 - Follow active transport routes with live progress updates
 - Filter by commodity types or operational status
 - Click markers for detailed facility and shipment information
+
+## Landing Page
+
+The platform includes a modern, visually engaging landing page with animated effects and glassmorphism design.
+
+### Accessing the Landing Page
+
+**Development:**
+```bash
+npm run dev
+# Visit http://localhost:5173/landing.html
+```
+
+**Production:**
+```bash
+npm run build
+npm run start
+# Visit http://localhost:3000/landing.html
+```
+
+### Key Features
+
+- **Animated Prism Background**: Canvas-based particle system with 80 particles, connection lines, and mouse interaction
+- **Glassmorphism Effects**: Modern backdrop-filter blur with hover animations and parallax movement
+- **Light/Dark Theme**: Toggle between themes with persistent localStorage preferences
+- **Accessibility**: Automatically respects `prefers-reduced-motion` system setting
+- **Performance**: Pauses rendering when tab is hidden to save battery and CPU
+- **Cross-browser**: Graceful fallbacks for Safari, Firefox, and browsers without backdrop-filter support
+
+### Configuration
+
+All visual parameters can be customized by editing configuration objects in the JavaScript modules:
+
+**Particle System** (`public/js/prismRenderer.js`):
+```javascript
+PrismRenderer.CONFIG.particleCount = 80;        // Number of particles
+PrismRenderer.CONFIG.baseSpeed = 0.3;           // Animation speed
+PrismRenderer.CONFIG.connectionDistance = 120;  // Connection line distance
+PrismRenderer.CONFIG.enableMouseInteraction = true;
+```
+
+**Glass Effects** (`public/js/glassEffect.js`):
+```javascript
+GlassEffect.CONFIG.blurAmount = 12;             // Backdrop blur intensity
+GlassEffect.CONFIG.enableParallax = true;       // Mouse parallax effect
+GlassEffect.CONFIG.parallaxStrength = 0.02;     // Parallax sensitivity
+GlassEffect.CONFIG.hoverLiftAmount = 8;         // Hover lift distance
+```
+
+**Color Palette** (`landing.html` CSS):
+```css
+:root {
+  --bg-primary: #ffffff;
+  --accent-primary: #10b981;
+  --accent-secondary: #3b82f6;
+  --glass-bg: rgba(255, 255, 255, 0.7);
+}
+```
+
+### Theme Management
+
+The landing page automatically syncs with the user's theme preference:
+
+- **localStorage persistence**: Theme choice saved across sessions
+- **System preference detection**: Respects `prefers-color-scheme` media query
+- **Smooth transitions**: All elements update dynamically on theme change
+- **Consistent styling**: Theme state shared between landing page and React dashboard
+
+**Storage Key:**
+```javascript
+const THEME_STORAGE_KEY = 'agri_advisory_theme_preference';
+```
+
+### Authentication Integration
+
+The landing page checks for authentication and redirects accordingly:
+
+```javascript
+const AUTH_STORAGE_KEY = 'agri_advisory_auth_token';
+
+// Auto-redirect authenticated users to dashboard
+const authToken = localStorage.getItem(AUTH_STORAGE_KEY);
+if (authToken) {
+  window.location.href = '/';
+}
+```
+
+**To integrate with your auth system:**
+1. Update `AUTH_STORAGE_KEY` to match your implementation
+2. Store auth token in localStorage after successful login
+3. Landing page will automatically detect and redirect
+
+### Performance & Accessibility
+
+**Prefers-Reduced-Motion:**
+- Animation loops do not start
+- Static particle frame rendered
+- All transitions disabled
+- Parallax effects disabled
+
+**Visibility API:**
+- Rendering pauses when tab is hidden
+- Automatic resume when tab becomes visible
+- Saves battery on mobile devices
+- Reduces CPU usage in background tabs
+
+**Mobile Optimization:**
+- Particle count automatically reduced by 50% on mobile
+- Touch-friendly interaction areas
+- Responsive design for all screen sizes
+- Optimized for performance on lower-end devices
+
+### Browser Support
+
+| Browser | Version | Support | Notes |
+|---------|---------|---------|-------|
+| Chrome | 76+ | ✅ Full | All features supported |
+| Safari | 9+ | ✅ Full | Requires -webkit- prefix |
+| Firefox | 103+ | ✅ Full | Backdrop-filter enabled by default |
+| Edge | 79+ | ✅ Full | Chromium-based |
+
+**Fallback Behavior:**
+- Older browsers without backdrop-filter support get solid semi-transparent backgrounds
+- Canvas unsupported browsers fall back to static gradient
+- All interactive features remain functional
+
+### Font Loading
+
+The landing page uses the **Inter** font family with optimized loading:
+
+```html
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+```
+
+**Strategy:**
+- Preconnect to Google Fonts for faster DNS resolution
+- `display=swap` ensures text visible during font load
+- Only loads needed font weights (300-700)
+- Falls back to system fonts if unavailable
+
+### Build & Deployment
+
+The landing page exists alongside the React dashboard:
+
+**Build Output:**
+```
+dist/
+├── landing.html              # Landing page
+├── index.html                # React app
+├── public/
+│   └── js/
+│       ├── prismRenderer.js  # Particle renderer
+│       ├── glassEffect.js    # Glass effects
+│       └── landing-theme.js  # Theme management
+└── assets/                   # React bundles
+```
+
+**Deployment:**
+- Upload entire `dist` folder to your hosting provider
+- Configure routing to serve both `landing.html` and React SPA
+- Set appropriate cache headers for static assets
+- Consider minifying JavaScript files for production
+
+### Detailed Documentation
+
+For comprehensive documentation including customization examples, troubleshooting, and advanced configuration, see **[docs/landing.md](./docs/landing.md)**.
+
+Topics covered:
+- Complete configuration reference
+- Color palette customization
+- Animation parameter tuning
+- Performance optimization tips
+- Browser-specific fallback handling
+- Authentication flow integration
+- Deployment strategies
 
 ## Development
 
